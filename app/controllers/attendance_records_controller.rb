@@ -1,15 +1,36 @@
 class AttendanceRecordsController < ApplicationController
     
-    def administrator
-        # shows main view for the administrator
-    end
+    # we need to add verifications if a user loggedin/admin when will is done
 
-    def user
-        # shows view for that specific user
+    def index
+        # these are temporary variables until we can actually get user information
+        logged_in = true
+        is_admin = true
+
+        if logged_in && is_admin # if admin
+            render :administrator
+        elsif logged_in # if not admin but logged in
+            render :user
+        else
+            # redirect to login page
+        end
+
     end
 
     def view_meeting
-        # shows a specific meeting to the administrator
+        # another temp variables
+        logged_in = true
+        is_admin = true
+
+        if logged_in && is_admin
+            @meeting_id = params[:meeting_id]
+            render :view_meeting
+        elsif logged_in
+            render :user
+        else
+            # redirect to login
+        end
+
     end
 
     def sign_into_meeting
