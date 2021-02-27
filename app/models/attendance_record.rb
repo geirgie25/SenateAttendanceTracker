@@ -26,4 +26,10 @@ class AttendanceRecord < ApplicationRecord
     return nil
   end
 
+  def self.make_records_for(meeting)
+    CommitteeEnrollment.where(committee_id: meeting.committee_id).find_each do |enrollment|
+      AttendanceRecord.create(committee_enrollment: enrollment, meeting: meeting, attended: false)
+    end
+  end
+
 end
