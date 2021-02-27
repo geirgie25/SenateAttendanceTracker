@@ -1,15 +1,20 @@
 class AttendanceRecordsController < ApplicationController
-    
+
     # we need to add verifications if a user loggedin/admin when will is done
 
     def index
         # these are temporary variables until we can actually get user information
         logged_in = true
-        is_admin = true
+        is_admin = false
 
         if logged_in && is_admin # if admin
             render :administrator
-        elsif logged_in # if not admin but logged in
+        elsif logged_in # if not admin but logged
+            # FIXME: change to current user once login is figured out
+            @user = User.first
+            @total_absences = AttendanceRecord.find_total_absences(@user)
+            @excused_absences = AttendanceRecord.find_total_excused_absences(@user)
+            @unexcused_absences = @total_absences - @excused_absences
             render :user
         else
             # redirect to login page
