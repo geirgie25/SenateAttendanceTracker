@@ -8,19 +8,14 @@
 <table>
     <thead>
         <tr>
-
             <th>User Name: </th>
             <th>Attended: </th>
-
         </tr>
-
     </thead>
-<tbody>
-
-            <% @records.each do |record| %>
+    <tbody>
+        <% @records.each do |record| %>
             <td> <%= record.committee_enrollment.user.name %></td>
             <td> <%= record.attended %></td>
-            <% end %>
+        <% end %>
     </tbody>
-
 </table>
