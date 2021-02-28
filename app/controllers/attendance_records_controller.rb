@@ -4,12 +4,15 @@ class AttendanceRecordsController < ApplicationController
 
     def index
         # these are temporary variables until we can actually get user information
+        user = User.find(9)
         logged_in = true
         is_admin = true
-
-        if logged_in && is_admin # if admin
+        curr_meeting = Meeting.get_current_meeting
+        if is_admin # if admin
+            @show_start_meeting = curr_meeting.nil?
             render :administrator
         elsif logged_in # if not admin but logged in
+            @show_signin = !curr_meeting.nil? && curr_meeting.signed_up_for_meeting(user) && !curr_meeting.attended_meeting(user) 
             render :user
         else
             # redirect to login page
@@ -22,7 +25,7 @@ class AttendanceRecordsController < ApplicationController
         logged_in = true
         is_admin = true
 
-        if logged_in && is_admin
+        if is_admin
             @meeting_id = params[:meeting_id]
             render :view_meeting
         elsif logged_in
@@ -41,14 +44,17 @@ class AttendanceRecordsController < ApplicationController
             if !@committee.nil?
                 @meeting = Meeting.create(committee: @committee)
                 @meeting.start_meeting
-                @meeting.save
-                AttendanceRecord.make_records_for(@meeting)
-                redirect_to("attendance_records#index", notice: "Meeting Sign-in Started.")
+                puts @meeting.save
+                if @meeting.save
+                    AttendanceRecord.make_records_for(@meeting)
+                    redirect_to(action: :index, notice: "Meeting Sign-in Started.") and return
+                end
+                redirect_to(action: :index, notice: "Couldn't save meeting sign-in.") and return
             end
             puts "Can't find committee General, was DB seeded?"
+            redirect_to(action: :index, notice: "Couldn't find committee General.") and return
         end
-        
-        redirect_to("attendance_records#index", notice: "Do not have permission for this action.")
+        redirect_to(action: :index, notice: "Do not have permission for this action.") and return
     end
 
     # ends current meeting signin then redirects to index
@@ -58,15 +64,14 @@ class AttendanceRecordsController < ApplicationController
             curr_meeting = Meeting.get_current_meeting
             unless curr_meeting.nil?
                 curr_meeting.end_meeting
-                unless curr_meeting.save
-                    redirect_to("attendance_records#index", notice: "Meeting Sign-in Ended.")
+                if curr_meeting.save
+                    redirect_to(action: :index, notice: "Meeting Sign-in Ended.") and return
                 end
-                redirect_to("attendance_records#index", notice: "Couldn't save meeting sign-in ended.")
+                redirect_to(action: :index, notice: "Couldn't save meeting sign-in ended.") and return
             end
-            redirect_to("attendance_records#index", notice: "There is no meeting sign-in occuring.")
-            puts "Can't find committee General, was DB seeded?"
+            redirect_to(action: :index, notice: "There is no meeting sign-in occuring.") and return
         end
-        redirect_to("attendance_records#index", notice: "Do not have permission for this action.")
+        redirect_to(action: :index, notice: "Do not have permission for this action.") and return
     end
 
     # signs user into current meeting then redirects to index page
@@ -80,15 +85,15 @@ class AttendanceRecordsController < ApplicationController
                 unless record.nil?
                     record.attended = true
                     if record.save
-                        redirect_to("attendance_records#index", notice: "Signed into Meeting.")
+                        redirect_to(action: :index, notice: "Signed into Meeting.") and return
                     else
-                        redirect_to("attendance_records#index", notice: "Attendance record couldn't be saved.")
+                        redirect_to(action: :index, notice: "Attendance record couldn't be saved.") and return
                     end
                 end
-                redirect_to("attendance_records#index", notice: "User is not signed up for this meeting.")
+                redirect_to(action: :index, notice: "User is not signed up for this meeting.") and return
             end
-            redirect_to("attendance_records#index", notice: "Meeting sign in period has already ended.")
+            redirect_to(action: :index, notice: "Meeting sign in period has already ended.") and return
         end
-        redirect_to("attendance_records#index", notice: "Do not have permisison for this action.")
+        redirect_to(action: :index, notice: "Do not have permisison for this action.") and return
     end
 end

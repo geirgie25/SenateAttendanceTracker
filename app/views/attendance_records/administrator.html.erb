@@ -1,2 +1,12 @@
 <% # this file is shown to the administrator that is logged in  %>
+<% if @show_start_meeting %>
+    <%= form_with url: "dashboard/start_meeting", method: :post do |form|%>
+        <%= form.submit "Start Meeting Sign-In" %>
+    <% end %>
+<% end %>
+<% if !@show_start_meeting %>
+    <%= form_with url: "dashboard/end_meeting", method: :post do |form|%>
+        <%= form.submit "End Meeting Sign-In" %>
+    <% end %>
+<% end %>
 <p>Hi ima admin</p>
