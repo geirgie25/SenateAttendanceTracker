@@ -1,5 +1,5 @@
 class AttendanceRecordsController < ApplicationController
-    
+
     # we need to add verifications if a user loggedin/admin when will is done
 
     def index
@@ -10,8 +10,14 @@ class AttendanceRecordsController < ApplicationController
         curr_meeting = Meeting.get_current_meeting
         if is_admin # if admin
             @show_start_meeting = curr_meeting.nil?
+            @meetings = Meeting.all
             render :administrator
-        elsif logged_in # if not admin but logged in
+        elsif logged_in # if not admin but logged
+            # FIXME: change to current user once login is figured out
+            @user = User.first
+            @total_absences = AttendanceRecord.find_total_absences(@user)
+            @excused_absences = AttendanceRecord.find_total_excused_absences(@user)
+            @unexcused_absences = @total_absences - @excused_absences
             @show_signin = !curr_meeting.nil? && curr_meeting.signed_up_for_meeting(user) && !curr_meeting.attended_meeting(user) 
             render :user
         else
@@ -22,6 +28,7 @@ class AttendanceRecordsController < ApplicationController
 
     def view_meeting
         # another temp variables
+
         logged_in = true
         is_admin = true
 
@@ -96,4 +103,5 @@ class AttendanceRecordsController < ApplicationController
         end
         redirect_to(action: :index, notice: "Do not have permisison for this action.") and return
     end
+    
 end

@@ -9,4 +9,23 @@
         <%= form.submit "End Meeting Sign-In" %>
     <% end %>
 <% end %>
-<p>Hi ima admin</p>
+<h2> Meeting Details</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Meeting ID: </th>
+      <th>Start Time: </th>
+      <th>End Time: </th>
+      <th>Meeting Link: </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meetings.each do |meeting| %>
+        <td> <%= meeting.id %></td>
+        <td> <%= meeting.start_time %></td>
+        <td> <%= meeting.end_time %></td>
+        <td> <%= link_to "Show Meeting", "dashboard/" + meeting.id.to_s %> </td>
+    <% end %>
+  </tbody>
+</table>
