@@ -32,9 +32,11 @@ class AttendanceRecordsController < ApplicationController
         is_admin = true
 
         if logged_in && is_admin
-            @meeting = Meeting.find(@meeting_id)
-            @records = Meeting.attendance_records
+            #showing the attendance record on page
             @meeting_id = params[:meeting_id]
+            @meeting = Meeting.find(@meeting_id)
+            @records = @meeting.attendance_records
+
             render :view_meeting
         elsif logged_in
             render :user

@@ -1,30 +1,25 @@
 
 <% # this file is shown to the administrator when they select a meeting  %>
 <p> Hi ur viewin meetin numer </p><%= @meeting_id %>
-<h2> View Meeting Records</h2>
+<h2> Showing Attendance Record Details</h2>
+
+<td> <%= link_to "Back to Administrator Page", :back%> </td>
 
 <table>
     <thead>
         <tr>
 
             <th>User Name: </th>
-            <th>Attendance: </th>
-            <th>Start Time: </th>
-            <th>End Time: </th>
+            <th>Attended: </th>
 
         </tr>
 
     </thead>
 <tbody>
-            <% @users.each do |user| %>
-
-                <td> <%= user.id %></td>
-                <td> <%= user.name %></td>
-                <td> <%= user.attendance %></td>
-            <% end %>
 
             <% @records.each do |record| %>
-            <td> <%= record.committee_enrollments.user.name %></td>
+            <td> <%= record.committee_enrollment.user.name %></td>
+            <td> <%= record.attended %></td>
             <% end %>
     </tbody>
 
