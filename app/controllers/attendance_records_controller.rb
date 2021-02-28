@@ -11,6 +11,7 @@ class AttendanceRecordsController < ApplicationController
         if is_admin # if admin
             @show_start_meeting = curr_meeting.nil?
             @meetings = Meeting.all
+
             render :administrator
         elsif logged_in # if not admin but logged
             # FIXME: change to current user once login is figured out
@@ -33,7 +34,10 @@ class AttendanceRecordsController < ApplicationController
         is_admin = true
 
         if is_admin
+            #showing the attendance record on page
             @meeting_id = params[:meeting_id]
+            @meeting = Meeting.find(@meeting_id)
+            @records = @meeting.attendance_records
             render :view_meeting
         elsif logged_in
             render :user
@@ -103,5 +107,5 @@ class AttendanceRecordsController < ApplicationController
         end
         redirect_to(action: :index, notice: "Do not have permisison for this action.") and return
     end
-    
+
 end
