@@ -5,9 +5,11 @@ class AttendanceRecordsController < ApplicationController
     def index
         # these are temporary variables until we can actually get user information
         logged_in = true
-        is_admin = false
+        is_admin = true
+
 
         if logged_in && is_admin # if admin
+            @meetings = Meeting.all
             render :administrator
         elsif logged_in # if not admin but logged
             # FIXME: change to current user once login is figured out
@@ -24,6 +26,7 @@ class AttendanceRecordsController < ApplicationController
 
     def view_meeting
         # another temp variables
+
         logged_in = true
         is_admin = true
 
@@ -44,4 +47,5 @@ class AttendanceRecordsController < ApplicationController
 
         end
     end
+    
 end
