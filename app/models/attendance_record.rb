@@ -25,7 +25,14 @@ class AttendanceRecord < ApplicationRecord
     end
     return nil
   end
-
+  
+  # makes all the attendance records for a meeting
+  def self.make_records_for(meeting)
+    CommitteeEnrollment.where(committee_id: meeting.committee_id).find_each do |enrollment|
+      AttendanceRecord.create(committee_enrollment: enrollment, meeting: meeting, attended: false)
+    end
+  end
+  
   #returns the total number of absences for a user
   def self.find_total_absences(user)
     absence_count = 0

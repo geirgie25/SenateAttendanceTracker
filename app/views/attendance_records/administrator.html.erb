@@ -1,26 +1,31 @@
 <% # this file is shown to the administrator that is logged in  %>
-<p>Hi ima admin</p
-    <h2> Meeting Details</h2>
+<% if @show_start_meeting %>
+    <%= form_with url: "dashboard/start_meeting", method: :post do |form|%>
+        <%= form.submit "Start Meeting Sign-In" %>
+    <% end %>
+<% end %>
+<% if !@show_start_meeting %>
+    <%= form_with url: "dashboard/end_meeting", method: :post do |form|%>
+        <%= form.submit "End Meeting Sign-In" %>
+    <% end %>
+<% end %>
+<h2> Meeting Details</h2>
 
-    <table>
-        <thead>
-            <tr>
-
-                <th>Meeting ID: </th>
-                <th>Start Time: </th>
-                <th>End Time: </th>
-                <th>Meeting Link: </th>
-
-            </tr>
-
-        </thead>
-    <tbody>
-                <% @meetings.each do |meeting| %>
-                    <td> <%= meeting.id %></td>
-                    <td> <%= meeting.start_time %></td>
-                    <td> <%= meeting.end_time %></td>
-                    <td> <%= link_to "Show Meeting", "dashboard/" + meeting.id.to_s %> </td>
-                <% end %>
-        </tbody>
-
-    </table>
+<table>
+  <thead>
+    <tr>
+      <th>Meeting ID: </th>
+      <th>Start Time: </th>
+      <th>End Time: </th>
+      <th>Meeting Link: </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meetings.each do |meeting| %>
+        <td> <%= meeting.id %></td>
+        <td> <%= meeting.start_time %></td>
+        <td> <%= meeting.end_time %></td>
+        <td> <%= link_to "Show Meeting", "dashboard/" + meeting.id.to_s %> </td>
+    <% end %>
+  </tbody>
+</table>

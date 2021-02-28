@@ -36,4 +36,13 @@ class Meeting < ApplicationRecord
   def self.get_current_meeting
     return self.where(end_time: nil).and(self.where.not(start_time: nil)).take
   end
+
+  def signed_up_for_meeting(user)
+    return !AttendanceRecord.find_record(self, user).nil?
+  end
+  
+  def attended_meeting(user)
+    record = AttendanceRecord.find_record(self, user)
+    return record.nil? ? false : record.attended
+  end
 end
