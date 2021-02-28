@@ -1,27 +1,22 @@
 class SessionsController < ApplicationController
 
-  skip_before_action :authorized, only: [:new, :create, :welcome]
+  skip_before_action :user_authorized, only: [:new, :create]
+  skip_before_action :admin_authorized, only: [:new, :create]
 
   def new
-
   end
 
   def create
-    @account = Account.find_by(username: params[:username])
-    if @account && @account.authenticate(params[:password])
-      sessions[:account_id] = @account.id
-      redirect_to '/welcome'
-    else
-      redirect_to '/login'
-  end
-
-  def login
-  end
-
-  def welcome
-  end
-
-  def page_requires_login
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      if @user.is_admin
+        redirect_to '/dashboard/admin' and return
+      else
+        redirect_to '/dashboard/user' and return
+      end
+    end
+    redirect_to '/login'
   end
   
 end

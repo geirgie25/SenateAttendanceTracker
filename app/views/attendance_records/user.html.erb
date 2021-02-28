@@ -1,0 +1,25 @@
+<% # this file is shown to the user that is logged in  %>
+<% if @show_signin %>
+    <%= form_with url: "/dashboard/user/meeting_signin", method: :post do |form|%>
+        <%= form.submit "Sign In" %>
+    <% end %>
+<% end %>
+                      
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Number of Absences</th>
+      <th>Excused Absences</th>
+      <th>Unexcused Absences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @total_absences %></td>
+      <td><%= @excused_absences %></td>
+      <td><%= @unexcused_absences %></td>
+    </tr>
+  </tbody>
+</table>

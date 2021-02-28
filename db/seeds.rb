@@ -5,3 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+general = Committee.new
+general.committee_name = "General"
+general.save
+
+administrator_role = Role.new
+administrator_role.role_name = "Administrator"
+administrator_role.save
