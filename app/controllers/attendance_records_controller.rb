@@ -10,6 +10,7 @@ class AttendanceRecordsController < ApplicationController
 
         if logged_in && is_admin # if admin
             @meetings = Meeting.all
+
             render :administrator
         elsif logged_in # if not admin but logged
             # FIXME: change to current user once login is figured out
@@ -31,6 +32,8 @@ class AttendanceRecordsController < ApplicationController
         is_admin = true
 
         if logged_in && is_admin
+            @meeting = Meeting.find(@meeting_id)
+            @records = Meeting.attendance_records
             @meeting_id = params[:meeting_id]
             render :view_meeting
         elsif logged_in
@@ -47,5 +50,5 @@ class AttendanceRecordsController < ApplicationController
 
         end
     end
-    
+
 end
