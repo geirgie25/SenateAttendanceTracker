@@ -35,21 +35,13 @@ class AttendanceRecord < ApplicationRecord
   
   #returns the total number of absences for a user
   def self.find_total_absences(user)
-    absence_count = 0
-    Meeting.all.each do |meeting|
-      if self.find_record(meeting, user).attended === false
-        absence_count += 1
-      end
-    end
-    return absence_count
+    return self.where(committee_enrollment: user.committee_enrollments).and(self.where(attended: false)).count
   end
 
   def self.find_total_excused_absences(user)
     excuse_count = 0
-    Meeting.all.each do |meeting|
-      if Excuse.exists? attendance_record_id: self.find_record(meeting, user).id
-        excuse_count += 1
-      end
+    self.where(committee_enrollment: user.committee_enrollments).and(self.where(attended: false)).find_each do |record|
+      excuse_count += record.excuses.count
     end
     return excuse_count
   end
