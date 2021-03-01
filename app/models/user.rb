@@ -6,4 +6,7 @@ class User < ApplicationRecord
   def is_admin
     return self.roles.find_by(role_name: "Administrator").present?
   end
+
+  validates :username, uniqueness: true, presence: true
+  validates :password, presence: true
 end
