@@ -18,7 +18,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    @committee = Committee.get_committee_by_name("General")
+    @committee_enrollment = CommitteeEnrollment.new
+    @committee_enrollment.user = @user
+    @committee_enrollment.committee = @committee
+    @committee_enrollment.save
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: "User was successfully created." }

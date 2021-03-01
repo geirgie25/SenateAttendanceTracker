@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   post 'dashboard/user/meeting_signin', to: 'attendance_records#sign_into_meeting'
   post 'dashboard/admin/start_meeting', to: 'attendance_records#start_meeting_signin'
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_meeting_signin'
+
+  resources :users
 end
