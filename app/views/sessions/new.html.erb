@@ -1,10 +1,14 @@
+<div class="center">
+  <h2>Login</h2>
+  <%= form_tag '/login' do %>
+    <%= label_tag :username, nil, class: "login_label" %>
+    <%= text_field_tag :username, nil, class: "login_field" %>
+    <%= label_tag :password, nil, class: "login_label"  %>
+    <%= password_field_tag :password, nil, class: "login_field"  %>
+    <%= submit_tag "Login" %>
+  <%end%>
+</div>
 
-<% #LOGIN AKA CREATE NEW SESSION %>
-<h1>LOGIN</h1>
-<%= form_tag '/login' do %>
-  <%= label_tag :username %>
-  <%= text_field_tag :username %>
-  <%= label_tag :password %>
-  <%= password_field_tag :password %>
-  <%= submit_tag "Login" %>
-<%end%>
+<div class="footer">
+  <p>aggiesenate</p>
+</div>
