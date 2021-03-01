@@ -1,3 +1,4 @@
+<%= render "shared/top_banner" %>
 <% # this file is shown to the administrator that is logged in  %>
 <% if @show_start_meeting %>
     <%= form_with url: "/dashboard/admin/start_meeting", method: :post do |form|%>
@@ -31,3 +32,7 @@
     <% end %>
   </tbody>
 </table>
+
+<%= link_to "Show Users", :users %>
+
+<%= render "shared/bottom_banner" %>

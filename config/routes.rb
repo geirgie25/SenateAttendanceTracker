@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   root "sessions#new"
 
   # LOGIN INFORMATION
-  resources :accounts, only: [:new, :create]
+  resources :accounts, only: [:new, :create, :destroy]
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
+  post 'logout', to: 'sessions#destroy'
   # get 'authorized', to: 'sessions#page_requires_login'
 
   # dashboard routes
@@ -15,4 +16,6 @@ Rails.application.routes.draw do
   post 'dashboard/user/meeting_signin', to: 'attendance_records#sign_into_meeting'
   post 'dashboard/admin/start_meeting', to: 'attendance_records#start_meeting_signin'
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_meeting_signin'
+
+  resources :users
 end
