@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   root "sessions#new"
 
   # LOGIN INFORMATION
-  resources :accounts, only: [:new, :create]
+  resources :accounts, only: [:new, :create, :destroy]
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
+  post 'logout', to: 'sessions#destroy'
   # get 'authorized', to: 'sessions#page_requires_login'
 
   # dashboard routes
