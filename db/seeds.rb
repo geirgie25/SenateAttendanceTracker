@@ -12,3 +12,10 @@ general.save
 administrator_role = Role.new
 administrator_role.role_name = "Administrator"
 administrator_role.save
+
+admin = User.new
+admin.username = "admin"
+admin.password = "password"
+admin.name = "Administrator"
+admin.roles << administrator_role
+admin.save
