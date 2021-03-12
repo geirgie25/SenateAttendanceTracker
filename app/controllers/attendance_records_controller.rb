@@ -31,7 +31,7 @@ class AttendanceRecordsController < ApplicationController
 
   def start_signin
     @committee = Committee.get_committee_by_name('General')
-    @meeting = Meeting.create(committee: @committee, start_time: Time.now)
+    @meeting = Meeting.create(committee: @committee, start_time: Time.zone.now)
     if @meeting.save
       AttendanceRecord.make_records_for(@meeting)
       notice = 'Meeting Sign-in Started.'

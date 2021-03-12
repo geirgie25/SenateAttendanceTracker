@@ -8,6 +8,6 @@ class Committee < ApplicationRecord
   has_many :meetings, inverse_of: :committee
 
   def self.get_committee_by_name(name)
-    where(committee_name: name).take
+    find_by(committee_name: name)
   end
 end

@@ -20,7 +20,7 @@ class Meeting < ApplicationRecord
   # starts this meeting
   def start_meeting
     unless meeting_started?
-      self[:start_time] = Time.now
+      self[:start_time] = Time.zone.now
       return true
     end
     false
@@ -29,7 +29,7 @@ class Meeting < ApplicationRecord
   # ends this meeting
   def end_meeting
     if currently_meeting?
-      self[:end_time] = Time.now
+      self[:end_time] = Time.zone.now
       return true
     end
     false
