@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# an AttendanceRecord. has a meeting, committee_enrollment, and excuses
 class AttendanceRecord < ApplicationRecord
   belongs_to :meeting, inverse_of: :attendance_records
   belongs_to :committee_enrollment, inverse_of: :attendance_records
@@ -13,37 +16,37 @@ class AttendanceRecord < ApplicationRecord
       record.save
       return true
     end
-    return false
+    false
   end
 
   # returns the attendance record for a user attending the meeting
   # if no record is found, returns nil
   def self.find_record(meeting, user)
-    ce = CommitteeEnrollment.where(committee_id: meeting.committee_id).and(CommitteeEnrollment.where(user_id: user.id)).take
-    unless ce.nil?
-      return self.where(meeting_id: meeting.id).and(self.where(committee_enrollment_id: ce.id)).take
-    end
-    return nil
+    ce = CommitteeEnrollment.where(committee_id: meeting.committee_id).and(
+      CommitteeEnrollment.where(user_id: user.id)
+    ).take
+    return where(meeting_id: meeting.id).and(where(committee_enrollment_id: ce.id)).take unless ce.nil?
+
+    nil
   end
-  
+
   # makes all the attendance records for a meeting
   def self.make_records_for(meeting)
     CommitteeEnrollment.where(committee_id: meeting.committee_id).find_each do |enrollment|
       AttendanceRecord.create(committee_enrollment: enrollment, meeting: meeting, attended: false)
     end
   end
-  
-  #returns the total number of absences for a user
+
+  # returns the total number of absences for a user
   def self.find_total_absences(user)
-    return self.where(committee_enrollment: user.committee_enrollments).and(self.where(attended: false)).count
+    where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).count
   end
 
   def self.find_total_excused_absences(user)
     excuse_count = 0
-    self.where(committee_enrollment: user.committee_enrollments).and(self.where(attended: false)).find_each do |record|
+    where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).find_each do |record|
       excuse_count += record.excuses.count
     end
-    return excuse_count
+    excuse_count
   end
-
 end
