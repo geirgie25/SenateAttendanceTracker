@@ -24,7 +24,7 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # linting
-gem 'rubocop', require: false
+gem 'rubocop'
 # needed for heroku
 gem 'rexml'
 # Use Active Storage variant
