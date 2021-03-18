@@ -28,5 +28,7 @@ jobs:
       run: bundle exec rspec
     - name: Simplecov Report
       uses: aki77/simplecov-report-action@v1
+      inputs:
+        failedThreshold: 0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
