@@ -1,0 +1,16 @@
+
+<p> <%= @committee.committee_name %> Committee </p>
+<% if show_start_button?(current_user, @committee) %>
+    <%= form_with url: meeting_new_path, method: :post do |form|%>
+        <%= form.text_field :meeting_title, placeholder: "Meeting Title" %>
+        <%= hidden_field_tag "committee_id", @committee.id %>
+        <%= form.submit "Start Meeting Sign-In" %>
+    <% end %>
+<% end %>
+
+<% if show_end_button?(current_user, @committee) %>
+    <%= form_with url: end_meeting_path(@committee.current_meeting.id), method: :post do |form|%>
+        <%= hidden_field_tag "committee_id", @committee.id %>
+        <%= form.submit "End Meeting Sign-In" %>
+    <% end %>
+<% end %>
