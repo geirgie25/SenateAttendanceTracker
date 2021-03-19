@@ -33,15 +33,15 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-rubocop-
     - name: Setup the Rails application
-        env:
-          RAILS_ENV: test
-        run: |
-          sudo apt-get -yqq install libpq-dev
-          bundle install --no-deployment --jobs 4 --retry 3
-          cp config/database.github.yml config/database.yml
-          bundle exec rails db:create
-          bundle exec rails db:migrate
-          yarn --frozen-lockfile
+      env:
+        RAILS_ENV: test
+      run: |
+        sudo apt-get -yqq install libpq-dev
+        bundle install --no-deployment --jobs 4 --retry 3
+        cp config/database.github.yml config/database.yml
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+        yarn --frozen-lockfile
     - name: Run Rspec
       run: bundle exec rspec
     - name: Simplecov Report
