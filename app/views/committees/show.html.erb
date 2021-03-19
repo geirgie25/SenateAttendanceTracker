@@ -14,3 +14,8 @@
         <%= form.submit "End Meeting Sign-In" %>
     <% end %>
 <% end %>
+
+<% if show_signin_notice?(current_user, @committee) %>
+    <p>There is currently a meeting signin period:</p>
+    <%= link_to "Sign in", signin_meeting_path(:id)%>
+<% end %>

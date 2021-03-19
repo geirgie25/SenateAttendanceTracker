@@ -22,4 +22,12 @@ module CommitteesHelper
 
     false
   end
+
+  def show_signin_notice?(user, committee)
+    return committee_head_permissions?(user, committee) && user.in_committee?(committee) unless user.nil?
+
+    false
+  end
+
+  def 
 end
