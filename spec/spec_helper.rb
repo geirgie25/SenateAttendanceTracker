@@ -100,3 +100,11 @@ RSpec.configure do |config|
   #   # as the one that triggered the failure.
   #   Kernel.srand config.seed
 end
+
+def sign_user_in(user)
+  post '/login', params: { username: user.username, password: user.password }
+end
+
+def sign_user_out
+  post '/logout'
+end

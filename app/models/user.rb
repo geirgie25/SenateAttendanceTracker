@@ -18,6 +18,11 @@ class User < ApplicationRecord
     committees.include?(committee)
   end
 
+  def attended_meeting?(meeting)
+    record = AttendanceRecord.find_record(meeting, self)
+    record.nil? ? false : record.attended
+  end
+
   validates :username, uniqueness: true, presence: true
   validates :password, presence: true
 end

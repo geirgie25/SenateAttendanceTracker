@@ -10,12 +10,11 @@
 
 <% if show_end_button?(current_user, @committee) %>
     <%= form_with url: end_meeting_path(@committee.current_meeting.id), method: :post do |form|%>
-        <%= hidden_field_tag "committee_id", @committee.id %>
         <%= form.submit "End Meeting Sign-In" %>
     <% end %>
 <% end %>
 
-<% if show_signin_notice?(current_user, @committee) %>
+<% if show_sign_in_notice?(current_user, @committee) %>
     <p>There is currently a meeting signin period:</p>
-    <%= link_to "Sign in", signin_meeting_path(:id)%>
+    <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
 <% end %>
