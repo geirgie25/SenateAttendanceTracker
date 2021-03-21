@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
+    @WTPusers = User.order('id ASC')
   end
 
   def show; end
