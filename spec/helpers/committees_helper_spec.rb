@@ -20,6 +20,7 @@ RSpec.describe CommitteesHelper, type: :helper do
 
   before do
     c.roles << r
+    c.users << u2
     c.save
     u.roles << r
     u.save
@@ -40,9 +41,7 @@ RSpec.describe CommitteesHelper, type: :helper do
     end
 
     it 'show if meeting ended' do
-      m = Meeting.create(start_time: Time.zone.now, committee: c)
-      m.end_meeting
-      m.save
+      Meeting.create(start_time: Time.zone.now, committee: c, end_time: Time.zone.now)
       expect(show_start_button?(u, c)).to eq true
     end
   end
@@ -59,10 +58,52 @@ RSpec.describe CommitteesHelper, type: :helper do
     end
 
     it "don't show if no current meeting for committee" do
-      m = Meeting.create(start_time: Time.zone.now, committee: c)
-      m.end_meeting
-      m.save
+      Meeting.create(start_time: Time.zone.now, committee: c, end_time: Time.zone.now)
       expect(show_end_button?(u, c)).to eq false
+    end
+  end
+
+  describe 'sign in helper' do
+    it 'current meeting and user in committe' do
+      AttendanceRecord.make_records_for(Meeting.create(start_time: Time.zone.now, committee: c))
+      expect(show_sign_in_notice?(u2, c)).to eq true
+    end
+
+    it 'user in committee no current meeting' do
+      AttendanceRecord.make_records_for(Meeting.create(start_time: Time.zone.now, committee: c,
+                                                       end_time: Time.zone.now))
+      expect(show_sign_in_notice?(u2, c)).to eq false
+    end
+
+    it 'user not in committee current meeting' do
+      AttendanceRecord.make_records_for(Meeting.create(start_time: Time.zone.now, committee: c))
+      expect(show_sign_in_notice?(u, c)).to eq false
+    end
+
+    it 'user not logged in current meeting' do
+      AttendanceRecord.make_records_for(Meeting.create(start_time: Time.zone.now, committee: c))
+      expect(show_sign_in_notice?(nil, c)).to eq false
+    end
+  end
+
+  describe 'show edit link helper' do
+    it 'committee head' do
+      expect(show_edit_committee_link?(u, c)).to eq true
+    end
+
+    it 'admin' do
+      r2 = Role.create(role_name: 'Administrator')
+      u2.roles << r2
+      u2.save
+      expect(show_edit_committee_link?(u2, c)).to eq true
+    end
+
+    it 'not admin or head' do
+      expect(show_edit_committee_link?(u2, c)).to eq false
+    end
+
+    it 'not logged in' do
+      expect(show_edit_committee_link?(nil, c)).to eq false
     end
   end
 end

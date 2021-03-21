@@ -18,3 +18,7 @@
     <p>There is currently a meeting signin period:</p>
     <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
 <% end %>
+
+<% if show_edit_committee_link?(current_user, @committee) %>
+    <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
+<% end %>

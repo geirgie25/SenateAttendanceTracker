@@ -1,35 +1,29 @@
 # frozen_string_literal: true
 
 module CommitteesHelper
-  # returns true if the given user has committee head
-  # permissions for the given committee
-  def committee_head_permissions?(user, committee)
-    return user.heads_committee?(committee) unless user.nil?
-
-    false
-  end
-
   # returns true if the start meeting button should show
   def show_start_button?(user, committee)
-    return !committee.current_meeting? if committee_head_permissions?(user, committee)
+    return !committee&.current_meeting? if user&.heads_committee?(committee)
 
     false
   end
 
   # returns true if the end meeting button should show
   def show_end_button?(user, committee)
-    return committee.current_meeting? if committee_head_permissions?(user, committee)
+    return committee&.current_meeting? if user&.heads_committee?(committee)
 
     false
   end
 
   def show_sign_in_notice?(user, committee)
-    unless user.nil?
-      return user.in_committee?(committee) &&
-             committee.current_meeting? &&
-             !user.attended_meeting?(committee.current_meeting)
-    end
+    (
+      user&.in_committee?(committee) &&
+      committee.current_meeting? &&
+      !user&.attended_meeting?(committee.current_meeting)
+    ).present?
+  end
 
-    false
+  def show_edit_committee_link?(user, committee)
+    (user&.heads_committee?(committee) || user&.admin?).present?
   end
 end

@@ -22,13 +22,13 @@ RSpec.describe 'Meetings', type: :request do
     end
 
     it "can't start if don't have permission" do
-      post '/login', params: { username: u2.username, password: u2.password }
+      sign_user_in(u2)
       post meeting_new_path, params: { committee_id: c.id, meeting_title: 'test_meeting2' }
       expect(c.current_meeting?).to eq false
     end
 
     it 'starts if have permission' do
-      post '/login', params: { username: u.username, password: u.password }
+      sign_user_in(u)
       post meeting_new_path, params: { committee_id: c.id, meeting_title: 'test_meeting3' }
       expect(c.current_meeting?).to eq true
     end
@@ -43,13 +43,13 @@ RSpec.describe 'Meetings', type: :request do
     end
 
     it "can't end if don't have role" do
-      post '/login', params: { username: u2.username, password: u2.password }
+      sign_user_in(u2)
       post end_meeting_path(m.id), params: { committee_id: c.id }
       expect(c.current_meeting?).to eq true
     end
 
     it 'ends if have role' do
-      post '/login', params: { username: u.username, password: u.password }
+      sign_user_in(u)
       post end_meeting_path(m.id), params: { committee_id: c.id }
       expect(c.current_meeting?).to eq false
     end
@@ -57,7 +57,7 @@ RSpec.describe 'Meetings', type: :request do
 
   describe 'Meeting Title:' do
     before do
-      post '/login', params: { username: u.username, password: u.password }
+      sign_user_in(u)
     end
 
     it 'meeting title set' do

@@ -17,24 +17,6 @@ class Meeting < ApplicationRecord
     meeting_started? && !meeting_ended?
   end
 
-  # starts this meeting
-  def start_meeting
-    unless meeting_started?
-      self[:start_time] = Time.zone.now
-      return true
-    end
-    false
-  end
-
-  # ends this meeting
-  def end_meeting
-    if currently_meeting?
-      self[:end_time] = Time.zone.now
-      return true
-    end
-    false
-  end
-
   # gets a meeting that is currently happening
   def self.current_meeting
     where(end_time: nil).and(where.not(start_time: nil)).take
