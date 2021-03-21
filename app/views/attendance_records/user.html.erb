@@ -26,28 +26,28 @@
   </tbody>
 </table>
 
-<table>
+<!-- <table>
   <tr>
     <th>User</th>
     <th>Number of Absences</th>
     <th>Excused Absences</th>
     <th>Unexcused Absences</th>
   </tr>
-  <% @WTPusers.each do |userInst| %>
+  <% #@WTPusers.each do |userInst| %>
   <tr>
-    <td><%= userInst.name %></td>
-    <td><%= AttendanceRecord.find_total_absences(userInst) %></td>
-    <td><%= AttendanceRecord.find_total_excused_absences(userInst) %></td>
-    <td><%= AttendanceRecord.find_total_excused_absences(userInst) - AttendanceRecord.find_total_absences(userInst) %></td>
-    <% if @user.admin? %>
+    <td><%= #userInst.name %></td>
+    <td><%= #AttendanceRecord.find_total_absences(userInst) %></td>
+    <td><%= #AttendanceRecord.find_total_excused_absences(userInst) %></td>
+    <td><%= #AttendanceRecord.find_total_excused_absences(userInst) - AttendanceRecord.find_total_absences(userInst) %></td>
+    <% #if @user.admin? %>
       <td>
-        <%= link_to("Show", user_path(userInst), :class => 'action show') %>
-        <%= link_to("Edit", edit_user_path(userInst), :class => 'action edit') %>
-        <%= link_to("Delete", delete_user_path(userInst), :class => 'action delete') %>
+        <%= #link_to("Show", user_path(userInst), :class => 'action show') %>
+        <%= #link_to("Edit", edit_user_path(userInst), :class => 'action edit') %>
+        <%= #link_to("Delete", delete_user_path(userInst), :class => 'action delete') %>
       </td>
-    <% end %>
+    <% #end %>
   </tr>
-  <% end %>
-</table>
+  <% #end %>
+</table> -->
 
 <%= render "shared/bottom_banner" %>
