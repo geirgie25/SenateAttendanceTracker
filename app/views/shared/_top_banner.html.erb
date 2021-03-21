@@ -3,6 +3,15 @@
 </div>
 
 <div class="navigationBar">
-    <%= link_to "Login", "/login" %>
-    <%= link_to "Logout", "/logout", method: :post %>
+	<%= link_to "Home", @user.admin? ? "/dashboard/admin" : "/dashboard/user" %>
+	<%= link_to "Users", "/login" %>
+	<%= link_to "General Committee", "/login" %>
+	<%= link_to "Login", "/login" %>
+  <%= link_to "Logout", "/logout", method: :post %>
+	<div class="dropdown">
+		<button class="dropbtn">Comittees</button>
+		<div class="dropdown-content">
+			<a href="login.html">Committee Test</a>
+		</div>
+	</div>
 </div>
