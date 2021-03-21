@@ -19,6 +19,6 @@
     <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
 <% end %>
 
-<% if show_edit_committee_link?(current_user, @committee) %>
+<% if show_edit_committee_link?(current_user) %>
     <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
 <% end %>

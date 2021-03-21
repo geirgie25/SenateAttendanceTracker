@@ -88,7 +88,7 @@ RSpec.describe CommitteesHelper, type: :helper do
 
   describe 'show edit link helper' do
     it 'committee head' do
-      expect(show_edit_committee_link?(u, c)).to eq true
+      expect(show_edit_committee_link?(u, c)).to eq false
     end
 
     it 'admin' do
@@ -98,7 +98,7 @@ RSpec.describe CommitteesHelper, type: :helper do
       expect(show_edit_committee_link?(u2, c)).to eq true
     end
 
-    it 'not admin or head' do
+    it 'no role' do
       expect(show_edit_committee_link?(u2, c)).to eq false
     end
 

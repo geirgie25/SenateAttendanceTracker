@@ -23,10 +23,10 @@ RSpec.describe 'Committees', type: :request do
   end
 
   describe 'Update Committee:' do
-    it 'update if committee role' do
+    it 'dont update even if committee head' do
       sign_user_in(u)
       patch committee_path(c.id), params: { id: c.id, committee: { committee_name: 'UpdatedName' } }
-      expect(Committee.find(c.id).committee_name).to eq 'UpdatedName'
+      expect(Committee.find(c.id).committee_name).to eq 'TestCommittee'
     end
 
     it 'update if admin role' do
@@ -44,17 +44,19 @@ RSpec.describe 'Committees', type: :request do
     end
 
     it 'update users in committee' do
-      sign_user_in(u)
-      patch committee_path(c.id), params: { id: c.id, committee: { committee_name: 'UpdatedName', user_ids: [u2.id] } }
-      expect(Committee.find(c.id).users.first).to eq u2
+      u2.roles << r2
+      u2.save
+      sign_user_in(u2)
+      patch committee_path(c.id), params: { id: c.id, committee: { committee_name: 'UpdatedName', user_ids: [u.id] } }
+      expect(Committee.find(c.id).users.first).to eq u
     end
   end
 
   describe 'Edit Committee:' do
-    it 'go to page if head' do
+    it 'dont go to page if head' do
       sign_user_in(u)
       get edit_committee_path(c.id)
-      expect(response).to have_http_status(:success)
+      expect(response).to have_http_status(:redirect)
     end
 
     it 'go to page if admin' do

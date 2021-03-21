@@ -2,7 +2,7 @@
 
 class CommitteesController < ApplicationController
   skip_before_action :user_authorized, only: %i[show]
-  skip_before_action :admin_authorized, only: %i[show edit update]
+  skip_before_action :admin_authorized, only: %i[show]
 
   # shows the current committee
   def show
@@ -11,14 +11,11 @@ class CommitteesController < ApplicationController
 
   def edit
     @committee = Committee.find(params[:id])
-    redirect_to(committee_path(@committee.id)) unless current_user&.heads_committee?(@committee) || current_user&.admin?
   end
 
   def update
     committee = Committee.find(params[:id])
-    if current_user&.heads_committee?(committee) || current_user&.admin?
-      committee.update(params[:committee].permit(:committee_name, user_ids: []))
-    end
+    committee.update(params[:committee].permit(:committee_name, user_ids: []))
     redirect_to(committee_path(committee.id))
   end
 end
