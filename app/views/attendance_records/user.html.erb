@@ -1,12 +1,3 @@
-<%= render "shared/top_banner" %>
-
-<% # this file is shown to the user that is logged in  %>
-<% if @show_signin %>
-    <%= form_with url: "/dashboard/user/meeting_signin", method: :post do |form|%>
-        <%= form.submit "Sign In" %>
-    <% end %>
-<% end %>
-
 <table>
   <thead>
     <tr>

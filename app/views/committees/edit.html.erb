@@ -1,0 +1,5 @@
+<%= form_with model: @committee do |form| %>
+  <%= form.text_field(:committee_name) %>
+  <%= form.collection_check_boxes :user_ids, User.all, :id, :name %>
+  <%= form.submit("Update Committee") %>
+<% end %>

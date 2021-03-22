@@ -22,10 +22,10 @@ class AttendanceRecord < ApplicationRecord
   # returns the attendance record for a user attending the meeting
   # if no record is found, returns nil
   def self.find_record(meeting, user)
-    ce = CommitteeEnrollment.where(committee_id: meeting.committee_id).and(
-      CommitteeEnrollment.where(user_id: user.id)
+    ce = CommitteeEnrollment.where(committee: meeting.committee).and(
+      CommitteeEnrollment.where(user: user)
     ).take
-    return where(meeting_id: meeting.id).and(where(committee_enrollment_id: ce.id)).take unless ce.nil?
+    return where(meeting: meeting).and(where(committee_enrollment: ce)).take unless ce.nil?
 
     nil
   end

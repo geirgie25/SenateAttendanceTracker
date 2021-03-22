@@ -3,6 +3,9 @@
 </div>
 
 <div class="navigationBar">
-    <%= link_to "Login", "/login" %>
-    <%= link_to "Logout", "/logout", method: :post %>
+    <% if logged_in? %>
+        <%= link_to "Logout", "/logout", method: :post %>
+    <% else %>
+        <%= link_to "Login", "/login" %>
+    <% end %>
 </div>

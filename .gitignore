@@ -1,6 +1,6 @@
 
 /config/database.yml
-
+converage/*
 
 # everything below this is stuff that was defaulted by rails new command
 
