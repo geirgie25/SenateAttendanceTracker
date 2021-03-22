@@ -1,0 +1,29 @@
+<%= render "shared/top_banner" %>
+
+<% # this file is to create new committees  %>
+<h2> Showing Committee Details</h2>
+
+<td> <%= link_to 'Go Back', :back %> </td>
+
+<table>
+    <thead>
+        <tr>
+            <th>Committe #: </th>
+            <th>Committe Name: </th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @committees.each do |committee| %>
+            <td> <%= committee.id %></td>
+            <td> <%= committee.committee_name %></td>
+
+            <td> <%= link_to "Show Committee", "/dashboard/general/" + committee.id.to_s %> </td>
+            <td> <%= link_to "Edit Committee",  "/dashboard/general/" + committee.id.to_s %> </td>
+            <td> <%= link_to "Delete Committee","/dashboard/general/" + committee.id.to_s %> </td>
+        <% end %>
+    </tbody>
+</table>
+<%= submit_tag "Create Committee" , :class => "submit" %>
+<% end %>
+
+<%= render "shared/bottom_banner" %>

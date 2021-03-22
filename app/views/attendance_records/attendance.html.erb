@@ -1,0 +1,31 @@
+<%= render "shared/top_banner" %>
+
+<% # this file is shown to the user that is logged in  %>
+<% if @show_signin %>
+    <%= form_with url: "/dashboard/user/meeting_signin", method: :post do |form|%>
+        <%= form.submit "Sign In" %>
+    <% end %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Unexcused Absences</th>
+      <th>Add an Excuse</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @user.name %></td>
+      <td><%= @unexcused_absences %></td>
+      <%= link_to "Add an Excuse",  excuse_form(user) %>
+
+
+    </tr>
+  </tbody>
+</table>
+
+
+<%= render "shared/bottom_banner" %>
