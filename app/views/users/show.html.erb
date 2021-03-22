@@ -10,5 +10,37 @@
   <%= @user.username %>
 </p>
 
+<table>
+  <thead>
+    <tr>
+      <th>Committee Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% where(committee_enrollment: @user.committee_enrollments).and(where(attended: true)).each do |absInst| %>
+      <tr>
+        <td><%= absInst.committee_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th>Committee Name</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% where(committee_enrollment: @user.committee_enrollments).and(where(attended: false)).each do |absInst| %>
+      <tr>
+        <td><%= absInst.committee_name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
