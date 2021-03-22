@@ -39,5 +39,11 @@ RSpec.describe MeetingsHelper, type: :helper do
       AttendanceRecord.make_records_for(m)
       expect(show_sign_in?(u, m)).to eq false
     end
+
+    it "don't show sign in if not logged in" do
+      m = Meeting.create(committee: c, start_time: Time.zone.now)
+      AttendanceRecord.make_records_for(m)
+      expect(show_sign_in?(nil, m)).to eq false
+    end
   end
 end
