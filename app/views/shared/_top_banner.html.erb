@@ -3,7 +3,7 @@
 </div>
 
 <div class="navigationBar">
-	<%= link_to "Home", @user.admin? ? "/dashboard/admin" : "/dashboard/user" %>
+	<%= link_to "Home", current_user&.admin? ? "/dashboard/admin" : "/dashboard/user" %>
 	<%= link_to "Users", "/login" %>
 	<%= link_to "General Committee", "/login" %>
 	<% if logged_in? %>
