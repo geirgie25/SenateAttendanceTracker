@@ -1,8 +1,14 @@
+# frozen_string_literal: true
+
 class ExcusesController < ApplicationController
-  skip_before_action :admin_authorized, only: %i[index show new create destroy]
-  before_action :set_excuse, only: %i[ show edit update]
+  skip_before_action :admin_authorized, only: %i[index my_excuses show new create destroy]
+  before_action :set_excuse, only: %i[show edit update]
 
   def index
+    @excuses = Excuse.all
+  end
+
+  def my_excuses
     @absences = AttendanceRecord.get_absences(current_user)
   end
 
@@ -56,5 +62,4 @@ class ExcusesController < ApplicationController
   def excuse_params
     params.require(:excuse).permit(:reason)
   end
-
 end

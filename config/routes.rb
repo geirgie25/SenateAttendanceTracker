@@ -27,11 +27,16 @@ Rails.application.routes.draw do
       post :end
       post :sign_in
     end
-  end 
-  
+  end
+
   # meetings
   post 'meeting/new', to: 'meetings#create'
 
+  # users routes
   resources :users
+
+  # excuses routes
+  get 'excuses/my_excuses', to: 'excuses#my_excuses'
   resources :excuses
+
 end

@@ -1,4 +1,3 @@
-<%= render "shared/top_banner" %>
 <p id="notice"><%= notice %></p>
 
 <h1>Excuses</h1>
@@ -6,21 +5,19 @@
 <table>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Meeting ID</th>
       <th>Date</th>
-      <th>Submitted Excuse?</th>
-      <th>Excuse Status</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @absences.each do |absence| %>
+    <% @excuses.each do |excuse| %>
       <tr>
-        <td><%= absence.meeting.id %></td>
-        <td><%= absence.meeting.start_time %></td>
-        <td><%= human_boolean(absence.excuses.exists?) %></td>
-        <td>Waiting for approval</td>
-        <td><%= link_to 'Submit Excuse', new_excuse_path(:attendance_record_id => absence.id) %></td>
+        <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
+        <td><%= excuse.attendance_record.meeting.id %></td>
+        <td><%= excuse.attendance_record.meeting.start_time %></td>
+        <td><%= link_to 'Edit', edit_user_path(excuse) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +25,4 @@
 
 <br>
 
-<%= render "shared/bottom_banner" %>
+<%= link_to 'Back', "/dashboard/user/" %>

@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Excuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Meeting ID</th>
+      <th>Date</th>
+      <th>Submitted Excuse?</th>
+      <th>Excuse Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @absences.each do |absence| %>
+      <tr>
+        <td><%= absence.meeting.id %></td>
+        <td><%= absence.meeting.start_time %></td>
+        <td><%= human_boolean(absence.excuses.exists?) %></td>
+        <td>Placeholder</td>
+        <td><%= link_to 'Submit Excuse', new_excuse_path(:attendance_record_id => absence.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

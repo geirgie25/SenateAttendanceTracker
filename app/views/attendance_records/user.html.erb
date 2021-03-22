@@ -17,6 +17,10 @@
   </tbody>
 </table>
 
-<%= link_to 'Excuses', "/excuses/" %>
+<% if @user.roles.any? {|role| role.role_name.include?("General")} %>
+  <%= link_to "Excuses", "/excuses/" %>
+<% else%>
+  <%= link_to "Excuses", "/excuses/my_excuses"%>
+<% end %>
 
 <%= render "shared/bottom_banner" %>
