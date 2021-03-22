@@ -22,4 +22,14 @@ module CommitteesHelper
 
     false
   end
+
+  def show_sign_in_notice?(user, committee)
+    unless user.nil?
+      return user.in_committee?(committee) &&
+             committee.current_meeting? &&
+             !user.attended_meeting?(committee.current_meeting)
+    end
+
+    false
+  end
 end

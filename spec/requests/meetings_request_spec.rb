@@ -15,7 +15,7 @@ RSpec.describe 'Meetings', type: :request do
     u.save
   end
 
-  describe 'Start Meeting' do
+  describe 'Start Meeting:' do
     it "can't start if not logged in" do
       post meeting_new_path, params: { committee_id: c.id, meeting_title: 'test_meeting1' }
       expect(response).to redirect_to('/login')
@@ -34,7 +34,7 @@ RSpec.describe 'Meetings', type: :request do
     end
   end
 
-  describe 'End Meeting' do
+  describe 'End Meeting:' do
     let(:m) { Meeting.create(committee: c, title: 'test_meeting', start_time: Time.zone.now) }
 
     it "can't end if not logged in" do
@@ -55,7 +55,7 @@ RSpec.describe 'Meetings', type: :request do
     end
   end
 
-  describe 'Meeting Title' do
+  describe 'Meeting Title:' do
     before do
       post '/login', params: { username: u.username, password: u.password }
     end
@@ -69,6 +69,34 @@ RSpec.describe 'Meetings', type: :request do
     it 'meeting title default' do
       post meeting_new_path, params: { committee_id: c.id, meeting_title: '' }
       expect(c.current_meeting.title).not_to eq ''
+    end
+  end
+
+  describe 'Sign-In:' do
+    before do
+      u2.committees << c
+      sign_user_in(u)
+      post meeting_new_path, params: { committee_id: c.id }
+    end
+
+    it 'sign in if part of committee' do
+      sign_user_in(u2)
+      post sign_in_meeting_path(c.current_meeting.id)
+      expect(AttendanceRecord.find_record(c.current_meeting, u2).attended).to eq true
+    end
+
+    it 'show meeting page' do
+      m = Meeting.create(committee: c)
+      get meeting_path(m.id)
+      expect(response).to have_http_status(:success)
+    end
+
+    it "can't sign in if meeting ended" do
+      m = c.current_meeting
+      post end_meeting_path(m.id)
+      sign_user_in(u2)
+      post sign_in_meeting_path(m.id)
+      expect(AttendanceRecord.find_record(m, u2).attended).to eq false
     end
   end
 end

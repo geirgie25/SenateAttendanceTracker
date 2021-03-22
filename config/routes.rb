@@ -22,8 +22,11 @@ Rails.application.routes.draw do
   resources :committees, :only => [:show]
 
   # meetings route
-  resources :meetings, :only => [:create] do
-    post :end, on: :member
+  resources :meetings, :only => [:create, :show] do
+    member do
+      post :end
+      post :sign_in
+    end
   end 
   
   # meetings
