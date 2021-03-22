@@ -10,4 +10,5 @@ class Committee < ApplicationRecord
   def self.get_committee_by_name(name)
     find_by(committee_name: name)
   end
+  validates_presence_of :committee_name
 end
