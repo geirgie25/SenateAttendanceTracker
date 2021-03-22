@@ -6,7 +6,11 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    #@WTPusers = User.order('id ASC')
+    if params[:committee]
+      @WTPusers = User.order('id ASC')
+    else
+      @WTPusers = User.order('id ASC')
+    end
   end
 
   def show; end
