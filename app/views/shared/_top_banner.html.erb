@@ -9,9 +9,21 @@
 	<%= link_to "Login", "/login" %>
   <%= link_to "Logout", "/logout", method: :post %>
 	<div class="dropdown">
-		<button class="dropbtn">Comittees</button>
+		<button class="dropbtn">Committees</button>
 		<div class="dropdown-content">
-			<a href="login.html">Committee Test</a>
+			<% Committee.all.each do |cInst| %>
+				<%# if possbile replace nil with cInst.name %>
+				<%= link_to(nil, committee_path(cInst), :class => 'action show') %>
+			<% end %>
 		</div>
+	</div>
+</div>
+<div class="dropdown">
+	<button class="dropbtn">Committees</button>
+	<div class="dropdown-content">
+		<% Committee.all.each do |cInst| %>
+			<%# if possbile replace nil with cInst.name %>
+			<%= link_to(nil, committee_path(cInst), :class => 'action show') %>
+		<% end %>
 	</div>
 </div>
