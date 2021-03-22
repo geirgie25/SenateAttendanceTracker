@@ -20,7 +20,7 @@
   </thead>
 
   <tbody>
-    <% where(committee_enrollment: @user.committee_enrollments).and(where(attended: true)).each do |absInst| %>
+    <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).and(where(attended: true)).each do |absInst| %>
       <tr>
         <td><%= absInst.meeting.committee.committee_name %></td>
       </tr>
@@ -38,7 +38,7 @@
   </thead>
 
   <tbody>
-    <% where(committee_enrollment: @user.committee_enrollments).and(where(attended: false)).each do |absInst| %>
+    <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).and(where(attended: false)).each do |absInst| %>
       <tr>
         <td><%= absInst.meeting.committee.committee_name %></td>
       </tr>
