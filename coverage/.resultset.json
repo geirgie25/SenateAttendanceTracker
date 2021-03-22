@@ -1,7 +1,396 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/channels/application_cable/channel.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/helpers/application_helper.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/helpers/attendance_records_helper.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/helpers/committees_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          9,
+          null,
+          2,
+          null,
+          null,
+          null,
+          1,
+          5,
+          null,
+          2,
+          null,
+          null,
+          null,
+          1,
+          4,
+          null,
+          2,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/helpers/meetings_helper.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/helpers/sessions_helper.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/committee.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          15,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/application_record.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/role.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/user.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          6,
+          null,
+          null,
+          1,
+          22,
+          null,
+          null,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/meeting.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          6,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          1,
+          3,
+          null,
+          null,
+          null,
+          1,
+          3,
+          3,
+          3,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          3,
+          3,
+          3,
+          null,
+          0,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/controllers/committees_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/controllers/application_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          1,
+          23,
+          null,
+          18,
+          null,
+          null,
+          null,
+          null,
+          1,
+          9,
+          null,
+          null,
+          null,
+          null,
+          1,
+          8,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          null,
+          null,
+          null,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/controllers/meetings_controller.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          4,
+          4,
+          3,
+          3,
+          3,
+          3,
+          null,
+          4,
+          null,
+          null,
+          1,
+          2,
+          2,
+          1,
+          1,
+          1,
+          null,
+          2,
+          null,
+          null,
+          1,
+          null,
+          1,
+          3,
+          null,
+          2,
+          null,
+          null,
+          1,
+          4,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/controllers/sessions_controller.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          6,
+          6,
+          6,
+          6,
+          6,
+          null,
+          6,
+          null,
+          null,
+          1,
+          0,
+          0,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/attendance_record.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          0,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          3,
+          0,
+          null,
+          null,
+          null,
+          null,
+          1,
+          0,
+          null,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/committee_enrollment.rb": {
+        "lines": [
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null
+        ]
+      },
+      "/mnt/c/rubyapps/senateattendancetracker/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
           null,
@@ -13,7 +402,7 @@
         "branches": {
         }
       },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/channels/application_cable/connection.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
           null,
@@ -25,52 +414,7 @@
         "branches": {
         }
       },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/application_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/attendance_records_controller.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/controllers/attendance_records_controller.rb": {
         "lines": [
           null,
           null,
@@ -102,80 +446,12 @@
           0,
           0,
           0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
           0
         ],
         "branches": {
         }
       },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/sessions_controller.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/users_controller.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/controllers/users_controller.rb": {
         "lines": [
           null,
           null,
@@ -244,40 +520,7 @@
         "branches": {
         }
       },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/application_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/attendance_records_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/sessions_helper.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/jobs/application_job.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/jobs/application_job.rb": {
         "lines": [
           null,
           null,
@@ -292,7 +535,7 @@
         "branches": {
         }
       },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/mailers/application_mailer.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/mailers/application_mailer.rb": {
         "lines": [
           null,
           null,
@@ -304,204 +547,11 @@
         "branches": {
         }
       },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/application_record.rb": {
+      "/mnt/c/rubyapps/senateattendancetracker/app/models/excuse.rb": {
         "lines": [
           null,
           null,
           null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/attendance_record.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/committee.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/committee_enrollment.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/excuse.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/meeting.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          null,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/role.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0
-        ],
-        "branches": {
-        }
-      },
-      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/user.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
-          0,
           0,
           0,
           0
@@ -510,6 +560,6 @@
         }
       }
     },
-    "timestamp": 1616016953
+    "timestamp": 1616186940
   }
 }

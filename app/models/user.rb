@@ -9,6 +9,11 @@ class User < ApplicationRecord
   def admin?
     roles.find_by(role_name: 'Administrator').present?
   end
+
+  def heads_committee?(committee)
+    roles.any? { |role| role.committees.include?(committee) }
+  end
+
   validates :username, uniqueness: true, presence: true
   validates :password, presence: true
 end

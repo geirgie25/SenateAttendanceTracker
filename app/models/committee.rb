@@ -10,4 +10,12 @@ class Committee < ApplicationRecord
   def self.get_committee_by_name(name)
     find_by(committee_name: name)
   end
+
+  def current_meeting?
+    Meeting.where(committee: self).and(Meeting.where(end_time: nil)).exists?
+  end
+
+  def current_meeting
+    Meeting.where(committee: self).and(Meeting.where(end_time: nil)).take
+  end
 end

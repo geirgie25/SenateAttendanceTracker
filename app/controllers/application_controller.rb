@@ -36,4 +36,6 @@ class ApplicationController < ActionController::Base
       redirect_to '/login'
     end
   end
+
+  helper_method :logged_in?, :current_user
 end
