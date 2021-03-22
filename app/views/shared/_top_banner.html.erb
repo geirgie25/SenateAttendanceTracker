@@ -6,8 +6,11 @@
 	<%= link_to "Home", @user.admin? ? "/dashboard/admin" : "/dashboard/user" %>
 	<%= link_to "Users", "/login" %>
 	<%= link_to "General Committee", "/login" %>
-	<%= link_to "Login", "/login" %>
-  <%= link_to "Logout", "/logout", method: :post %>
+	<% if logged_in? %>
+    <%= link_to "Logout", "/logout", method: :post %>
+  <% else %>
+    <%= link_to "Login", "/login" %>
+  <% end %>
 	<div class="dropdown">
 		<button class="dropbtn">Committees</button>
 		<div class="dropdown-content">
