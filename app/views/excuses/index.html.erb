@@ -21,7 +21,6 @@
         <td><%= human_boolean(absence.excuses.exists?) %></td>
         <td>Waiting for approval</td>
         <td><%= link_to 'Submit Excuse', new_excuse_path(:attendance_record_id => absence.id) %></td>
-        <td><%= link_to 'Cancel Excuse Submission', @excuses, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

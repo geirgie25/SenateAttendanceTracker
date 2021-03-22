@@ -11,7 +11,6 @@ class ExcusesController < ApplicationController
   def new
     @excuse = Excuse.new
     @absence = AttendanceRecord.find(params[:attendance_record_id])
-    @excuse.build_attendance_record
   end
 
   def edit; end
@@ -42,18 +41,6 @@ class ExcusesController < ApplicationController
         format.json { render json: @excuse.errors, status: :unprocessable_entity }
       end
     end
-  end
-
-  def destroy
-    @absence = AttendanceRecord.find(params[:id])
-    @excusess = @absence.excuses
-    if @excuse.exists?
-      @excuse.destroy
-      respond_to do |format|
-        format.html { redirect_to excuses_url, notice: 'Excuse was successfully deleted.' }
-        format.json { head :no_content }
-    end
-  end
   end
 
   private
