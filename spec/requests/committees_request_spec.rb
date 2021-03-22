@@ -47,7 +47,7 @@ RSpec.describe 'Committees', type: :request do
       u2.roles << r2
       u2.save
       sign_user_in(u2)
-      patch committee_path(c.id), params: { id: c.id, committee: { committee_name: 'UpdatedName', user_ids: [u.id] } }
+      patch committee_path(c.id), params: { committee: { committee_name: 'UpdatedName', user_ids: [u.id] } }
       expect(Committee.find(c.id).users.first).to eq u
     end
   end
