@@ -25,6 +25,11 @@
     <%= form.label :password %>
     <%= form.text_field :password %>
   </div>
+  
+  <div class="field">
+    <%= form.label :roles %>
+    <%= form.collection_check_boxes :role_ids, Role.all, :id, :role_name %>
+  </div>
 
   <div class="actions">
     <%= form.submit %>

@@ -1,0 +1,11 @@
+<p><%= @meeting.committee.committee_name %></p>
+<p>Meeting <%= @meeting.title %></p>
+
+
+<% if show_sign_in?(current_user, @meeting) %>
+    <p>By signing into this meeting, I agree to the Aggie Honor Code:</p>
+    <p>An Aggie does not lie, cheat, or steal, nor tolerates those who do.</p>
+    <%= form_with url: sign_in_meeting_path(@meeting.id), method: :post do |form|%>
+        <%= form.submit "Sign-In" %>
+    <% end %>
+<% end %>
