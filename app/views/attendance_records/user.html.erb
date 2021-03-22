@@ -17,25 +17,4 @@
   </tbody>
 </table>
 
-<table>
-    <tr>
-      <th>User</th>
-      <th>Number of Absences</th>
-      <th>Excused Absences</th>
-      <th>Unexcused Absences</th>
-    </tr>
-    <% @WTPusers.each do |WTPInst| %>
-    <tr>
-      <td><%= WTPInst.name %></td>
-      <td><%= AttendanceRecord.total_absences(WTPInst) %></td>
-      <td><%= AttendanceRecord.excused_absences(WTPInst) %></td>
-      <td><%= AttendanceRecord.total_absences(WTPInst) - AttendanceRecord.excused_absences(WTPInst) %></td>
-      <td>
-        <%= link_to("Show", user_path(WTPInst), :class => 'action show') %>
-        <%= link_to("Edit", edit_user_path(WTPInst), :class => 'action edit') %>
-        <%= link_to("Delete", delete_user_path(WTPInst), :class => 'action delete') %>
-      </td>
-    </tr>
-    <% end %>
-  </table>
 <%= render "shared/bottom_banner" %>

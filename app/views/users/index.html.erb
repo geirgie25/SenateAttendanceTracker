@@ -7,6 +7,9 @@
     <tr>
       <th>Name</th>
       <th>Username</th>
+      <th>Number of Absences</th>
+      <th>Excused Absences</th>
+      <th>Unexcused Absences</th>
     </tr>
   </thead>
 
@@ -15,6 +18,9 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.username %></td>
+        <td><%= AttendanceRecord.total_absences(WTPInst) %></td>
+        <td><%= AttendanceRecord.excused_absences(WTPInst) %></td>
+        <td><%= AttendanceRecord.total_absences(WTPInst) - AttendanceRecord.excused_absences(WTPInst) %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
