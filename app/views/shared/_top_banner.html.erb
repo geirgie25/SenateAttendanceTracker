@@ -21,12 +21,3 @@
 		</div>
 	</div>
 </div>
-<div class="dropdown">
-	<button class="dropbtn">Committees</button>
-	<div class="dropdown-content">
-		<% Committee.all.each do |cInst| %>
-			<%# if possbile replace nil with cInst.name %>
-			<%= link_to(nil, committee_path(cInst), :class => 'action show') %>
-		<% end %>
-	</div>
-</div>
