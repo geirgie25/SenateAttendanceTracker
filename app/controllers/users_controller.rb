@@ -6,9 +6,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    if params.has_key?(:committee)
+    if params.has_key?(:committee_id)
       #set WTPusers = to the users in that committee
-      @WTPusers = params[:committee].users
+      @WTPusers = Committee.find(params[:committee_id]).users
     else
       @WTPusers = User.order('id ASC')
     end
