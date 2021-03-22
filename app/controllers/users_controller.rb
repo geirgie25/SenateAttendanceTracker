@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     @users = User.all
     if params.has_key?(:committee)
       #set WTPusers = to the users in that committee
-      @WTPusers = User.order('id ASC')
+      @WTPusers = params[:committee].users
     else
       @WTPusers = User.order('id ASC')
     end
