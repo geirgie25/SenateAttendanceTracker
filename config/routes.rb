@@ -19,4 +19,5 @@ Rails.application.routes.draw do
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_signin'
 
   resources :users
+  resources :excuses
 end
