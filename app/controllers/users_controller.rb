@@ -3,6 +3,7 @@
 # controller for users
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  skip_before_action :admin_authorized, only: %i[index]
 
   def index
     @users = User.all
