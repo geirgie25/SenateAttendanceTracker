@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class MeetingsController < ApplicationController
-  skip_before_action :user_authorized, only: %i[show]
-  skip_before_action :admin_authorized, only: %i[create end show sign_in]
+  skip_before_action :user_authorized, only: %i[index show]
+  skip_before_action :admin_authorized, only: %i[index create end show sign_in]
+
+  def index
+    @meetings = filter_meetings
+  end
+
   def create
     committee = Committee.find(params[:committee_id])
     if !committee.current_meeting? && committee_head_permissions?(committee)
@@ -40,6 +45,12 @@ class MeetingsController < ApplicationController
   end
 
   private
+
+  def filter_meetings
+    return Committee.find(params[:committee_id]).meetings if params[:committee_id].present?
+
+    Meeting.all
+  end
 
   def committee_head_permissions?(committee)
     current_user&.heads_committee?(committee)

@@ -43,12 +43,18 @@ class AttendanceRecord < ApplicationRecord
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).count
   end
 
+  # returns the total number of excused absences for a user
   def self.find_total_excused_absences(user)
     excuse_count = 0
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).find_each do |record|
       excuse_count += record.excuses.count
     end
     excuse_count
+  end
+
+  # returns all attendance records for missed meetings for a user
+  def self.get_absences(user)
+    where(committee_enrollment: user.committee_enrollments).and(where(attended: false))
   end
 
   def self.records(user)

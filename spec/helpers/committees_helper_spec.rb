@@ -85,25 +85,4 @@ RSpec.describe CommitteesHelper, type: :helper do
       expect(show_sign_in_notice?(nil, c)).to eq false
     end
   end
-
-  describe 'show edit link helper' do
-    it 'committee head' do
-      expect(show_edit_committee_link?(u)).to eq false
-    end
-
-    it 'admin' do
-      r2 = Role.create(role_name: 'Administrator')
-      u2.roles << r2
-      u2.save
-      expect(show_edit_committee_link?(u2)).to eq true
-    end
-
-    it 'no role' do
-      expect(show_edit_committee_link?(u2)).to eq false
-    end
-
-    it 'not logged in' do
-      expect(show_edit_committee_link?(nil)).to eq false
-    end
-  end
 end

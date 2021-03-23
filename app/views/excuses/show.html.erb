@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meeting <%= @excuse.attendance_record.meeting.id %> Excuse</strong>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @excuse.status %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @excuse.reason %>
+</p>
+
+<%= link_to "Back", "/excuses/my_excuses"%>

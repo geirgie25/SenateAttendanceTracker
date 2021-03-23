@@ -21,10 +21,14 @@ Rails.application.routes.draw do
   resources :attendance_records, :only => [:index]
 
   # committees route
-  resources :committees, :only => [:new, :create, :show, :edit, :update]
+  resources :committees, :only => [:new, :create, :show, :edit, :update] do
+    resources :users, :only => [:index]
+    resources :meetings, :only => [:index]
+    resources :excuses, :only => [:index, :show, :edit, :update, :destroy]
+  end
 
   # meetings route
-  resources :meetings, :only => [:create, :show] do
+  resources :meetings, :only => [:index,:create, :show] do
     member do
       post :end
       post :sign_in
@@ -34,7 +38,11 @@ Rails.application.routes.draw do
   # meetings
   post 'meeting/new', to: 'meetings#create'
 
-
+  # users routes
   resources :users
-  
+
+  # excuses routes
+  get 'excuses/my_excuses', to: 'excuses#my_excuses'
+  resources :excuses, :only => [:show, :new, :create, :update, :destroy]
+
 end

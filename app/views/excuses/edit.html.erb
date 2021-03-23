@@ -1,0 +1,27 @@
+<h1>Reviewing excuse for Meeting <%= @excuse.attendance_record.meeting.id %> for <%= @excuse.attendance_record.committee_enrollment.user.name %></h1>
+
+<%= form_with(model: @excuse) do |form| %>
+  <% if @excuse.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@excuse.errors.count, "error") %> prohibited this excuse from being saved:</h2>
+
+      <ul>
+        <% @excuse.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Excuse.statuses.keys.map {|key| [key.humanize, key]} %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+
+<% end %>
+
+<%= link_to 'Back', :back %>

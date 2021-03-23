@@ -3,8 +3,7 @@
     <tr>
       <th>Committees</th>
       <th>Meeting</th>
-      <th>Attendance Records</th>
-      <th>Excuse Form</th>
+      <th>Attendance Status</th>
     </tr>
   </thead>
   <tbody>
@@ -13,10 +12,6 @@
       <td><%= record.meeting.committee.committee_name %></td>
       <td><%= record.meeting.title %></td>
       <td><%= record.attended%></td>
-
-     <% if show_excuse_link?(record) && current_user.id = record.committee_enrollment.user.id %>
-        <td> <%= link_to "Add an Excuse",  "" %> </td>
-     <%end%>
 
     </tr>
     <% end %>
