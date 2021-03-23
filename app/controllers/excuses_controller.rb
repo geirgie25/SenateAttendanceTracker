@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class ExcusesController < ApplicationController
-  skip_before_action :admin_authorized, only: %i[index my_excuses show new create destroy]
-  before_action :set_excuse, only: %i[show edit update]
+  skip_before_action :admin_authorized
+  before_action :set_excuse, only: %i[show edit update destroy]
 
   def index
     @excuses = Excuse.all
@@ -12,7 +12,9 @@ class ExcusesController < ApplicationController
     @absences = AttendanceRecord.get_absences(current_user)
   end
 
-  def show; end
+  def show
+    @user = current_user
+  end
 
   def new
     @excuse = Excuse.new
@@ -49,6 +51,14 @@ class ExcusesController < ApplicationController
     end
   end
 
+  def destroy
+    @excuse.destroy
+    respond_to do |format|
+      format.html { redirect_to excuses_url, notice: 'Excuse was successfully deleted.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def set_excuse
@@ -60,6 +70,6 @@ class ExcusesController < ApplicationController
   end
 
   def excuse_params
-    params.require(:excuse).permit(:reason)
+    params.require(:excuse).permit(:reason, :status)
   end
 end

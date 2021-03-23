@@ -18,7 +18,7 @@
         <td><%= absence.meeting.id %></td>
         <td><%= absence.meeting.start_time %></td>
         <td><%= human_boolean(absence.excuses.exists?) %></td>
-        <td>Placeholder</td>
+        <td><%= absence.excuses.exists? ? absence.excuses.first.status : "N/A" %></td>
         <td><%= link_to 'Submit Excuse', new_excuse_path(:attendance_record_id => absence.id) %></td>
       </tr>
     <% end %>

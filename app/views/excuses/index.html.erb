@@ -17,7 +17,8 @@
         <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
         <td><%= excuse.attendance_record.meeting.id %></td>
         <td><%= excuse.attendance_record.meeting.start_time %></td>
-        <td><%= link_to 'Edit', edit_user_path(excuse) %></td>
+        <td><%= link_to 'Edit', edit_excuse_path(excuse) %></td>
+        <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

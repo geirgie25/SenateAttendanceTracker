@@ -5,8 +5,17 @@
 </p>
 
 <p>
+  <strong>Status:</strong>
+  <%= @excuse.status %>
+</p>
+
+<p>
   <strong>Reason:</strong>
   <%= @excuse.reason %>
 </p>
 
-<%= link_to 'Back', '/excuses/my_excuses' %>
+<% if @user.roles.any? {|role| role.role_name.include?("General")} %>
+  <%= link_to "Back", "/excuses/" %>
+<% else%>
+  <%= link_to "Back", "/excuses/my_excuses"%>
+<% end %>
