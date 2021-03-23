@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_signin'
 
   # committees route
-  resources :committees, :only => [:show, :edit, :update]
+  resources :committees, :only => [:new, :create, :show, :edit, :update]
 
   # meetings route
   resources :meetings, :only => [:create, :show] do
@@ -27,10 +27,12 @@ Rails.application.routes.draw do
       post :end
       post :sign_in
     end
-  end 
-  
+  end
+
   # meetings
   post 'meeting/new', to: 'meetings#create'
 
+
   resources :users
+  
 end
