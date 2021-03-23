@@ -5,10 +5,12 @@
   <%= @user.name %>
 </p>
 
+<% if current_user&.admin? %>
 <p>
   <strong>Username:</strong>
   <%= @user.username %>
 </p>
+<% end %>
 
 
 <!-- Attended -->

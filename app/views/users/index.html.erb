@@ -6,7 +6,9 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Username</th>
+      <% if current_user&.admin? %>
+        <th>Username</th>
+      <% end %>
       <th>Number of Absences</th>
       <th>Excused Absences</th>
       <th>Unexcused Absences</th>
@@ -17,7 +19,9 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= user.username %></td>
+        <% if current_user&.admin? %>
+          <td><%= user.username %></td>
+        <% end %>
         <td><%= AttendanceRecord.find_total_absences(user) %></td>
         <td><%=  AttendanceRecord.find_total_excused_absences(user) %></td>
         <td><%= AttendanceRecord.find_total_absences(user) -  AttendanceRecord.find_total_excused_absences(user) %></td>
