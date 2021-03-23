@@ -41,6 +41,6 @@ Rails.application.routes.draw do
 
   # excuses routes
   get 'excuses/my_excuses', to: 'excuses#my_excuses'
-  resources :excuses, :only => [:show, :new, :create]
+  resources :excuses, :only => [:show, :new, :create, :update]
 
 end

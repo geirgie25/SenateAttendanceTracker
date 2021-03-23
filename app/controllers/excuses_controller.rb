@@ -28,22 +28,14 @@ class ExcusesController < ApplicationController
     @absence = AttendanceRecord.find(params[:excuse][:attendance_record_id])
     @excuse = Excuse.new(excuse_params)
     @excuse.attendance_record = @absence
-
-    respond_to do |format|
-      if @excuse.save
-        format.html { redirect_to @excuse, notice: 'Excuse was successfully created.' }
-        format.json { render :show, status: :created, location: @excuses }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @excuse.errors, status: :unprocessable_entity }
-      end
-    end
+    @excuse.save
+    redirect_to :my_excuses
   end
 
   def update
     respond_to do |format|
       if @excuse.update(excuse_params)
-        format.html { redirect_to @excuse, notice: 'Excuse was successfully updated.' }
+        format.html { redirect_to committee_path(@excuse.attendance_record.meeting.committee.id), notice: 'Excuse was successfully updated.' }
         format.json { render :show, status: :ok, location: @excuse }
       else
         format.html { render :edit, status: :unprocessable_entity }
