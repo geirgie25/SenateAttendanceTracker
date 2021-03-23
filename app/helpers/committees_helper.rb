@@ -1,4 +1,3 @@
-
 # frozen_string_literal: true
 
 module CommitteesHelper
@@ -27,5 +26,4 @@ module CommitteesHelper
   def show_edit_committee_link?(user)
     user&.admin?.present?
   end
-
 end

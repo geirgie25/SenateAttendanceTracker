@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 # frozen_string_literal: true
 
->>>>>>> main
 require 'rails_helper'
 
 # Specs in this file have access to a helper object that includes
@@ -16,9 +13,6 @@ require 'rails_helper'
 #   end
 # end
 RSpec.describe CommitteesHelper, type: :helper do
-<<<<<<< HEAD
-  pending "add some examples to (or delete) #{__FILE__}"
-=======
   let(:c) { Committee.create(committee_name: 'TestCommittee') }
   let(:r) { Role.create(role_name: 'TestCommitteeHead') }
   let(:u) { User.create(username: 'papa', name: 'papi', password: 'pass') }
@@ -112,5 +106,4 @@ RSpec.describe CommitteesHelper, type: :helper do
       expect(show_edit_committee_link?(nil)).to eq false
     end
   end
->>>>>>> main
 end

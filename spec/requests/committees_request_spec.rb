@@ -1,11 +1,6 @@
-require 'rails_helper'
-RSpec.describe "Committees", type: :request do
-
-
 # frozen_string_literal: true
 
 require 'rails_helper'
-
 RSpec.describe 'Committees', type: :request do
   let(:c) { Committee.create(committee_name: 'TestCommittee') }
   let(:r) { Role.create(role_name: 'TestCommitteeHead') }
@@ -77,10 +72,15 @@ RSpec.describe 'Committees', type: :request do
       expect(response).to have_http_status(:redirect)
     end
 
+    it "can't go to new commmittee page if not administrator" do
+      sign_user_in(u2)
+      get new_committee_path
+      expect(response).to have_http_status(:redirect)
+    end
+
     it "don't go to page without logged in" do
       get edit_committee_path(c.id)
       expect(response).to have_http_status(:redirect)
     end
   end
-
 end

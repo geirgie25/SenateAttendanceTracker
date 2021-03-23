@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   # meetings
   post 'meeting/new', to: 'meetings#create'
 
+
   resources :users
-  resources :committees, :only => [:new, :create]
+  
 end
