@@ -19,10 +19,13 @@ Rails.application.routes.draw do
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_signin'
 
   # committees route
-  resources :committees, :only => [:show, :edit, :update]
+  resources :committees, :only => [:show, :edit, :update] do
+    resources :users, :only => [:index]
+    resources :meetings, :only => [:index]
+  end
 
   # meetings route
-  resources :meetings, :only => [:create, :show] do
+  resources :meetings, :only => [:index,:create, :show] do
     member do
       post :end
       post :sign_in

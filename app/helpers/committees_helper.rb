@@ -23,7 +23,12 @@ module CommitteesHelper
     ).present?
   end
 
-  def show_edit_committee_link?(user)
+  def show_edit_committee_link?(user, committee)
+    user&.admin?.present? or user&.heads_committee?(committee)
+  end
+
+  def show_delete_committee_link?(user)
     user&.admin?.present?
   end
+
 end

@@ -19,6 +19,14 @@
     <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
 <% end %>
 
-<% if show_edit_committee_link?(current_user) %>
+<%= link_to "Users", committee_users_url(@committee.id) %>
+
+<%= link_to "Meetings", committee_meetings_url(@committee.id) %>
+
+<% if show_edit_committee_link?(current_user, @committee) %>
     <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
+<% end %>
+
+<% if show_delete_committee_link?(current_user) %>
+    <%= link_to "Delete Committee", @committee, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
