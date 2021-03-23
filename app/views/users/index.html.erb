@@ -33,5 +33,7 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %> |
+<% if current_user&.admin? %>
+  <%= link_to 'New User', new_user_path %> |
+<% end %>
 <%= link_to 'Back', "/dashboard/admin/" %>
