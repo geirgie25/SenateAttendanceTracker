@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :committees, :only => [:show, :edit, :update] do
     resources :users, :only => [:index]
     resources :meetings, :only => [:index]
+    resources :excuses, :only => [:index, :show, :edit, :update, :destroy]
   end
 
   # meetings route
@@ -40,6 +41,6 @@ Rails.application.routes.draw do
 
   # excuses routes
   get 'excuses/my_excuses', to: 'excuses#my_excuses'
-  resources :excuses
+  resources :excuses, :only => [:show, :new, :create]
 
 end

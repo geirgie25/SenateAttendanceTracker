@@ -3,9 +3,10 @@
 class ExcusesController < ApplicationController
   skip_before_action :admin_authorized
   before_action :set_excuse, only: %i[show edit update destroy]
+  before_action :user_id_authorized, only: %i[show]
 
   def index
-    @excuses = Excuse.all
+    @meetings = Committee.find(params[:committee_id]).meetings
   end
 
   def my_excuses
@@ -61,12 +62,14 @@ class ExcusesController < ApplicationController
 
   private
 
-  def set_excuse
-    @excuse = Excuse.find(params[:id])
+  def user_id_authorized
+    unless current_user.id == @excuse.attendance_record.committee_enrollment.user.id
+      redirect_back(fallback_location: '/excuses/my_excuses')
+    end
   end
 
-  def set_record
-    @absence = AttendanceRecord.find(params[:attendance_record_id])
+  def set_excuse
+    @excuse = Excuse.find(params[:id])
   end
 
   def excuse_params

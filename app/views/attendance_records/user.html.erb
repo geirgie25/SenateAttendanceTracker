@@ -17,8 +17,4 @@
   </tbody>
 </table>
 
-<% if @user.roles.any? {|role| role.role_name.include?("General")} %>
-  <%= link_to "Excuses", "/excuses/" %>
-<% else%>
-  <%= link_to "Excuses", "/excuses/my_excuses"%>
-<% end %>
+<%= link_to "Excuses", "/excuses/my_excuses"%>

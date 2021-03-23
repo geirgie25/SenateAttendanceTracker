@@ -47,9 +47,8 @@ class MeetingsController < ApplicationController
   private
 
   def filter_meetings
-    if !params[:committee_id].blank?
-      return Committee.find(params[:committee_id]).meetings
-    end
+    return Committee.find(params[:committee_id]).meetings if params[:committee_id].present?
+
     Meeting.all
   end
 

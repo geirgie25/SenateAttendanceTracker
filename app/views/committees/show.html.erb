@@ -19,14 +19,18 @@
     <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
 <% end %>
 
-<%= link_to "Users", committee_users_url(@committee.id) %>
+<%= link_to "Committee Users", committee_users_url(@committee.id) %> |
 
-<%= link_to "Meetings", committee_meetings_url(@committee.id) %>
+<%= link_to "Committee Meetings", committee_meetings_url(@committee.id) %>
+
+<% if show_committee_excuses_link?(current_user, @committee) %>
+    | <%= link_to "Committee Excuses", committee_excuses_url(@committee.id) %>
+<% end %>
 
 <% if show_edit_committee_link?(current_user, @committee) %>
-    <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
+    | <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
 <% end %>
 
 <% if show_delete_committee_link?(current_user) %>
-    <%= link_to "Delete Committee", @committee, method: :delete, data: { confirm: 'Are you sure?' } %>
+    | <%= link_to "Delete Committee", @committee, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>

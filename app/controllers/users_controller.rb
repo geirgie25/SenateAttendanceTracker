@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   skip_before_action :admin_authorized, only: %i[index]
 
   def index
-    #@WTPusers = User.order('id ASC')
+    # @WTPusers = User.order('id ASC')
     @users = filter_users
   end
 
@@ -58,9 +58,8 @@ class UsersController < ApplicationController
   private
 
   def filter_users
-    if !params[:committee_id].blank?
-      return Committee.find(params[:committee_id]).users
-    end
+    return Committee.find(params[:committee_id]).users if params[:committee_id].present?
+
     User.all
   end
 
