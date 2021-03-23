@@ -19,8 +19,8 @@
         <td><%= user.name %></td>
         <td><%= user.username %></td>
         <td><%= AttendanceRecord.find_total_absences(user) %></td>
-        <td><%= AttendanceRecord.find_excused_absences(user) %></td>
-        <td><%= AttendanceRecord.find_total_absences(user) - AttendanceRecord.find_excused_absences(user) %></td>
+        <td><%=  AttendanceRecord.find_total_excused_absences(user) %></td>
+        <td><%= AttendanceRecord.find_total_absences(user) -  AttendanceRecord.find_total_excused_absences(user) %></td>
         <td><%= link_to 'Show', user %></td>
         <% if current_user&.admin? %>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
