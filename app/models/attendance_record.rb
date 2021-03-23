@@ -52,6 +52,6 @@ class AttendanceRecord < ApplicationRecord
   end
 
   def self.records(user)
-      where(committee_enrollment: user.committee_enrollments)
+    where(committee_enrollment: user.committee_enrollments)
   end
 end

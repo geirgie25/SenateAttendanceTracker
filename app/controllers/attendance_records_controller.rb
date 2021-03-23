@@ -5,8 +5,9 @@ class AttendanceRecordsController < ApplicationController
   skip_before_action :admin_authorized, only: %i[user_dashboard]
 
   def index
-      @records = filter_records
+    @records = filter_records
   end
+
   def user_dashboard
     @user = current_user
     @total_absences = AttendanceRecord.find_total_absences(@user)
@@ -35,9 +36,8 @@ class AttendanceRecordsController < ApplicationController
   private
 
   def filter_records
-      unless params[ :user_id].blank?
-          return AttendanceRecords.records(User.find(params[:user_id]))
-     end
+    return AttendanceRecords.records(User.find(params[:user_id])) if params[:user_id].present?
+
     AttendanceRecord.all
-end
+  end
 end
