@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/helpers/application_helper.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/application_helper.rb": {
         "lines": [
           null,
           null,
@@ -17,7 +17,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/helpers/attendance_records_helper.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/attendance_records_helper.rb": {
         "lines": [
           null,
           null,
@@ -26,7 +26,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/helpers/committees_helper.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/committees_helper.rb": {
         "lines": [
           null,
           null,
@@ -59,7 +59,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/helpers/meetings_helper.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/meetings_helper.rb": {
         "lines": [
           null,
           null,
@@ -74,7 +74,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/helpers/sessions_helper.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/sessions_helper.rb": {
         "lines": [
           null,
           null,
@@ -83,7 +83,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/committee.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/committee.rb": {
         "lines": [
           null,
           null,
@@ -109,7 +109,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/application_record.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/application_record.rb": {
         "lines": [
           null,
           null,
@@ -119,7 +119,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/role.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/role.rb": {
         "lines": [
           null,
           null,
@@ -130,7 +130,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/user.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/user.rb": {
         "lines": [
           null,
           null,
@@ -141,7 +141,7 @@
           1,
           1,
           1,
-          44,
+          52,
           null,
           null,
           1,
@@ -162,7 +162,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/controllers/sessions_controller.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/sessions_controller.rb": {
         "lines": [
           null,
           null,
@@ -190,7 +190,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/controllers/application_controller.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/application_controller.rb": {
         "lines": [
           null,
           null,
@@ -204,9 +204,9 @@
           null,
           null,
           1,
-          110,
+          121,
           null,
-          100,
+          108,
           null,
           null,
           null,
@@ -235,7 +235,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/controllers/attendance_records_controller.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/attendance_records_controller.rb": {
         "lines": [
           null,
           null,
@@ -270,7 +270,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/meeting.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/meeting.rb": {
         "lines": [
           null,
           null,
@@ -307,7 +307,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/controllers/committees_controller.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/committees_controller.rb": {
         "lines": [
           null,
           null,
@@ -323,7 +323,6 @@
           2,
           2,
           2,
-          null,
           null,
           null,
           1,
@@ -342,7 +341,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/committee_enrollment.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/committee_enrollment.rb": {
         "lines": [
           null,
           null,
@@ -354,7 +353,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/attendance_record.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/attendance_record.rb": {
         "lines": [
           null,
           null,
@@ -410,7 +409,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/controllers/meetings_controller.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/meetings_controller.rb": {
         "lines": [
           null,
           null,
@@ -467,17 +466,18 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/controllers/users_controller.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/users_controller.rb": {
         "lines": [
           null,
           null,
           null,
           1,
           1,
+          1,
+          1,
           null,
           1,
           0,
-          null,
           null,
           null,
           1,
@@ -535,7 +535,7 @@
           null
         ]
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/channels/application_cable/channel.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/channels/application_cable/channel.rb": {
         "lines": [
           null,
           null,
@@ -547,7 +547,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/channels/application_cable/connection.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/channels/application_cable/connection.rb": {
         "lines": [
           null,
           null,
@@ -559,7 +559,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/jobs/application_job.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/jobs/application_job.rb": {
         "lines": [
           null,
           null,
@@ -574,7 +574,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/mailers/application_mailer.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/mailers/application_mailer.rb": {
         "lines": [
           null,
           null,
@@ -586,7 +586,7 @@
         "branches": {
         }
       },
-      "/mnt/c/Users/Rhonda Hollier/Desktop/SenateAttendanceTracker/app/models/excuse.rb": {
+      "/mnt/c/rubyapps/SenateAttendanceTracker/app/models/excuse.rb": {
         "lines": [
           null,
           null,
@@ -599,6 +599,6 @@
         }
       }
     },
-    "timestamp": 1616467282
+    "timestamp": 1616483703
   }
 }
