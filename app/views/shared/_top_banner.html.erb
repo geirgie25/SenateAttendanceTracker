@@ -1,11 +1,24 @@
 <div class="AggieScheduleBar">
-	<p>AGGIE SENATE</p>
+	<p>TEXAS A&M STUDENT SENATE</p>
 </div>
 
 <div class="navigationBar">
-    <% if logged_in? %>
-        <%= link_to "Logout", "/logout", method: :post %>
-    <% else %>
-        <%= link_to "Login", "/login" %>
-    <% end %>
+	<%= link_to "Home", current_user&.admin? ? "/dashboard/admin" : "/dashboard/user" %>
+	<%= link_to "Users", "/login" %>
+	<%= link_to "General Committee", "/login" %>
+	<% if logged_in? %>
+    <%= link_to "Logout", "/logout", method: :post %>
+  <% else %>
+    <%= link_to "Login", "/login" %>
+  <% end %>
+	<div class="dropdown">
+		<button class="dropbtn">Committees</button>
+		<div class="dropdown-content">
+			<% Committee.all.each do |cInst| %>
+				<%if cInst.committee_name != "General" %>
+					<%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
 </div>
