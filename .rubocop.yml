@@ -15,12 +15,15 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/**/*'
     - '.git/**/*'
-    
+
 Layout/LineLength:
   Max: 120
 
 Metrics/MethodLength:
   Severity: warning
+
+Metrics/ClassLength:
+  Enabled: false
 
 Metrics/BlockLength:
   Exclude:
@@ -35,5 +38,3 @@ Naming/ClassAndModuleCamelCase:
 Naming/MethodName:
   Enabled: true
   EnforcedStyle: snake_case
-  
-  

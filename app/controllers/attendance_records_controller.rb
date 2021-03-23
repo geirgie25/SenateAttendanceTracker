@@ -2,10 +2,10 @@
 
 # controls attendance records. temp
 class AttendanceRecordsController < ApplicationController
-  skip_before_action :admin_authorized, only: %i[user_dashboard]
+  skip_before_action :admin_authorized, only: %i[user_dashboard index]
 
   def index
-    @records = filter_records
+    @records = AttendanceRecord.records(current_user)
   end
 
   def user_dashboard
@@ -31,13 +31,5 @@ class AttendanceRecordsController < ApplicationController
     @meeting = Meeting.find(@meeting_id)
     @records = @meeting.attendance_records
     render :view_meeting
-  end
-
-  private
-
-  def filter_records
-    return AttendanceRecords.records(User.find(params[:user_id])) if params[:user_id].present?
-
-    AttendanceRecord.all
   end
 end
