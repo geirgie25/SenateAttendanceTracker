@@ -1,0 +1,36 @@
+<%= render "shared/top_banner" %>
+<td> <%= link_to "Go Back", :back %> </td>
+
+<% # this file is shown to the user that is logged in  %>
+<% if @show_signin %>
+    <%= form_with url: "/dashboard/user/meeting_signin", method: :post do |form|%>
+        <%= form.submit "Sign In" %>
+    <% end %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Committees</th>
+      <th>Meeting</th>
+      <th>Attendance Records</th>
+      <th>Excuse Form</th>
+    </tr>
+  </thead>
+  <tbody>
+     <% @records.each do |record| %>
+    <tr>
+      <td><%= record.meeting.committee.committee_name %></td>
+      <td><%= record.meeting.title %></td>
+      <td><%= record.attended%></td>
+
+     <% if show_excuse_link?(record)&& current_user.id = record.committee_enrollment.user.id %>
+        <td> <%= link_to "Add an Excuse",  excuse_form(user) %> </td>
+     <%end%>
+
+    </tr>
+  </tbody>
+</table>
+
+
+<%= render "shared/bottom_banner" %>
