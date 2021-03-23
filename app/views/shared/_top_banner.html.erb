@@ -15,8 +15,11 @@
 		<button class="dropbtn">Committees</button>
 		<div class="dropdown-content">
 			<% Committee.all.each do |cInst| %>
-				<%# if possbile replace nil with cInst.name %>
-				<%= link_to(nil, committee_path(cInst), :class => 'action show') %>
+				<%if cInst.committee_name == "General" %>
+					
+				<% else %>
+					<%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %>
+				<% end %>
 			<% end %>
 		</div>
 	</div>
