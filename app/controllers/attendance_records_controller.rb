@@ -2,7 +2,11 @@
 
 # controls attendance records. temp
 class AttendanceRecordsController < ApplicationController
-  skip_before_action :admin_authorized, only: %i[user_dashboard]
+  skip_before_action :admin_authorized, only: %i[user_dashboard index]
+
+  def index
+    @records = AttendanceRecord.records(current_user)
+  end
 
   def user_dashboard
     @user = current_user

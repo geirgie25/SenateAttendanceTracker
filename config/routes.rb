@@ -18,6 +18,8 @@ Rails.application.routes.draw do
   post 'dashboard/admin/start_meeting', to: 'attendance_records#start_signin'
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_signin'
 
+  resources :attendance_records, :only => [:index]
+
   # committees route
   resources :committees, :only => [:new, :create, :show, :edit, :update]
 
