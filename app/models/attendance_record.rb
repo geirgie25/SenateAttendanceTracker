@@ -9,6 +9,7 @@ class AttendanceRecord < ApplicationRecord
   # sets the attendance record for a user attending a meeting to value
   # returns true if an attendance record for the meeting was found
   # else returns false
+
   def self.set_attended(meeting, user, value)
     record = find_record(meeting, user)
     unless record.nil?
@@ -51,13 +52,12 @@ class AttendanceRecord < ApplicationRecord
     excuse_count
   end
 
-  # returns the total number of absences for a user
-  def self.find_total_absences(user)
-    where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).count
-  end
-
   # returns all attendance records for missed meetings for a user
   def self.get_absences(user)
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false))
+  end
+
+  def self.records(user)
+    where(committee_enrollment: user.committee_enrollments)
   end
 end

@@ -3,13 +3,11 @@
 # controller for users
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
-  before_action :filter_users, only: %i[index]
-  skip_before_action :user_authorized, only: %i[index]
-  skip_before_action :admin_authorized, only: %i[index]
+  skip_before_action :user_authorized, only: %i[index show]
+  skip_before_action :admin_authorized, only: %i[index show]
 
   def index
-    # @WTPusers = User.order('id ASC')
-    @users = filter_users
+    @users = User.all
   end
 
   def show; end
@@ -56,12 +54,6 @@ class UsersController < ApplicationController
   end
 
   private
-
-  def filter_users
-    return Committee.find(params[:committee_id]).users if params[:committee_id].present?
-
-    User.all
-  end
 
   def set_user
     @user = User.find(params[:id])

@@ -18,8 +18,10 @@ Rails.application.routes.draw do
   post 'dashboard/admin/start_meeting', to: 'attendance_records#start_signin'
   post 'dashboard/admin/end_meeting', to: 'attendance_records#end_signin'
 
+  resources :attendance_records, :only => [:index]
+
   # committees route
-  resources :committees, :only => [:show, :edit, :update] do
+  resources :committees, :only => [:new, :create, :show, :edit, :update] do
     resources :users, :only => [:index]
     resources :meetings, :only => [:index]
     resources :excuses, :only => [:index, :show, :edit, :update, :destroy]
@@ -41,6 +43,6 @@ Rails.application.routes.draw do
 
   # excuses routes
   get 'excuses/my_excuses', to: 'excuses#my_excuses'
-  resources :excuses, :only => [:show, :new, :create, :update]
+  resources :excuses, :only => [:show, :new, :create, :update, :destroy]
 
 end

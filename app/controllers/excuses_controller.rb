@@ -29,25 +29,21 @@ class ExcusesController < ApplicationController
     @excuse = Excuse.new(excuse_params)
     @excuse.attendance_record = @absence
     @excuse.save
-    redirect_to :my_excuses
+    redirect_to excuses_my_excuses_path
   end
 
   def update
-    respond_to do |format|
-      if @excuse.update(excuse_params)
-        format.html { redirect_to committee_path(@excuse.attendance_record.meeting.committee.id), notice: 'Excuse was successfully updated.' }
-        format.json { render :show, status: :ok, location: @excuse }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @excuse.errors, status: :unprocessable_entity }
-      end
-    end
+    @excuse.update(excuse_params)
+    redirect_to committee_path(@excuse.attendance_record.meeting.committee.id),
+                notice: 'Excuse was successfully updated.'
   end
 
   def destroy
     @excuse.destroy
     respond_to do |format|
-      format.html { redirect_to excuses_url, notice: 'Excuse was successfully deleted.' }
+      format.html do
+        redirect_to "/committees/#{@excuse.id}/excuses/", notice: 'Excuse was successfully deleted.'
+      end
       format.json { head :no_content }
     end
   end
@@ -55,9 +51,9 @@ class ExcusesController < ApplicationController
   private
 
   def user_id_authorized
-    unless current_user.id == @excuse.attendance_record.committee_enrollment.user.id
-      redirect_back(fallback_location: '/excuses/my_excuses')
-    end
+    return if current_user.id == @excuse.attendance_record.committee_enrollment.user.id
+
+    redirect_back(fallback_location: '/excuses/my_excuses')
   end
 
   def set_excuse

@@ -13,6 +13,11 @@ administrator_role = Role.new
 administrator_role.role_name = "Administrator"
 administrator_role.save
 
+general_head_role = Role.create( role_name: "General Committee Head")
+
+general_head_role.committees << general
+general_head_role.save
+
 admin = User.new
 admin.username = "admin"
 admin.password = "password"
