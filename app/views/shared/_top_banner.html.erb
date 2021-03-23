@@ -4,13 +4,8 @@
 
 <div class="navigationBar">
 	<%= link_to "Home", current_user&.admin? ? "/dashboard/admin" : "/dashboard/user" %>
-	<%= link_to "Users", "/login" %>
-	<%= link_to "General Committee", "/login" %>
-	<% if logged_in? %>
-    <%= link_to "Logout", "/logout", method: :post %>
-  <% else %>
-    <%= link_to "Login", "/login" %>
-  <% end %>
+	<%= link_to "Users", users_path %>
+	<%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %>
 	<div class="dropdown">
 		<button class="dropbtn">Committees</button>
 		<div class="dropdown-content">
@@ -21,4 +16,9 @@
 			<% end %>
 		</div>
 	</div>
+	<% if logged_in? %>
+    	<%= link_to "Logout", "/logout", method: :post %>
+    <% else %>
+    	<%= link_to "Login", "/login" %>
+    <% end %>
 </div>
