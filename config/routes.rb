@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   # committees route
   resources :committees, :only => [:new, :create, :show, :edit, :update] do
-    resources :users, :only => [:index]
+    resources :users, :only => [:index, :show]
     resources :meetings, :only => [:index]
     resources :excuses, :only => [:index, :show, :edit, :update, :destroy]
   end
