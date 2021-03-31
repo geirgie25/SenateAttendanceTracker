@@ -138,6 +138,12 @@ RSpec.describe 'Users', type: :request do
       patch user_path(u2.id), params: { id: u2.id, user: { name: 'papi', username: 'NewUsername', password: 'pass' } }
       expect(User.find(u2.id).username).to eq 'NewUsername'
     end
+
+    it 'dont update if invalid' do
+      sign_user_in(u)
+      patch user_path(u2.id), params: { id: u2.id, user: { name: 'papi', username: 'papa', password: 'pass' } }
+      expect(User.find(u2.id).username).to eq 'papa2'
+    end
   end
 
   describe 'Delete User:' do
