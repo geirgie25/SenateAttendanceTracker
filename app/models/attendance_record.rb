@@ -14,8 +14,7 @@ class AttendanceRecord < ApplicationRecord
     record = find_record(meeting, user)
     unless record.nil?
       record.attended = value
-      record.save
-      return true
+      return record.save
     end
     false
   end
@@ -57,6 +56,7 @@ class AttendanceRecord < ApplicationRecord
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false))
   end
 
+  # gets all attendance records for user
   def self.records(user)
     where(committee_enrollment: user.committee_enrollments)
   end
