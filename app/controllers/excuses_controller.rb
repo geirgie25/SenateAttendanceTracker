@@ -3,7 +3,10 @@
 class ExcusesController < ApplicationController
   skip_before_action :admin_authorized
   before_action :set_excuse, only: %i[show edit update destroy]
-  before_action :user_id_authorized, only: %i[show]
+  before_action :set_record, only: %i[new]
+  before_action :committee_head_authorized, only: %i[index edit update destroy]
+  before_action :user_id_authorized, only: %i[show new]
+  before_action :user_only, only: %i[my_excuses create]
 
   def index
     @meetings = Committee.find(params[:committee_id]).meetings
@@ -19,7 +22,6 @@ class ExcusesController < ApplicationController
 
   def new
     @excuse = Excuse.new
-    @absence = AttendanceRecord.find(params[:attendance_record_id])
   end
 
   def edit; end
@@ -51,13 +53,37 @@ class ExcusesController < ApplicationController
   private
 
   def user_id_authorized
-    return if current_user.id == @excuse.attendance_record.committee_enrollment.user.id
+    if @excuse.nil?
+      return if current_user.id == @absence.committee_enrollment.user.id
+    elsif current_user.id == @excuse.attendance_record.committee_enrollment.user.id
+      return
+    end
+    redirect_back(fallback_location: excuses_my_excuses_path)
+  end
 
-    redirect_back(fallback_location: '/excuses/my_excuses')
+  def committee_head_authorized
+    if @excuse.nil?
+      @committee = Committee.find(params[:committee_id])
+      return if current_user.heads_committee?(@committee)
+
+      redirect_back(fallback_location: committee_path(@committee.id))
+    else
+      return if current_user.heads_committee?(@excuse.attendance_record.meeting.committee)
+
+      redirect_back(fallback_location: excuses_my_excuses_path)
+    end
+  end
+
+  def user_only
+    redirect_back(fallback_location: '/dashboard/admin') if current_user.admin?
   end
 
   def set_excuse
     @excuse = Excuse.find(params[:id])
+  end
+
+  def set_record
+    @absence = AttendanceRecord.find(params[:attendance_record_id])
   end
 
   def excuse_params

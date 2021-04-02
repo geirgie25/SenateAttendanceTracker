@@ -15,6 +15,13 @@ RSpec.describe 'Meetings', type: :request do
     u.save
   end
 
+  describe 'Index:' do
+    it 'get meetings index page if not logged in' do
+      get meetings_path
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe 'Start Meeting:' do
     it "can't start if not logged in" do
       post meeting_new_path, params: { committee_id: c.id, meeting_title: 'test_meeting1' }
