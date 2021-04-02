@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# an AttendanceRecord. has a meeting, committee_enrollment, and excuses
+# an AttendanceRecord. has a meeting, committee_enrollment, and an excuse
 class AttendanceRecord < ApplicationRecord
   belongs_to :meeting, inverse_of: :attendance_records
   belongs_to :committee_enrollment, inverse_of: :attendance_records
-  has_many :excuses, inverse_of: :attendance_record
+  has_one :excuse, inverse_of: :attendance_record
 
   # sets the attendance record for a user attending a meeting to value
   # returns true if an attendance record for the meeting was found
@@ -46,7 +46,7 @@ class AttendanceRecord < ApplicationRecord
   def self.find_total_excused_absences(user)
     excuse_count = 0
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).find_each do |record|
-      excuse_count += record.excuses.count
+      excuse_count += 1 if record.excuse.present?
     end
     excuse_count
   end
