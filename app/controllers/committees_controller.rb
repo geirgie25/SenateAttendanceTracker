@@ -27,4 +27,10 @@ class CommitteesController < ApplicationController
     committee.update(params[:committee].permit(:committee_name, user_ids: []))
     redirect_to(committee_path(committee.id))
   end
+
+  def filter_administrator
+    return Committee.administrator(Roles.find(params[:roles_id])) if params[:roles_id].present?
+
+    Committee.all
+  end
 end
