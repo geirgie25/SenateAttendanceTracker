@@ -11,7 +11,7 @@ class InitialMigration < ActiveRecord::Migration[6.1]
       t.text :role_name
       t.timestamps
     end
-    
+
     create_join_table :users, :roles
 
     create_table :committees do |t|
@@ -46,5 +46,6 @@ class InitialMigration < ActiveRecord::Migration[6.1]
       t.belongs_to :attendance_record, index: true, foreign_key: true
       t.timestamps
     end
+
   end
 end
