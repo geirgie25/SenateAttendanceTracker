@@ -26,14 +26,14 @@ RSpec.describe AttendanceRecordsHelper, type: :helper do
   describe 'Page should ' do
     it 'show excuse link if excuse exists' do
       m = Meeting.create(title: 'TestMeeting', start_time: Time.zone.now, end_time: Time.zone.now, committee_id: c.id)
-      ar =  AttendanceRecord.create(attended: false, committee_enrollment_id: ce.id, meeting_id: m.id)
-      e = Excuse.create(reason: 'TestReason', attendance_record_id: ar.id)
+      ar = AttendanceRecord.create(attended: false, committee_enrollment_id: ce.id, meeting_id: m.id)
+      Excuse.create(reason: 'TestReason', attendance_record_id: ar.id)
       expect(show_excuse_link?(ar)).to eq true
     end
 
     it 'not show excuse link if excuse does not exist' do
       m = Meeting.create(title: 'TestMeeting', start_time: Time.zone.now, end_time: Time.zone.now, committee_id: c.id)
-      ar =  AttendanceRecord.create(attended: false, committee_enrollment_id: ce.id, meeting_id: m.id)
+      ar = AttendanceRecord.create(attended: false, committee_enrollment_id: ce.id, meeting_id: m.id)
       expect(show_excuse_link?(ar)).to eq false
     end
 
