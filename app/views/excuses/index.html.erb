@@ -14,7 +14,7 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <% meeting.attendance_records.each do |record| %>
-        <% record.excuses.each do |excuse| %>
+        <% record.excuse do |excuse| %>
           <tr>
             <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
             <td><%= excuse.attendance_record.meeting.id %></td>
@@ -30,4 +30,4 @@
 
 <br>
 
-<%= link_to 'Back', "/dashboard/user/" %>
+<%= link_to 'Back', user_dashboards_path %>

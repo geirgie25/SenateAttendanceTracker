@@ -75,7 +75,7 @@ class ExcusesController < ApplicationController
   end
 
   def user_only
-    redirect_back(fallback_location: '/dashboard/admin') if current_user.admin?
+    redirect_back(fallback_location: admin_dashboards_path) if current_user.admin?
   end
 
   def set_excuse

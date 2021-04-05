@@ -3,7 +3,7 @@
 # AttendanceRecords helpers
 module AttendanceRecordsHelper
   def show_excuse_link?(record)
-    !record.attended && record.excuses.count.zero?
+    !record.attended && record.excuse.count.zero?
   end
 
   def show_yellow_warning?(max_absences, current_absences)
