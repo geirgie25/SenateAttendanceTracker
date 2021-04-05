@@ -10,8 +10,8 @@ class AttendanceRecordsController < ApplicationController
 
   def user_dashboard
     @user = current_user
-    @total_absences = AttendanceRecord.find_total_absences(@user)
-    @excused_absences = AttendanceRecord.find_total_excused_absences(@user)
+    @total_absences = AttendanceRecord.find_total_absences(@user.committee_enrollments)
+    @excused_absences = AttendanceRecord.find_total_excused_absences(@user.committee_enrollments)
     @unexcused_absences = @total_absences - @excused_absences
 
     curr_meeting = Meeting.current_meeting

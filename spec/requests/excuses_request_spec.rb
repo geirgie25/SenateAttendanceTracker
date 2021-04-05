@@ -197,7 +197,7 @@ RSpec.describe 'Excuses', type: :request do
     user.save
     c.roles << r
     c.save
-    sign_user_in(u)
+    sign_user_in(user)
   end
 
   def make_admin(user)
