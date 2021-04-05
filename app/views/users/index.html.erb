@@ -45,7 +45,7 @@
 <% end %>
 
 <% if current_user&.admin? %>
-  <td><%= link_to 'Back', '/dashboard/admin' %></td>
+  <td><%= link_to 'Back', admin_dashboards_path %></td>
 <% else %>
-  <td><%= link_to 'Back', '/dashboard/user' %></td>
+  <td><%= link_to 'Back', user_dashboards_path %></td>
 <% end %>
