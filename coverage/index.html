@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-04T23:46:54-05:00">2021-04-04T23:46:54-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-05T00:35:36-05:00">2021-04-05T00:35:36-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -23,7 +23,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="yellow">
-  88.65%
+  88.96%
 </span>
 
      </span>
@@ -44,10 +44,10 @@
 
   <div class="t-line-summary">
     <b>326</b> relevant lines,
-    <span class="green"><b>289</b> lines covered</span> and
-    <span class="red"><b>37</b> lines missed. </span>
+    <span class="green"><b>290</b> lines covered</span> and
+    <span class="red"><b>36</b> lines missed. </span>
     (<span class="yellow">
-  88.65%
+  88.96%
 </span>
 )
   </div>
@@ -193,12 +193,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#7225923ece22c05c93c39b24c4f12ef945aa0042" class="src_link" title="app/helpers/attendance_records_helper.rb">app/helpers/attendance_records_helper.rb</a></td>
-            <td class="yellow strong cell--number t-file__coverage">88.89 %</td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">20</td>
             <td class="cell--number">9</td>
-            <td class="cell--number">8</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">1.22</td>
+            <td class="cell--number">9</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.44</td>
             
           </tr>
         
@@ -809,14 +809,14 @@
     <span class="group_name">Helpers</span>
     (<span class="covered_percent">
       <span class="green">
-  91.89%
+  94.59%
 </span>
 
      </span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         1.54
+         1.59
        </span>
     </span> hits/line
     )
@@ -830,10 +830,10 @@
 
   <div class="t-line-summary">
     <b>37</b> relevant lines,
-    <span class="green"><b>34</b> lines covered</span> and
-    <span class="red"><b>3</b> lines missed. </span>
+    <span class="green"><b>35</b> lines covered</span> and
+    <span class="red"><b>2</b> lines missed. </span>
     (<span class="green">
-  91.89%
+  94.59%
 </span>
 )
   </div>
@@ -869,12 +869,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#7225923ece22c05c93c39b24c4f12ef945aa0042" class="src_link" title="app/helpers/attendance_records_helper.rb">app/helpers/attendance_records_helper.rb</a></td>
-            <td class="yellow strong cell--number t-file__coverage">88.89 %</td>
+            <td class="green strong cell--number t-file__coverage">100.00 %</td>
             <td class="cell--number">20</td>
             <td class="cell--number">9</td>
-            <td class="cell--number">8</td>
-            <td class="cell--number">1</td>
-            <td class="cell--number">1.22</td>
+            <td class="cell--number">9</td>
+            <td class="cell--number">0</td>
+            <td class="cell--number">1.44</td>
             
           </tr>
         
@@ -5590,8 +5590,8 @@
   <div class="header">
     <h3>app/helpers/attendance_records_helper.rb</h3>
     <h4>
-      <span class="yellow">
-  88.89%
+      <span class="green">
+  100.0%
 </span>
 
       lines covered
@@ -5601,8 +5601,8 @@
 
     <div class="t-line-summary">
       <b>9</b> relevant lines.
-      <span class="green"><b>8</b> lines covered</span> and
-      <span class="red"><b>1</b> lines missed.</span>
+      <span class="green"><b>9</b> lines covered</span> and
+      <span class="red"><b>0</b> lines missed.</span>
     </div>
 
     
@@ -5668,13 +5668,13 @@
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="6">
-            
-            
-
+          <li class="covered" data-hits="2" data-linenumber="6">
+            <span class="hits">2</span>
             
 
-            <code class="ruby">    !record.attended &amp;&amp; record.excuse.count.zero?</code>
+            
+
+            <code class="ruby">    !record.attended &amp;&amp; record.excuse.present?</code>
           </li>
         </div>
       
