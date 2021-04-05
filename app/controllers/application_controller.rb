@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   #   used to redirect to welcome unless an admin
   def admin_authorized
     if logged_in? && !current_user.admin?
-      redirect_to '/dashboard/user'
+      redirect_to user_dashboards_path
     elsif !logged_in?
       redirect_to '/login'
     end

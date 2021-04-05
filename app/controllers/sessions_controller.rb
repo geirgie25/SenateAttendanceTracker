@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     post_login_url = '/login'
     if @user&.authenticate(params[:password])
       session[:user_id] = @user.id
-      post_login_url = @user.admin? ? '/dashboard/admin' : '/dashboard/user'
+      post_login_url = @user.admin? ? admin_dashboards_path : user_dashboards_path
     end
     redirect_to post_login_url
   end
