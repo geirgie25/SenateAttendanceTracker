@@ -76,6 +76,8 @@
       },
       "/mnt/c/rubyapps/SenateAttendanceTracker/app/helpers/dashboards_helper.rb": {
         "lines": [
+          null,
+          null,
           1,
           null
         ]
@@ -336,6 +338,8 @@
       },
       "/mnt/c/rubyapps/SenateAttendanceTracker/app/controllers/dashboards_controller.rb": {
         "lines": [
+          null,
+          null,
           1,
           1,
           null,
@@ -746,6 +750,6 @@
         }
       }
     },
-    "timestamp": 1617583333
+    "timestamp": 1617583830
   }
 }
