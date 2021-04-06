@@ -36,44 +36,5 @@ RSpec.describe AttendanceRecordsHelper, type: :helper do
       ar = AttendanceRecord.create(attended: false, committee_enrollment_id: ce.id, meeting_id: m.id)
       expect(show_excuse_link?(ar)).to eq false
     end
-
-    it 'show yellow warning if user is nearing max absence limit' do
-      make_absences(9)
-      expect(show_yellow_warning?(12, AttendanceRecord.find_total_absences(ce))).to eq true
-    end
-
-    it 'show red warning if user is has reached max absence limit' do
-      make_absences(12)
-      expect(show_red_warning?(12, AttendanceRecord.find_total_absences(ce))).to eq true
-    end
-
-    it 'show red warning if user is has passed max absence limit' do
-      make_absences(13)
-      expect(show_red_warning?(12, AttendanceRecord.find_total_absences(ce))).to eq true
-    end
-
-    it 'not show yellow warning if user is well below max absence limit' do
-      make_absences(1)
-      expect(show_yellow_warning?(12, AttendanceRecord.find_total_absences(ce))).to eq false
-    end
-
-    it 'not show red warning if user is well below max absence limit' do
-      make_absences(1)
-      expect(show_red_warning?(12, AttendanceRecord.find_total_absences(ce))).to eq false
-    end
-  end
-
-  private
-
-  def make_absences(number_of_absences)
-    number_of_absences.times do
-      AttendanceRecord.make_records_for(
-        Meeting.create(
-          committee: c,
-          start_time: Time.zone.now,
-          end_time: Time.zone.now
-        )
-      )
-    end
   end
 end
