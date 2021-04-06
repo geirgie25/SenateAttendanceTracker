@@ -20,7 +20,7 @@ RSpec.describe 'Excuses', type: :request do
     ar.save
   end
 
-  describe 'Committees Index:' do
+  describe 'Committees Excuses Index:' do
     it 'redirect index page if user' do
       sign_user_in(u)
       get committee_excuses_url(c.id)
