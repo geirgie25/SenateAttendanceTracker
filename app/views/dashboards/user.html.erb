@@ -44,7 +44,7 @@
   <% if show_yellow_warning?(ce.committee.max_excused_absences, AttendanceRecord.find_total_excused_absences(ce)) %>
     <p><span style="background-color: #FFFF00">You are nearing the excused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
   <% elsif show_red_warning?(ce.committee.max_excused_absences, AttendanceRecord.find_total_excused_absences(ce)) %>
-    <p><span style="background-color: #FF0000">You have reached the excused limit for the <%= ce.committee.committee_name %> committee</span></p>
+    <p><span style="background-color: #FF0000">You have reached the excused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
   <% end %>
   <% if show_yellow_warning?(ce.committee.max_unexcused_absences, AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)) %>
     <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
