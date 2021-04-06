@@ -10,6 +10,8 @@ class ExcusesController < ApplicationController
 
   def index
     @meetings = Committee.find(params[:committee_id]).meetings
+    @records = AttendanceRecord.where(meeting: @meetings)
+    @excuses = Excuse.where(attendance_record: @records)
   end
 
   def my_excuses

@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     else
       admin_authorized
     end
-    @users = User.all
+    @users = filter_users
   end
 
   def show
@@ -61,6 +61,12 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def filter_users
+    return Committee.find(params[:committee_id]).users if params[:committee_id].present?
+
+    User.all
+  end
 
   def set_user
     @user = User.find(params[:id])
