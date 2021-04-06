@@ -61,9 +61,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><%= @total_absences %></td>
-        <td><%= @excused_absences %></td>
-        <td><%= @unexcused_absences %></td>
+        <td><%= AttendanceRecord.find_total_absences(ce) %></td>
+        <td><%= AttendanceRecord.find_total_excused_absences(ce) %></td>
+        <td><%= AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce) %></td>
       </tr>
     </tbody>
   </table>
