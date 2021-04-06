@@ -37,7 +37,7 @@ RSpec.describe Committee, type: :model do
       expect(described_class.get_max_excused_absences_for_all_user_committees(u)).to eq 44
     end
 
-    it '5 committees with default max excused absences should have total of 30' do
+    it '5 committees with default max unexcused absences should have total of 30' do
       5.times do
         c1 = described_class.create(committee_name: 'Test')
         CommitteeEnrollment.create(committee_id: c1.id, user_id: u.id)
