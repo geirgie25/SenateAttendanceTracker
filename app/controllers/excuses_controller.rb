@@ -64,16 +64,17 @@ class ExcusesController < ApplicationController
   end
 
   def committee_head_authorized
-    if @excuse.nil?
+    if !Committee.find(params[:committee_id]).nil?
       @committee = Committee.find(params[:committee_id])
       return if current_user.heads_committee?(@committee)
 
       redirect_back(fallback_location: committee_path(@committee.id))
-    else
+    elsif !@excuse.nil?
       return if current_user.heads_committee?(@excuse.attendance_record.meeting.committee)
 
       redirect_back(fallback_location: excuses_my_excuses_path)
     end
+    redirect_back(fallback_location: excuses_my_excuses_path)
   end
 
   def user_only

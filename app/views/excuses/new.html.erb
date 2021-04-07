@@ -1,4 +1,4 @@
-<h1>Excuse for Meeting <%= @absence.meeting.id %></h1>
+<h1>Excuse for <%= @absence.meeting.title %> meeting</h1>
 
 <%= form_with(model: @excuse) do |form| %>
   <% if @excuse.errors.any? %>

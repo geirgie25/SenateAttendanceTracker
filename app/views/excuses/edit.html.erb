@@ -1,4 +1,4 @@
-<h1>Reviewing excuse for Meeting <%= @excuse.attendance_record.meeting.id %> for <%= @excuse.attendance_record.committee_enrollment.user.name %></h1>
+<h1>Reviewing excuse for <%= @excuse.attendance_record.meeting.title %> Meeting for <%= @excuse.attendance_record.committee_enrollment.user.name %></h1>
 
 <%= form_with(model: @excuse) do |form| %>
   <% if @excuse.errors.any? %>
