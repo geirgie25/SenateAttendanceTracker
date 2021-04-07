@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     else
       admin_authorized
     end
-    @users = filter_users
+    @users = filter_usersrails
   end
 
   def show
@@ -31,6 +31,11 @@ class UsersController < ApplicationController
     @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save
     respond_to do |format|
       if @user.save
+        Committee.joins(:roles).where(roles: @user.roles).find_each do |committee|
+          unless CommitteeEnrollment.where(user: @user).and(CommitteeEnrollment.where(committee: committee)).present?
+            CommitteeEnrollment.new(user: @user, committee: committee).save
+          end
+        end
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
