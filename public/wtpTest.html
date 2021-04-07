@@ -11,6 +11,7 @@
 		.navbar {
 			background-color: #333333;
 			color: #3C0000;
+			<!--transform: skew(-21deg);-->
 		}
 		.navbar .navbar-brand {
 			font-size: 25px;
@@ -21,13 +22,65 @@
 		.navbar .navbar-nav {
 			background-color: #333333;
 		}
-
 		.navbar-nav .nav-link{
 			color: #f6f6f6;
 		}
 
-		.ul.navbar-nav>li {
+
+		nav .navbar-nav li a{
+		  color: #f6f6f6 !important;
+		}
+		nav .navbar-nav li a:hover{
+		  color: #333333 !important;
+		}
+		nav .navbar-nav li a:active{
+		  color: #333333 !important;
+		}
+		nav .navbar-nav li a:focus{
+		  color: #333333 !important;
+		}
+
+
+		.navbar-custom {
+			background-color: #3C0000;
+			padding-top: -2px;
+			padding-bottom: -2px;
+		}
+		.navbar-custom .navbar-nav {
+			background-color: #3C0000;
+			font-size: 10px;
+		}
+
+
+		.modal-header {
+			color: #f6f6f6;
+			background-color: #3C0000;
+		}
+
+		.btn {
+			outline: none !important
+			outline-color: #333333;
+			color: #f6f6f6;
+			background-color: #3C0000;
+		}
+		.btn:hover {
+			color: #333333;
 			background-color: #f6f6f6;
+		}
+
+		.tSpaceMid {
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+		.table {
+			background-color: #f6f6f6;
+		}
+		.table-thead {
+			background-color: #3C0000;
+		}
+		th {
+			background-color: #3C0000;
+			color: white;
 		}
 	</style>
   </head>
@@ -54,10 +107,15 @@
 			</div>
 		  </li>
 		</ul>
-		<ul class="nav navbar-nav ml-auto">
-		  <li><a href="#">Log In</a></li>
-		  <li><a href="#">Log out</a></li>
 	  </div>
+	  <nav class="navbar-custom navbar-expand-md">
+		  <div class="container-fluid">
+			<ul class="nav navbar-nav ml-auto">
+			  <li><a href="#">Log In</a></li>
+			  <li><a href="#">Log out</a></li>
+			</ul>
+		  </div>
+		</nav>
 	</nav>
 
 	<div id="MODALID" >
@@ -136,7 +194,41 @@
 		</div>
 	</div>
 
+	<br>
+	<br>
+	<br>
+	<br>
+
+	<div id="tSpaceMid">
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Firstname</th>
+				<th scope="col">Lastname</th>
+				<th scope="col">Lastname</th>
+				<th scope="col">Lastname</th>
+				<th scope="col">Lastname</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td scope="row">1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+				<td>1</td>
+			</tr>
+			<tr>
+				<td scope="row">2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+				<td>2</td>
+			</tr>
+		</tbody>
+	</table>
+	</div>
+
 </body>
 
-  </body>
 </html>
