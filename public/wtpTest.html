@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<!-- <title>Bootstrap Example</title> -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<style>
+		.navbar {
+			background-color: #333333;
+			color: #3C0000;
+		}
+		.navbar .navbar-brand {
+			font-size: 25px;
+			font-family: "Georgia", Times, serif;
+			color: #f6f6f6;
+		}
+
+		.navbar .navbar-nav {
+			background-color: #333333;
+		}
+
+		.navbar-nav .nav-link{
+			color: #f6f6f6;
+		}
+
+		.ul.navbar-nav>li {
+			background-color: #f6f6f6;
+		}
+	</style>
+  </head>
+
+
+  <body style="">
+	<nav class="navbar navbar-expand-md">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="#">TEXAS A&M STUDENT SENATE</a>
+		</div>
+		<ul class="nav navbar-nav">
+		  <li class="active"><a href="#">Home</a></li>
+		  <li><a href="#">Users</a></li>
+		  <li><a href="#">General Committee</a></li>
+		  <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  Committees
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			  <a class="dropdown-item" href="#">Committee 1</a>
+			  <br>
+			  <a class="dropdown-item" href="#">Committee 2</a>
+			</div>
+		  </li>
+		</ul>
+		<ul class="nav navbar-nav ml-auto">
+		  <li><a href="#">Log In</a></li>
+		  <li><a href="#">Log out</a></li>
+	  </div>
+	</nav>
+
+	<div id="MODALID" >
+		<div class="modal fade show in">
+		  <div class="modal-dialog">
+			<div class="v-cell">
+			  <div class="modal-content">
+				<div class="modal-header">
+				  <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				  <h4 class="modal-title">ABSENT WARNING</h4>
+				</div>
+				<div class="modal-body">
+					You been absent boy...
+				</div>
+				<div class="modal-footer">
+				  <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">I'll be a good boy from now on!</button>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	</div>
+
+	<script>
+	function KILLMODAL() {
+		var elem = document.getElementById("MODALID");
+		elem.parentNode.removeChild(elem);
+	}
+	</script>
+
+
+	<br>
+	<br>
+
+	<button type="button" class="btn btn-primary">ButtonText</button>
+
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+	<div id="MODALID" >
+		<div id="myModal" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">ABSENT WARNING 1</h4>
+			  </div>
+			  <div class="modal-body">
+				<p>You been absent boy...</p>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
+	</div>
+
+	<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2">Open Modal</button>
+	<div id="MODALID" >
+		<div id="myModal2" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">ABSENT WARNING 2</h4>
+			  </div>
+			  <div class="modal-body">
+				<p>You been SUPER absent boy!</p>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
+	</div>
+
+</body>
+
+  </body>
+</html>
