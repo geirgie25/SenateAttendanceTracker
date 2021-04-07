@@ -11,21 +11,19 @@
     </tr>
   </thead>
 
-  <tbody>
-    <% @meetings.each do |meeting| %>
-      <% meeting.attendance_records.each do |record| %>
-        <% record.excuse do |excuse| %>
-          <tr>
-            <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
-            <td><%= excuse.attendance_record.meeting.id %></td>
-            <td><%= excuse.attendance_record.meeting.start_time %></td>
-            <td><%= link_to 'Edit', edit_committee_excuse_url(:id => excuse.id ) %></td>
-            <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          </tr>
-        <% end %>
+
+    <tbody>
+      <% @excuses.each do |excuse| %>
+        <tr>
+          <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
+          <td><%= excuse.attendance_record.meeting.title %></td>
+          <td><%= excuse.attendance_record.meeting.start_time %></td>
+          <td><%= excuse.attendance_record.meeting.end_time %></td>
+          <td><%= link_to 'Edit', edit_committee_excuse_url(:id => excuse.id ) %></td>
+          <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
       <% end %>
-    <% end %>
-  </tbody>
+    </tbody>
 </table>
 
 <br>
