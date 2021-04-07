@@ -43,13 +43,13 @@ RSpec.describe 'Excuses', type: :request do
   describe 'My Excuses:' do
     it 'get my excuses page if user' do
       sign_user_in(u)
-      get excuses_my_excuses_path
+      get excuses_my_absences_path
       expect(response).to have_http_status(:success)
     end
 
     it 'redirect my excuses page if admin' do
       make_admin(u)
-      get excuses_my_excuses_path
+      get excuses_my_absences_path
       expect(response).to have_http_status(:redirect)
     end
   end

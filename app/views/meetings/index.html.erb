@@ -3,8 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Meeting ID</th>
-      <th>Meeting Title</th>
+      <th>Meeting</th>
       <th>Meeting Start Time</th>
       <th>Meeting End Time</th>
     </tr>
@@ -13,7 +12,6 @@
   <tbody>
     <% @meetings.each do |meeting| %>
       <tr>
-        <td><%= meeting.id %></td>
         <td><%= meeting.title %></td>
         <td><%= meeting.start_time %></td>
         <td><%= meeting.end_time %></td>
@@ -23,5 +21,3 @@
 </table>
 
 <br>
-
-<%= link_to 'Back', :back %>

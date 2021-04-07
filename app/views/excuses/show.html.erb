@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong><%= @excuse.attendance_record.meeting.title %> meeting Excuse</strong>
+  <strong>Excuse for <%= @excuse.attendance_record.meeting.title %> Meeting</strong>
 </p>
 
 <p>
@@ -14,4 +14,4 @@
   <%= @excuse.reason %>
 </p>
 
-<%= link_to "Back", "/excuses/my_excuses"%>
+<%= link_to "Back", "/excuses/my_absences"%>

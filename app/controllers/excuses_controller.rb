@@ -6,7 +6,7 @@ class ExcusesController < ApplicationController
   before_action :set_record, only: %i[new]
   before_action :committee_head_authorized, only: %i[index edit update destroy]
   before_action :user_id_authorized, only: %i[show new]
-  before_action :user_only, only: %i[my_excuses create]
+  before_action :user_only, only: %i[my_absences create]
 
   def index
     @meetings = Committee.find(params[:committee_id]).meetings
@@ -14,7 +14,7 @@ class ExcusesController < ApplicationController
     @excuses = Excuse.where(attendance_record: @records)
   end
 
-  def my_excuses
+  def my_absences
     @absences = AttendanceRecord.get_absences(current_user)
   end
 
@@ -33,7 +33,7 @@ class ExcusesController < ApplicationController
     @excuse = Excuse.new(excuse_params)
     @excuse.attendance_record = @absence
     @excuse.save
-    redirect_to excuses_my_excuses_path
+    redirect_to excuses_my_absences_path
   end
 
   def update
@@ -60,21 +60,21 @@ class ExcusesController < ApplicationController
     elsif current_user.id == @excuse.attendance_record.committee_enrollment.user.id
       return
     end
-    redirect_back(fallback_location: excuses_my_excuses_path)
+    redirect_back(fallback_location: excuses_my_absences_path)
   end
 
   def committee_head_authorized
-    if !Committee.find(params[:committee_id]).nil?
-      @committee = Committee.find(params[:committee_id])
+    if Committee.find_by_id(params[:committee_id]).present?
+      @committee = Committee.find_by_id(params[:committee_id])
       return if current_user.heads_committee?(@committee)
 
       redirect_back(fallback_location: committee_path(@committee.id))
-    elsif !@excuse.nil?
+    elsif @excuse.present?
       return if current_user.heads_committee?(@excuse.attendance_record.meeting.committee)
 
-      redirect_back(fallback_location: excuses_my_excuses_path)
+      redirect_back(fallback_location: excuses_my_absences_path)
     end
-    redirect_back(fallback_location: excuses_my_excuses_path)
+    redirect_back(fallback_location: excuses_my_absences_path)
   end
 
   def user_only
