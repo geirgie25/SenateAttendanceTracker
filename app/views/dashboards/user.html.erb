@@ -1,5 +1,21 @@
+<h2> Attendance Summary </h2>
 <table>
   <thead>
+    <% if show_yellow_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>
+      <p><span style="background-color: #FFFF00">You are nearing the total absence limit</span></p>
+    <% elsif show_red_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>
+      <p><span style="background-color: #FF0000">You have reached the total absence limit</span></p>
+    <% end %>
+    <% if show_yellow_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
+      <p><span style="background-color: #FFFF00">You are nearing the excused absence limit</span></p>
+    <% elsif show_red_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
+      <p><span style="background-color: #FF0000">You have reached the excused absence limit</span></p>
+    <% end %>
+    <% if show_yellow_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
+      <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit</span></p>
+    <% elsif show_red_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
+      <p><span style="background-color: #FF0000">You have reached the unexcused absence limit</span></p>
+    <% end %>
     <tr>
       <th>User</th>
       <th>Number of Absences</th>
@@ -16,5 +32,42 @@
     </tr>
   </tbody>
 </table>
+
+<h2> Committee Attendance Summary </h2>
+<% @user.committee_enrollments.each do |ce| %>
+  <h3><%= ce.committee.committee_name %> Committee</h3>
+  <% if show_yellow_warning?(ce.committee.max_combined_absences, AttendanceRecord.find_total_absences(ce)) %>
+    <p><span style="background-color: #FFFF00">You are nearing the total absence limit for the <%= ce.committee.committee_name %> committee</span></p>
+  <% elsif show_red_warning?(ce.committee.max_combined_absences, AttendanceRecord.find_total_absences(ce)) %>
+    <p><span style="background-color: #FF0000">You have reached the total absence limit for the <%= ce.committee.committee_name %> committee</span></p>
+  <% end %>
+  <% if show_yellow_warning?(ce.committee.max_excused_absences, AttendanceRecord.find_total_excused_absences(ce)) %>
+    <p><span style="background-color: #FFFF00">You are nearing the excused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
+  <% elsif show_red_warning?(ce.committee.max_excused_absences, AttendanceRecord.find_total_excused_absences(ce)) %>
+    <p><span style="background-color: #FF0000">You have reached the excused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
+  <% end %>
+  <% if show_yellow_warning?(ce.committee.max_unexcused_absences, AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)) %>
+    <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
+  <% elsif show_red_warning?(ce.committee.max_unexcused_absences, AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)) %>
+    <p><span style="background-color: #FF0000">You have reached the unexcused absence limit for the <%= ce.committee.committee_name %> committee</span></p>
+  <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>Number of Absences</th>
+        <th>Excused Absences</th>
+        <th>Unexcused Absences</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= AttendanceRecord.find_total_absences(ce) %></td>
+        <td><%= AttendanceRecord.find_total_excused_absences(ce) %></td>
+        <td><%= AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce) %></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+<% end %>
 <%= link_to "My Excuses", "/excuses/my_excuses"%>|
 <td> <%= link_to "My Attendance Record", attendance_records_path %> </td>

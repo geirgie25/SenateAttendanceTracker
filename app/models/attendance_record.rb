@@ -38,12 +38,12 @@ class AttendanceRecord < ApplicationRecord
   end
 
   # returns the total number of absences for a user
-  def self.find_total_absences(user)
-    where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).count
+  def self.find_total_absences(committee_enrollment)
+    where(committee_enrollment: committee_enrollment).and(where(attended: false)).count
   end
 
   # returns the total number of excused absences for a user
-  def self.find_total_excused_absences(user)
+  def self.find_total_excused_absences(committee_enrollment)
     excuse_count = 0
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false)).find_each do |record|
       excuse_count += 1 if record.excuse.present? && record.excuse.status == 'Approved'
