@@ -129,10 +129,10 @@ RSpec.describe 'Users', type: :request do
     it 'if user is committee head add user to committee' do
       sign_user_in(u)
       r1 = make_committee_head_role(c)
-      post users_path, params: { user: { name: 'TestName', username: 'test', password: 'TestPassword', role_ids: [r1.id] } }
-      expect(CommitteeEnrollment.where(user: User.last).and(CommitteeEnrollment.where(committee: c)).present?).to eq true
+      post users_path, params: { user: { name: '1', username: '1', password: '1', role_ids: [r1.id] } }
+      u = User.last
+      expect(CommitteeEnrollment.where(user: u).and(CommitteeEnrollment.where(committee: c)).present?).to eq true
     end
-
   end
 
   describe 'Update User:' do
@@ -151,7 +151,8 @@ RSpec.describe 'Users', type: :request do
     it 'if user is assigned committee head role by admin, they should automatically be signe up for comittee' do
       sign_user_in(u)
       r1 = make_committee_head_role(c)
-      patch user_path(u2.id), params: { id: u2.id, user: { name: 'papi', username: 'papa2', password: 'pass', role_ids: [r1.id] } }
+      patch user_path(u2.id),
+            params: { id: u2.id, user: { name: 'papi', username: 'papa2', password: 'pass', role_ids: [r1.id] } }
       expect(CommitteeEnrollment.where(user: u2).and(CommitteeEnrollment.where(committee: c)).present?).to eq true
     end
 
@@ -178,10 +179,10 @@ RSpec.describe 'Users', type: :request do
 
   private
 
-  def make_committee_head_role(c)
-    r = Role.create(role_name: "#{c.committee_name} Head")
-    c.roles << r
-    c.save
-    return r
+  def make_committee_head_role(committee)
+    r = Role.create(role_name: "#{committee.committee_name} Head")
+    committee.roles << r
+    committee.save
+    r
   end
 end

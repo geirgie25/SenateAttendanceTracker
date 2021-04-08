@@ -14,7 +14,7 @@
       <img src="./assets/0.12.3/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-08T00:31:07-05:00">2021-04-08T00:31:07-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2021-04-08T00:41:15-05:00">2021-04-08T00:41:15-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -30,7 +30,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         6.03
+         6.01
        </span>
     </span> hits/line
     )
@@ -176,7 +176,7 @@
             <td class="cell--number">55</td>
             <td class="cell--number">55</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.69</td>
+            <td class="cell--number">2.62</td>
             
           </tr>
         
@@ -297,7 +297,7 @@
             <td class="cell--number">27</td>
             <td class="cell--number">27</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.26</td>
+            <td class="cell--number">2.19</td>
             
           </tr>
         
@@ -375,7 +375,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         7.63
+         7.61
        </span>
     </span> hits/line
     )
@@ -499,7 +499,7 @@
             <td class="cell--number">55</td>
             <td class="cell--number">55</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.69</td>
+            <td class="cell--number">2.62</td>
             
           </tr>
         
@@ -601,7 +601,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         5.15
+         5.13
        </span>
     </span> hits/line
     )
@@ -670,7 +670,7 @@
             <td class="cell--number">27</td>
             <td class="cell--number">27</td>
             <td class="cell--number">0</td>
-            <td class="cell--number">2.26</td>
+            <td class="cell--number">2.19</td>
             
           </tr>
         
@@ -4941,7 +4941,7 @@
 
             
 
-            <code class="ruby">    @committee = Committee.get_committee_by_name(&#39;General&#39;)</code>
+            <code class="ruby">    respond_to do |format|</code>
           </li>
         </div>
       
@@ -4952,29 +4952,29 @@
 
             
 
-            <code class="ruby">    @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="4" data-linenumber="33">
-            <span class="hits">4</span>
-            
-
-            
-
-            <code class="ruby">    respond_to do |format|</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="4" data-linenumber="34">
-            <span class="hits">4</span>
-            
-
-            
-
             <code class="ruby">      if @user.save</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="33">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">        add_to_committee_if_head(@user)</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="2" data-linenumber="34">
+            <span class="hits">2</span>
+            
+
+            
+
+            <code class="ruby">        @committee = Committee.get_committee_by_name(&#39;General&#39;)</code>
           </li>
         </div>
       
@@ -4985,7 +4985,7 @@
 
             
 
-            <code class="ruby">        add_to_committee_if_head(@user)</code>
+            <code class="ruby">        @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save</code>
           </li>
         </div>
       
@@ -8114,8 +8114,8 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="4" data-linenumber="12">
-            <span class="hits">4</span>
+          <li class="covered" data-hits="2" data-linenumber="12">
+            <span class="hits">2</span>
             
 
             
