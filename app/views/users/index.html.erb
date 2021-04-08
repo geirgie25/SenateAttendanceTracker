@@ -2,16 +2,16 @@
 
 <h1>Users</h1>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>Name</th>
+      <th scope="col">Name</th>
       <% if current_user&.admin? %>
-        <th>Username</th>
+        <th scope="col">Username</th>
       <% end %>
-      <th>Number of Absences</th>
-      <th>Excused Absences</th>
-      <th>Unexcused Absences</th>
+      <th scope="col">Number of Absences</th>
+      <th scope="col">Excused Absences</th>
+      <th scope="col">Unexcused Absences</th>
     </tr>
   </thead>
 
