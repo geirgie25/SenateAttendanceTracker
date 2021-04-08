@@ -11,7 +11,7 @@ class CommitteesController < ApplicationController
   def create
     @committee = Committee.create(params[:committee].permit(:committee_name, user_ids: []))
     @committee.roles << Role.create(role_name: "#{@committee.committee_name} Head")
-    redirect_to '/dashboard/admin'
+    redirect_to admin_dashboards_path
   end
 
   def show

@@ -19,4 +19,31 @@ class Committee < ApplicationRecord
   def current_meeting
     Meeting.where(committee: self).and(Meeting.where(end_time: nil)).take
   end
+
+  # returns max combined absences allowed for all user's committees combined
+  def self.get_max_combined_absences_for_all_user_committees(user)
+    total_max_combined_absences = 0
+    where(committee_enrollments: user.committee_enrollments).find_each do |committee|
+      total_max_combined_absences += committee.max_combined_absences
+    end
+    total_max_combined_absences
+  end
+
+  # returns max excused absences allowed for all user's committees combined
+  def self.get_max_excused_absences_for_all_user_committees(user)
+    total_max_excused_absences = 0
+    where(committee_enrollments: user.committee_enrollments).find_each do |committee|
+      total_max_excused_absences += committee.max_excused_absences
+    end
+    total_max_excused_absences
+  end
+
+  # returns max unexcused absences allowed for all user's committees combined
+  def self.get_max_unexcused_absences_for_all_user_committees(user)
+    total_max_unexcused_absences = 0
+    where(committee_enrollments: user.committee_enrollments).find_each do |committee|
+      total_max_unexcused_absences += committee.max_unexcused_absences
+    end
+    total_max_unexcused_absences
+  end
 end

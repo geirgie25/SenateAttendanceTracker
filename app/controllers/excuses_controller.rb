@@ -10,6 +10,8 @@ class ExcusesController < ApplicationController
 
   def index
     @meetings = Committee.find(params[:committee_id]).meetings
+    @records = AttendanceRecord.where(meeting: @meetings)
+    @excuses = Excuse.where(attendance_record: @records)
   end
 
   def my_excuses
@@ -75,7 +77,7 @@ class ExcusesController < ApplicationController
   end
 
   def user_only
-    redirect_back(fallback_location: '/dashboard/admin') if current_user.admin?
+    redirect_back(fallback_location: admin_dashboards_path) if current_user.admin?
   end
 
   def set_excuse

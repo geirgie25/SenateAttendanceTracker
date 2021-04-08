@@ -22,9 +22,9 @@
         <% if current_user&.admin? %>
           <td><%= user.username %></td>
         <% end %>
-        <td><%= AttendanceRecord.find_total_absences(user) %></td>
-        <td><%=  AttendanceRecord.find_total_excused_absences(user) %></td>
-        <td><%= AttendanceRecord.find_total_absences(user) -  AttendanceRecord.find_total_excused_absences(user) %></td>
+        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) %></td>
+        <td><%=  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
+        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) -  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
         <% if current_user&.admin? %>
           <td><%= link_to 'Show', user %></td>
         <% else %>
@@ -45,7 +45,7 @@
 <% end %>
 
 <% if current_user&.admin? %>
-  <td><%= link_to 'Back', '/dashboard/admin' %></td>
+  <td><%= link_to 'Back', admin_dashboards_path %></td>
 <% else %>
-  <td><%= link_to 'Back', '/dashboard/user' %></td>
+  <td><%= link_to 'Back', user_dashboards_path %></td>
 <% end %>
