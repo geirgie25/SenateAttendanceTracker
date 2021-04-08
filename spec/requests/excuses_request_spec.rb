@@ -20,7 +20,7 @@ RSpec.describe 'Excuses', type: :request do
     ar.save
   end
 
-  describe 'Committees Excuses Index:' do
+  describe 'for Committees Index:' do
     it 'redirect index page if user' do
       sign_user_in(u)
       get committee_excuses_url(c.id)
@@ -192,7 +192,7 @@ RSpec.describe 'Excuses', type: :request do
   private
 
   def make_committee_head(user)
-    r = Role.create(role_name: 'TestCommitteeHead')
+    r = Role.create(role_name: 'TestCommittee Head')
     user.roles << r
     user.save
     c.roles << r

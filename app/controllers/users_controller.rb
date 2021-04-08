@@ -4,7 +4,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :user_authorized, only: %i[index show]
-  skip_before_action :admin_authorized, only: %i[index show]
+  skip_before_action :admin_authorized, only: %i[index show edit update]
+  before_action :user_id_authorized, only: %i[edit update]
 
   def index
     if params[:committee_id].present?
@@ -31,11 +32,7 @@ class UsersController < ApplicationController
     @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save
     respond_to do |format|
       if @user.save
-        Committee.joins(:roles).where(roles: @user.roles).find_each do |committee|
-          unless CommitteeEnrollment.where(user: @user).and(CommitteeEnrollment.where(committee: committee)).present?
-            CommitteeEnrollment.new(user: @user, committee: committee).save
-          end
-        end
+        add_to_committee_if_head(@user)
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -48,6 +45,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        add_to_committee_if_head(@user)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -79,5 +77,23 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :username, :password, role_ids: [])
+  end
+
+  def user_id_authorized
+    if current_user.admin?
+      nil
+    else
+      return if current_user.id == @user.id
+
+      redirect_back(fallback_location: user_dashboards_path)
+    end
+  end
+
+  def add_to_committee_if_head(user)
+    Committee.joins(:roles).where(roles: user.roles).find_each do |committee|
+      if CommitteeEnrollment.where(user: user).and(CommitteeEnrollment.where(committee: committee)).blank?
+        CommitteeEnrollment.new(user: user, committee: committee).save
+      end
+    end
   end
 end
