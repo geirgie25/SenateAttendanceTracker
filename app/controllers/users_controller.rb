@@ -7,16 +7,10 @@ class UsersController < ApplicationController
   skip_before_action :admin_authorized, only: %i[index show]
 
   def index
-    if params[:committee_id].present?
-      @committee = Committee.find(params[:committee_id])
-    else
-      admin_authorized
-    end
-    @users = User.all
+    set_users
   end
 
   def show
-    admin_authorized if params[:committee_id].blank?
   end
 
   def new
@@ -69,4 +63,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :username, :password, role_ids: [])
   end
+
+  def set_users
+    @users = User.all
+    @committee = Committee.find(params[:committee_id]) if params[:committee_id]
+    @users = @users.for_committee(@committee.id) if @committee
+  end
+
 end

@@ -33,8 +33,6 @@
     <% end %>
   </tbody>
 </table>
-<%# AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).and(AttendanceRecord.where(attended: false)).each do |absInst| %>
-
 <% if current_user&.admin? %>
   <%= link_to 'Edit', edit_user_path(@user) %>
 <% end %>

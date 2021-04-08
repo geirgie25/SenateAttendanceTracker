@@ -4,14 +4,12 @@ class ExcusesController < ApplicationController
   skip_before_action :admin_authorized
   before_action :set_excuse, only: %i[show edit update destroy]
   before_action :set_record, only: %i[new]
-  before_action :committee_head_authorized, only: %i[index edit update destroy]
+  before_action :committee_head_authorized, only: %i[edit update destroy]
   before_action :user_id_authorized, only: %i[show new]
   before_action :user_only, only: %i[my_excuses create]
 
   def index
-    @meetings = Committee.find(params[:committee_id]).meetings
-    @records = AttendanceRecord.where(meeting: @meetings)
-    @excuses = Excuse.where(attendance_record: @records)
+    set_excuses
   end
 
   def my_excuses
@@ -82,6 +80,17 @@ class ExcusesController < ApplicationController
 
   def set_excuse
     @excuse = Excuse.find(params[:id])
+  end
+
+  def set_excuses
+    if params[:committee_id]
+      committee = Committee.find(params[:committee_id])
+      @meetings = committee.meetings
+      @records = AttendanceRecord.where(meeting: @meetings)
+      if(current_user&.heads_committee?(committee))
+        @excuses = Excuse.where(attendance_record: @records)
+      end
+    end      
   end
 
   def set_record
