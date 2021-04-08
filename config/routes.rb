@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :users
 
   # excuses routes
-  get 'excuses/my_excuses', to: 'excuses#my_excuses'
+  get 'excuses/my_absences', to: 'excuses#my_absences'
   resources :excuses, :only => [:show, :new, :create, :update, :destroy]
 
 end

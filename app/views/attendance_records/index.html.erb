@@ -3,6 +3,8 @@
     <tr>
       <th>Committees</th>
       <th>Meeting</th>
+      <th>Start Time</th>
+      <th>End Time</th>
       <th>Attendance Status</th>
     </tr>
   </thead>
@@ -11,6 +13,8 @@
     <tr>
       <td><%= record.meeting.committee.committee_name %></td>
       <td><%= record.meeting.title %></td>
+      <td><%= record.meeting.start_time %></td>
+      <td><%= record.meeting.end_time %></td>
       <td><%= record.attended%></td>
 
     </tr>

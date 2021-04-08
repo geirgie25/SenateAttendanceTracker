@@ -4,7 +4,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
   skip_before_action :user_authorized, only: %i[index show]
-  skip_before_action :admin_authorized, only: %i[index show]
+  skip_before_action :admin_authorized, only: %i[index show edit update]
+  before_action :user_id_authorized, only: %i[edit update]
 
   def index
     if params[:committee_id].present?
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
     else
       admin_authorized
     end
-    @users = User.all
+    @users = filter_users
   end
 
   def show
@@ -27,10 +28,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @committee = Committee.get_committee_by_name('General')
-    @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save
     respond_to do |format|
       if @user.save
+        add_to_committee_if_head(@user)
+        @committee = Committee.get_committee_by_name('General')
+        @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -43,6 +45,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        add_to_committee_if_head(@user)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
@@ -62,11 +65,35 @@ class UsersController < ApplicationController
 
   private
 
+  def filter_users
+    return Committee.find(params[:committee_id]).users if params[:committee_id].present?
+
+    User.all
+  end
+
   def set_user
     @user = User.find(params[:id])
   end
 
   def user_params
     params.require(:user).permit(:name, :username, :password, role_ids: [])
+  end
+
+  def user_id_authorized
+    if current_user.admin?
+      nil
+    else
+      return if current_user.id == @user.id
+
+      redirect_back(fallback_location: user_dashboards_path)
+    end
+  end
+
+  def add_to_committee_if_head(user)
+    Committee.joins(:roles).where(roles: user.roles).find_each do |committee|
+      if CommitteeEnrollment.where(user: user).and(CommitteeEnrollment.where(committee: committee)).blank?
+        CommitteeEnrollment.new(user: user, committee: committee).save
+      end
+    end
   end
 end

@@ -5,27 +5,27 @@
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Meeting ID</th>
-      <th>Date</th>
+      <th>Senator</th>
+      <th>Meeting</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Status</th>
     </tr>
   </thead>
 
-
-    <tbody>
-      <% @excuses.each do |excuse| %>
-        <tr>
-          <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
-          <td><%= excuse.attendance_record.meeting.title %></td>
-          <td><%= excuse.attendance_record.meeting.start_time %></td>
-          <td><%= excuse.attendance_record.meeting.end_time %></td>
-          <td><%= link_to 'Edit', edit_committee_excuse_url(:id => excuse.id ) %></td>
-          <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
+  <tbody>
+    <% @excuses.each do |excuse| %>
+      <tr>
+        <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
+        <td><%= excuse.attendance_record.meeting.title %></td>
+        <td><%= excuse.attendance_record.meeting.start_time %></td>
+        <td><%= excuse.attendance_record.meeting.end_time %></td>
+        <td><%= excuse.status %></td>
+        <td><%= link_to 'Edit', edit_committee_excuse_url(:id => excuse.id ) %></td>
+        <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br>
-
-<%= link_to 'Back', user_dashboards_path %>

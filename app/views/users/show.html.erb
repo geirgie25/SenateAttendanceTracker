@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Senator:</strong>
   <%= @user.name %>
 </p>
 
@@ -12,29 +12,4 @@
 </p>
 <% end %>
 
-
-<!-- Attended -->
-<table>
-  <thead>
-    <tr>
-      <th>Committee Name</th>
-      <th>Meeting Title</th>
-      <th>Attendance</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).each do |absInst| %>
-      <tr>
-        <td><%= absInst.meeting.committee.committee_name %></td>
-        <td><%= absInst.meeting.title %></td>
-        <td><%= absInst.attended %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<%# AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).and(AttendanceRecord.where(attended: false)).each do |absInst| %>
-
-<% if current_user&.admin? %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
-<% end %>
+<%= link_to 'Back', :back %>

@@ -11,10 +11,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+  <% if current_user.admin? %>
+    <div class="field">
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+  <% end %>
 
   <div class="field">
     <%= form.label :username %>
@@ -25,11 +27,13 @@
     <%= form.label :password %>
     <%= form.text_field :password %>
   </div>
-  
-  <div class="field">
-    <%= form.label :roles %>
-    <%= form.collection_check_boxes :role_ids, Role.all, :id, :role_name %>
-  </div>
+
+  <% if current_user.admin? %>
+    <div class="field">
+      <%= form.label :roles %>
+      <%= form.collection_check_boxes :role_ids, Role.all, :id, :role_name %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
