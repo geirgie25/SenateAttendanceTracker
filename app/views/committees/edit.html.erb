@@ -4,10 +4,9 @@
   <%= form.text_field(:committee_name) %>
   </br>
   <br>
-  <p>Users in Committee:</p>
+  <p>Senators in Committee:</p>
   <%= form.collection_check_boxes :user_ids, User.all, :id, :name %>
   <br>
-
   <br>
   <p>Max Unexcused Absences: </p>
   <%= form.text_field( :max_unexcused_absences) %>
@@ -26,5 +25,5 @@
   <div>
 
     <%= form.submit("Update Committee") %>
-  </div>
+</div>
 <% end %>

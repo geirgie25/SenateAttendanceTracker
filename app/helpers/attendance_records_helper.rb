@@ -3,6 +3,6 @@
 # AttendanceRecords helpers
 module AttendanceRecordsHelper
   def show_excuse_link?(record)
-    !record.attended && record.excuse.count.zero?
+    !record.attended && record.excuse.present?
   end
 end

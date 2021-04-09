@@ -27,16 +27,16 @@ RSpec.describe AttendanceRecord, type: :model do
   end
 
   it 'find_total_absences' do
-    expect(described_class.find_total_absences(u)).to eq 1
+    expect(described_class.find_total_absences(u.committee_enrollments)).to eq 1
   end
 
   it 'find_total_excused_absences with no excuses' do
-    expect(described_class.find_total_excused_absences(u)).to eq 0
+    expect(described_class.find_total_excused_absences(u.committee_enrollments)).to eq 0
   end
 
   it 'find_total_excused_absences with one excuse' do
     Excuse.create(attendance_record: described_class.records(u).first, status: 1)
-    expect(described_class.find_total_excused_absences(u)).to eq 1
+    expect(described_class.find_total_excused_absences(u.committee_enrollments)).to eq 1
   end
 
   it 'get_absences works' do
