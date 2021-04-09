@@ -1,22 +1,15 @@
 <h1>Add a New Committee</h1>
 <div>
-
-     <%= link_to 'Go Back', :back %> 
+    <%= link_to 'Go Back', :back %> 
     <%= form_for(@committee) do |f|%>
-
-
     <table summary = "Committee form fields">
         <tr>
-            <th><%=f.label( 'Name' ) %></th>
-            <td> <%= f.text_field(:committee_name) %></td>
+            <th><%= f.label( 'Name' ) %></th>
+            <td><%= f.text_field(:committee_name) %></td>
         </tr>
-
-
     </table>
-
     <div class="form-button">
         <%= f.submit("Create New Committee") %>
     </div>
     <% end %>
-
 </div>

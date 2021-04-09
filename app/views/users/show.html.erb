@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>User:</strong>
+  <strong>Senator </strong>
   <%= @user.name %>
 </p>
 
@@ -12,29 +12,27 @@
 </p>
 <% end %>
 
-
-<!-- Attended -->
-<table class="table">
+<table>
   <thead>
     <tr>
-      <th scope="col">Committee Name</th>
-      <th scope="col">Meeting Title</th>
-      <th scope="col">Attendance</th>
+      <th scope="col">Senator</th>
+      <th scope="col">Committee</th>
+      <th scope="col">Meeting</th>
+      <th scope="col">Sign-in Start</th>
+      <th scope="col">Sign-in End</th>
+      <th scope="col">Attendance Status</th>
     </tr>
   </thead>
-
   <tbody>
-    <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).each do |absInst| %>
-      <tr>
-        <td><%= absInst.meeting.committee.committee_name %></td>
-        <td><%= absInst.meeting.title %></td>
-        <td><%= absInst.attended %></td>
-      </tr>
+     <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).each do |record| %>
+    <tr>
+      <td><%= record.committee_enrollment.user.name %></td>
+      <td><%= record.meeting.committee.committee_name %></td>
+      <td><%= record.meeting.title %></td>
+      <td><%= record.meeting.start_time.to_formatted_s(:short) %></td>
+      <td><%= record.meeting.end_time.to_formatted_s(:short) %></td>
+      <td><%= attendance_status_string(record) %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
-<%# AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).and(AttendanceRecord.where(attended: false)).each do |absInst| %>
-
-<% if current_user&.admin? %>
-  <%= link_to 'Edit', edit_user_path(@user) %>
-<% end %>

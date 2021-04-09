@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Senator <%= current_user.name %>'s Absences</h1>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Meeting</th>
+      <th scope="col">Start Time</th>
+      <th scope="col">End Time</th>
+      <th scope="col">Excuse Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @absences.each do |absence| %>
+      <tr>
+        <td><%= absence.meeting.title %></td>
+        <td><%= absence.meeting.start_time.to_formatted_s(:short) %></td>
+        <td><%= absence.meeting.end_time.to_formatted_s(:short) %></td>
+        <td><%= absence.excuse.present? ? absence.excuse.status : "Not Submitted" %></td>
+        <td><%= link_to 'Submit Excuse', new_excuse_path(:attendance_record_id => absence.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
