@@ -4,7 +4,7 @@
 
 <div class="navigationBar">
 	<%= link_to "Home", current_user&.admin? ? admin_dashboards_path : user_dashboards_path %>
-	<%= link_to "Users", users_path %>
+	<%= link_to "Senators", users_path %>
 	<%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %>
 	<div class="dropdown">
 		<button class="dropbtn">Committees</button>

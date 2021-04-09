@@ -16,23 +16,23 @@ RSpec.describe 'Users', type: :request do
 
   describe 'Users Index:' do
     it 'get committee users index page if not logged in' do
-      get(committee_users_url(c.id))
+      get(users_url(committee_id: c.id))
       expect(response).to have_http_status(:success)
     end
 
-    it 'get committee users index page if logged in' do
+    it 'get committee user index page if logged in' do
       sign_user_in(u2)
-      get(committee_users_url(c.id))
+      get(users_url(committee_id: c.id))
       expect(response).to have_http_status(:success)
     end
 
-    it 'redirect committee users index page if user' do
+    it 'get users index page if user' do
       sign_user_in(u2)
       get users_path
-      expect(response).to have_http_status(:redirect)
+      expect(response).to have_http_status(:success)
     end
 
-    it 'get committee users index page if admin' do
+    it 'get users index page if admin' do
       sign_user_in(u)
       get users_path
       expect(response).to have_http_status(:success)
@@ -40,21 +40,10 @@ RSpec.describe 'Users', type: :request do
   end
 
   describe 'Show User:' do
-    it 'show committe user if not logged in' do
-      get committee_user_path(c.id, u2.id)
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'show committe user if logged in' do
-      sign_user_in(u2)
-      get committee_user_path(c.id, u2.id)
-      expect(response).to have_http_status(:success)
-    end
-
-    it 'dont show user if user' do
+    it 'show user if user' do
       sign_user_in(u2)
       get user_path(u2.id)
-      expect(response).to have_http_status(:redirect)
+      expect(response).to have_http_status(:success)
     end
 
     it 'show user if admin' do

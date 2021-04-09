@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Senators</h1>
 
 <table>
   <thead>
@@ -23,13 +23,9 @@
           <td><%= user.username %></td>
         <% end %>
         <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) %></td>
-        <td><%=  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
+        <td><%= AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
         <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) -  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
-        <% if @committee.present? %>
-          <td><%= link_to 'Show', committee_user_path(@committee.id, user.id) %></td>
-        <% else %>
-          <td><%= link_to 'Show', user %></td>
-        <% end %>
+        <td><%= link_to 'Show', user %></td>
         <% if current_user&.admin? %>
           <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
@@ -42,10 +38,4 @@
 <br>
 <% if current_user&.admin? %>
   <%= link_to 'New User', new_user_path %>
-<% end %>
-
-<% if current_user&.admin? %>
-  <td><%= link_to 'Back', admin_dashboards_path %></td>
-<% else %>
-  <td><%= link_to 'Back', user_dashboards_path %></td>
 <% end %>

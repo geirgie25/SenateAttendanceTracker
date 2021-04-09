@@ -8,17 +8,10 @@ class UsersController < ApplicationController
   before_action :user_id_authorized, only: %i[edit update]
 
   def index
-    if params[:committee_id].present?
-      @committee = Committee.find(params[:committee_id])
-    else
-      admin_authorized
-    end
-    @users = filter_users
+    set_users
   end
 
-  def show
-    admin_authorized if params[:committee_id].blank?
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -34,10 +27,8 @@ class UsersController < ApplicationController
         @committee = Committee.get_committee_by_name('General')
         @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,18 +56,18 @@ class UsersController < ApplicationController
 
   private
 
-  def filter_users
-    return Committee.find(params[:committee_id]).users if params[:committee_id].present?
-
-    User.all
-  end
-
   def set_user
     @user = User.find(params[:id])
   end
 
   def user_params
     params.require(:user).permit(:name, :username, :password, role_ids: [])
+  end
+
+  def set_users
+    @users = User.all
+    @committee = Committee.find(params[:committee_id]) if params[:committee_id]
+    @users = @users.for_committee(@committee.id) if @committee
   end
 
   def user_id_authorized

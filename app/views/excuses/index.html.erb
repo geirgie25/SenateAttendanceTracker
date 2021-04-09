@@ -18,10 +18,10 @@
       <tr>
         <td><%= excuse.attendance_record.committee_enrollment.user.name %></td>
         <td><%= excuse.attendance_record.meeting.title %></td>
-        <td><%= excuse.attendance_record.meeting.start_time %></td>
-        <td><%= excuse.attendance_record.meeting.end_time %></td>
+        <td><%= excuse.attendance_record.meeting.start_time.to_formatted_s(:short) %></td>
+        <td><%= excuse.attendance_record.meeting.end_time.to_formatted_s(:short) %></td>
         <td><%= excuse.status %></td>
-        <td><%= link_to 'Edit', edit_committee_excuse_url(:id => excuse.id ) %></td>
+        <td><%= link_to 'Edit', edit_excuse_path(id: excuse.id ) %></td>
         <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

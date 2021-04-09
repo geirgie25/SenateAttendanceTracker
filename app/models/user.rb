@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :committee_enrollments, dependent: :delete_all
   has_many :committees, through: :committee_enrollments
   has_secure_password
+  scope :for_committee, ->(committee_id) { Committee.find(committee_id).users }
   def admin?
     roles.find_by(role_name: 'Administrator').present?
   end

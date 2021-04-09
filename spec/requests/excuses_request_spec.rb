@@ -23,19 +23,19 @@ RSpec.describe 'Excuses', type: :request do
   describe 'for Committees Index:' do
     it 'redirect index page if user' do
       sign_user_in(u)
-      get committee_excuses_url(c.id)
+      get excuses_url(committee_id: c.id)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'get index page if committee head' do
       make_committee_head(u)
-      get(committee_excuses_url(c.id))
+      get(excuses_url(committee_id: c.id))
       expect(response).to have_http_status(:success)
     end
 
     it 'redirect index page if admin' do
       make_admin(u)
-      get committee_excuses_url(c.id)
+      get excuses_url(committee_id: c.id)
       expect(response).to have_http_status(:redirect)
     end
   end
@@ -100,21 +100,21 @@ RSpec.describe 'Excuses', type: :request do
     it 'redirect edit page if user' do
       e = create_excuse(ar)
       sign_user_in(u)
-      get edit_committee_excuse_path(c.id, e.id)
+      get edit_excuse_path(e.id)
       expect(response).to have_http_status(:redirect)
     end
 
     it 'get edit page if committee head' do
       make_committee_head(u)
       e = create_excuse(ar)
-      get edit_committee_excuse_path(c.id, e.id)
+      get edit_excuse_path(e.id)
       expect(response).to have_http_status(:success)
     end
 
     it 'redirect edit page if admin' do
       make_admin(u)
       e = create_excuse(ar)
-      get edit_committee_excuse_path(c.id, e.id)
+      get edit_excuse_path(e.id)
       expect(response).to have_http_status(:redirect)
     end
   end
@@ -170,21 +170,21 @@ RSpec.describe 'Excuses', type: :request do
     it 'dont delete if user' do
       e = create_excuse(ar)
       sign_user_in(u)
-      delete committee_excuse_path(c.id, e.id)
+      delete excuse_path(e.id)
       expect(Excuse.exists?(e.id)).to eq true
     end
 
     it 'delete if committee head' do
       make_committee_head(u)
       e = create_excuse(ar)
-      delete committee_excuse_path(c.id, e.id)
+      delete excuse_path(e.id)
       expect(Excuse.exists?(e.id)).to eq false
     end
 
     it 'dont delete if admin role' do
       make_admin(u)
       e = create_excuse(ar)
-      delete committee_excuse_path(c.id, e.id)
+      delete excuse_path(e.id)
       expect(Excuse.exists?(e.id)).to eq true
     end
   end
