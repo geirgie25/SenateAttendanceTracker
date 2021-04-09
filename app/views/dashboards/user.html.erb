@@ -17,7 +17,7 @@
       <p><span style="background-color: #FF0000">You have reached the unexcused absence limit</span></p>
     <% end %>
     <tr>
-      <th>User</th>
+      <th>Senator</th>
       <th>Number of Absences</th>
       <th>Excused Absences</th>
       <th>Unexcused Absences</th>
@@ -69,5 +69,6 @@
   </table>
   <br>
 <% end %>
-<%= link_to "Excuses", "/excuses/my_excuses"%>|
-<td> <%= link_to "See User Attendance Record", attendance_records_path %> </td>
+<%= link_to "My Excuses", "/excuses/my_absences"%>|
+<td> <%= link_to "My Attendance Record", attendance_records_path %> </td>|
+<%= link_to "Change my username/password", edit_user_path(current_user.id) %>

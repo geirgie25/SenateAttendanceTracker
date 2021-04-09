@@ -20,7 +20,6 @@
 <% end %>
 
 <%= link_to "Committee Users", users_path(committee_id: @committee.id) %> |
-
 <%= link_to "Committee Meetings", meetings_path(committee_id: @committee.id) %>
 
 <% if show_committee_excuses_link?(current_user, @committee) %>

@@ -6,8 +6,10 @@ class AttendanceRecord < ApplicationRecord
   belongs_to :committee_enrollment, inverse_of: :attendance_records
   has_one :excuse, inverse_of: :attendance_record
 
-  scope :for_committee, ->(committee_id) { left_outer_joins(:meeting).where("meetings.committee_id = ?", committee_id) }
-  scope :user, ->(user_id) { left_outer_joins(:committee_enrollment).where("committee_enrollments.user_id = ?", user_id)}
+  scope :for_committee, ->(committee_id) { left_outer_joins(:meeting).where(meetings: { committee_id: committee_id }) }
+  scope :user, lambda { |user_id|
+                 left_outer_joins(:committee_enrollment).where(committee_enrollments: { user_id: user_id })
+               }
   scope :for_meeting, ->(meeting_id) { where(meeting_id: meeting_id) }
   # sets the attendance record for a user attending a meeting to value
   # returns true if an attendance record for the meeting was found
@@ -40,7 +42,7 @@ class AttendanceRecord < ApplicationRecord
     end
   end
 
-  # returns the total number of absences for a committee
+  # returns the total number of absences for a user
   def self.find_total_absences(committee_enrollment)
     where(committee_enrollment: committee_enrollment).and(where(attended: false)).count
   end
@@ -49,7 +51,7 @@ class AttendanceRecord < ApplicationRecord
   def self.find_total_excused_absences(committee_enrollment)
     excuse_count = 0
     where(committee_enrollment: committee_enrollment).and(where(attended: false)).find_each do |record|
-      excuse_count += 1 if record.excuse.present?
+      excuse_count += 1 if record.excuse.present? && record.excuse.status == 'Approved'
     end
     excuse_count
   end

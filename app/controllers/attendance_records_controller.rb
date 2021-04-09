@@ -10,8 +10,8 @@ class AttendanceRecordsController < ApplicationController
   end
 
   private
-  
-  def filtered_records
+
+  def set_records
     @records = AttendanceRecord.all
     @records = @records.user(params[:user_id]) if params[:user_id]
     @records = @records.for_committee(params[:committee_id]) if params[:committee_id]

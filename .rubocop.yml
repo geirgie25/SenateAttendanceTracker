@@ -38,3 +38,6 @@ Naming/ClassAndModuleCamelCase:
 Naming/MethodName:
   Enabled: true
   EnforcedStyle: snake_case
+  
+Layout/EndOfLine:
+   Enabled: False
