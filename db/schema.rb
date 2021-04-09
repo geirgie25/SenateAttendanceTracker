@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_211703) do
+ActiveRecord::Schema.define(version: 2021_04_02_150114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 2021_03_22_211703) do
     t.text "committee_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "max_unexcused_absences", default: 6
+    t.integer "max_excused_absences", default: 11
+    t.integer "max_combined_absences", default: 11
   end
 
   create_table "committees_roles", id: false, force: :cascade do |t|
