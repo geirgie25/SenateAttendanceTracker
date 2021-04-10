@@ -1,8 +1,29 @@
 <%= form_with model: @committee do |form| %>
+  <br>
+   <p>Committee Name:</p>
   <%= form.text_field(:committee_name) %>
+  </br>
   <br>
   <p>Senators in Committee:</p>
   <%= form.collection_check_boxes :user_ids, User.all, :id, :name %>
   <br>
-  <%= form.submit("Update Committee") %>
+  <br>
+  <p>Max Unexcused Absences: </p>
+  <%= form.text_field( :max_unexcused_absences) %>
+  <br>
+
+  <br>
+  <p>Max Excused Absences: </p>
+  <%= form.text_field(:max_excused_absences) %>
+  <br>
+
+  <br>
+  <p>Max Combined Absences: </p>
+  <%= form.text_field(:max_combined_absences) %>
+  <br>
+
+  <div>
+
+    <%= form.submit("Update Committee") %>
+</div>
 <% end %>
