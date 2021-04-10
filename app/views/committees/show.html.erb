@@ -19,11 +19,58 @@
     <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
 <% end %>
 
-<%= link_to "Committee Users", users_path(committee_id: @committee.id) %> |
-<%= link_to "Committee Meetings", meetings_path(committee_id: @committee.id) %>
+Committee Senators
+<table>
+  <thead>
+    <tr>
+      <th>Senator</th>
+      <th>Number of Absences</th>
+      <th>Excused Absences</th>
+      <th>Unexcused Absences</th>
+    </tr>
+  </thead>
 
+  <tbody>
+    <% @committee.users.each do |user| %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) %></td>
+        <td><%= AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
+        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) -  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
+        <td><%= link_to 'Show User', user %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Show All Senators", users_path(committee_id: @committee.id) %>
+<br>
+Committee Meetings
+<table>
+  <thead>
+    <tr>
+      <th>Meeting Title</th>
+      <th>Meeting Start Time</th>
+      <th>Meeting End Time</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @committee.meetings[0...4].each do |meeting| %>
+      <tr>
+        <td><%= meeting.title %></td>
+        <td><%= meeting.start_time.to_formatted_s(:short) %></td>
+        <td><%= meeting.end_time.to_formatted_s(:short) %></td>
+        <td><%= link_to "Show Meeting", meeting_path(meeting.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Show All Meetings", meetings_path(committee_id: @committee.id) %>
+<br>
 <% if show_committee_excuses_link?(current_user, @committee) %>
-    | <%= link_to "Committee Excuses", excuses_path(committee_id: @committee.id) %>
+    <%= link_to "Committee Excuses", excuses_path(committee_id: @committee.id) %>
 <% end %>
 
 <% if show_edit_committee_link?(current_user, @committee) %>
