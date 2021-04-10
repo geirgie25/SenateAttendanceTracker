@@ -31,9 +31,9 @@
 		<a class="navbar-brand" href="#">TEXAS A&M STUDENT SENATE</a>
 	</div>
 	<ul class="nav navbar-nav">
-		<!-- <li class="active"><%= link_to "Home", current_user&.admin? ? "/dashboard/admin" : "/dashboard/user" %></li> -->
-		<!-- <li><%= link_to "Users", users_path %></li> -->
-		<!-- <li><%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %></li> -->
+		<li class="active"><%= link_to "Home", current_user&.admin? ? admin_dashboards_path : user_dashboards_path %></li>
+		<li><%= link_to "Senators", users_path %></li>
+		<li><%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %></li>
 		<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			Committees
@@ -41,7 +41,7 @@
 		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			<% Committee.all.each do |cInst| %>
 				<%if cInst.committee_name != "General" %>
-					<%# <%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show'), class: "a"  %> %>
+					<%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %>
 					<br>
 				<% end %>
 			<% end %>
@@ -53,9 +53,9 @@
 		<div class="container-fluid">
 		<ul class="nav navbar-nav ml-auto">
 			<% if logged_in? %>
-		    	<%# <%= link_to "Logout", "/logout", method: :post, class: "a"  %> %>
+		    	<%= link_to "Logout", "/logout", method: :post %>
 		    <% else %>
-		    	<%# <%= link_to "Login", "/login", class: "a"  %> %>
+		    	<%= link_to "Login", "/login" %>
 		  <% end %>
 		</ul>
 		</div>
