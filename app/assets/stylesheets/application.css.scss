@@ -125,3 +125,20 @@
 	margin: 4px 2px;
 	cursor: pointer;
 }
+
+.navbar {
+  background-color: #333333;
+  color: #3C0000;
+}
+.navbar .navbar-brand {
+  font-size: 25px;
+  font-family: "Georgia", Times, serif;
+  color: #f6f6f6;
+}
+
+.navbar .navbar-nav {
+  background-color: #333333;
+}
+.navbar-nav .nav-link{
+  color: #f6f6f6;
+}

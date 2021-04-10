@@ -1,8 +1,5 @@
-@import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Merriweather:400,700');
-
-$white: white;
-$black: black;
+@import "custom";
+@import "~bootstrap/scss/boostrap";
 
 .navbar {
   background-color: #333333;
@@ -58,10 +55,17 @@ nav .navbar-nav li a:focus{
   outline-color: #333333;
   color: #f6f6f6;
   background-color: #3C0000;
+  box-shadow: none;
 }
 .btn:hover {
   color: #333333;
   background-color: #f6f6f6;
+}
+.btn:focus,.btn:active {
+  color: #333333;
+  background-color: #f6f6f6;
+  outline: none !important;
+  box-shadow: none;
 }
 
 .tSpaceMid {
@@ -75,6 +79,11 @@ nav .navbar-nav li a:focus{
   background-color: #3C0000;
 }
 th {
+  background-color: #3C0000;
+  color: white;
+}
+
+.panel > .panel-heading {
   background-color: #3C0000;
   color: white;
 }
