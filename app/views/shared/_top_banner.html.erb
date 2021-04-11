@@ -36,17 +36,18 @@
 		<li><%= link_to "Senators", users_path %></li>
 		<li><%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %></li>
 		<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			Committees
-		</a>
-		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-			<% Committee.all.each do |cInst| %>
-				<%if cInst.committee_name != "General" %>
-					<%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %>
-					<br>
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Committees
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<% Committee.all.each do |cInst| %>
+					<%if cInst.committee_name != "General" %>
+						<!-- <a class="dropdown-item"><%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %></a> -->
+						<li><%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %></li>
+
+					<% end %>
 				<% end %>
-			<% end %>
-		</div>
+			</div>
 		</li>
 	</ul>
 	</div>
@@ -54,9 +55,9 @@
 		<div class="container-fluid">
 		<ul class="nav navbar-nav ml-auto">
 			<% if logged_in? %>
-		    	<%= link_to "Logout", "/logout", method: :post %>
+		    	<li><%= link_to "Logout", "/logout", method: :post %></li>
 		    <% else %>
-		    	<%= link_to "Login", "/login" %>
+		    	<li><%= link_to "Login", "/login" %></li>
 		  <% end %>
 		</ul>
 		</div>

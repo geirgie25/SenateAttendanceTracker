@@ -76,12 +76,72 @@ function KILLMODAL() {
       </div>
       <!--<p><span style="background-color: #FFFF00">You are nearing the excused absence limit</span></p>-->
     <% elsif show_red_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
-      <p><span style="background-color: #FF0000">You have reached the excused absence limit</span></p>
+      <div id="MODALID" >
+        <div class="modal fade show in">
+          <div class="modal-dialog">
+          <div class="v-cell">
+            <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title">ABSENCE WARNING</h4>
+            </div>
+            <div class="modal-body">
+              You have reached the excused absence limit
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- <p><span style="background-color: #FF0000">You have reached the excused absence limit</span></p> -->
     <% end %>
     <% if show_yellow_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
-      <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit</span></p>
+      <div id="MODALID" >
+        <div class="modal fade show in">
+          <div class="modal-dialog">
+          <div class="v-cell">
+            <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title">ABSENCE WARNING</h4>
+            </div>
+            <div class="modal-body">
+              You are nearing the unexcused absence limit
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit</span></p> -->
     <% elsif show_red_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
-      <p><span style="background-color: #FF0000">You have reached the unexcused absence limit</span></p>
+      <div id="MODALID" >
+        <div class="modal fade show in">
+          <div class="modal-dialog">
+          <div class="v-cell">
+            <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title">ABSENCE WARNING</h4>
+            </div>
+            <div class="modal-body">
+              You have reached the unexcused absence limit
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
+            </div>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+      <!-- <p><span style="background-color: #FF0000">You have reached the unexcused absence limit</span></p> -->
     <% end %>
     <tr>
       <th scope="col">Senator</th>
