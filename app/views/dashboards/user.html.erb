@@ -1,4 +1,11 @@
 <h2> Attendance Summary </h2>
+<script>
+function KILLMODAL() {
+  var elem = document.getElementById("MODALID");
+  elem.parentNode.removeChild(elem);
+}
+</script>
+
 <table class="table">
   <thead>
     <% if show_yellow_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>

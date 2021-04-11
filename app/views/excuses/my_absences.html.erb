@@ -20,6 +20,12 @@
     </div>
   </div>
 <% end %>
+<script>
+function KILLMODAL() {
+  var elem = document.getElementById("MODALID");
+  elem.parentNode.removeChild(elem);
+}
+</script>
 
 <h1>Senator <%= current_user.name %>'s Absences</h1>
 <table>
