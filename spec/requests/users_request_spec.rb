@@ -115,7 +115,7 @@ RSpec.describe 'Users', type: :request do
       end.to change(User, :count).by(0)
     end
 
-    it 'if user is committee head add user to committee' do
+    it 'if user is assigned committee head role add user to committee' do
       sign_user_in(u)
       r1 = make_committee_head_role(c)
       post users_path, params: { user: { name: '1', username: '1', password: '1', role_ids: [r1.id] } }
@@ -137,12 +137,19 @@ RSpec.describe 'Users', type: :request do
       expect(User.find(u2.id).username).to eq 'NewUsername'
     end
 
-    it 'if user is assigned committee head role by admin, they should automatically be signe up for comittee' do
+    it 'if user is assigned committee head role and user isnt part of committee, should be signed up for committee' do
       sign_user_in(u)
       r1 = make_committee_head_role(c)
-      patch user_path(u2.id),
-            params: { id: u2.id, user: { name: 'papi', username: 'papa2', password: 'pass', role_ids: [r1.id] } }
+      patch user_path(u2.id), params: { id: u2.id, user: { password: 'pass', role_ids: [r1.id] } }
       expect(CommitteeEnrollment.where(user: u2).and(CommitteeEnrollment.where(committee: c)).present?).to eq true
+    end
+
+    it 'if user is assigned committee head role and user is a part of committee, shouldnt be signed up for committee' do
+      sign_user_in(u)
+      CommitteeEnrollment.create(user: u2, committee: c)
+      r1 = make_committee_head_role(c)
+      patch user_path(u2.id), params: { id: u2.id, user: { password: 'pass', role_ids: [r1.id] } }
+      expect(CommitteeEnrollment.where(user: u2).and(CommitteeEnrollment.where(committee: c)).count).to eq 1
     end
 
     it 'dont update if invalid' do
@@ -163,6 +170,13 @@ RSpec.describe 'Users', type: :request do
       sign_user_in(u)
       delete user_path(u2.id)
       expect(User.exists?(u2.id)).to eq false
+    end
+
+    it 'delete committee enrollments when parent user is deleted' do
+      sign_user_in(u)
+      ce = CommitteeEnrollment.create(user: u2, committee: c)
+      delete user_path(u2.id)
+      expect(CommitteeEnrollment.exists?(ce.id)).to eq false
     end
   end
 

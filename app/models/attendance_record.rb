@@ -6,6 +6,8 @@ class AttendanceRecord < ApplicationRecord
   belongs_to :committee_enrollment, inverse_of: :attendance_records
   has_one :excuse, inverse_of: :attendance_record
 
+  enum type: { In_Person: 0, Online: 1 }
+
   scope :for_committee, ->(committee_id) { left_outer_joins(:meeting).where(meetings: { committee_id: committee_id }) }
   scope :user, lambda { |user_id|
                  left_outer_joins(:committee_enrollment).where(committee_enrollments: { user_id: user_id })

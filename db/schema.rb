@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_02_150114) do
+ActiveRecord::Schema.define(version: 2021_04_10_203526) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2021_04_02_150114) do
     t.boolean "attended"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "type"
     t.index ["committee_enrollment_id"], name: "index_attendance_records_on_committee_enrollment_id"
     t.index ["meeting_id"], name: "index_attendance_records_on_meeting_id"
   end
