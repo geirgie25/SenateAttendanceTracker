@@ -8,8 +8,8 @@
     <%= render partial: "shared/modal", locals: {title: "Absence Warning", content: [total_absence_string(ce), unexcused_absence_string(ce), excused_absence_string(ce)]} %>
   <% end %>
   <h3><%= ce.committee.committee_name %> Committee</h3>
-  <table>
-    <thead class="table">
+  <table class="table">
+    <thead>
       <tr>
         <th scope="col">Attendances</th>
         <th scope="col">Total Absences</th>
