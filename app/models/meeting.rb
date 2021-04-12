@@ -23,10 +23,12 @@ class Meeting < ApplicationRecord
     where(end_time: nil).and(where.not(start_time: nil)).take
   end
 
+  # returns true if the user is in the meeting
   def user_exists?(user)
     !AttendanceRecord.find_record(self, user).nil?
   end
 
+  # returns true if the user attended the meeting
   def attended_meeting?(user)
     record = AttendanceRecord.find_record(self, user)
     record.nil? ? false : record.attended

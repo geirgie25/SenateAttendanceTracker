@@ -15,6 +15,7 @@ module DashboardsHelper
     false
   end
 
+  # gets a string for the total absences warning. if no warning, returns empty string
   def total_absence_string(cenroll)
     near_limit = "You are nearing the total absence limit for #{cenroll.committee.committee_name} Committee.\n"
     reached_limit = "You have reached the total absence limit for #{cenroll.committee.committee_name} Committee.\n"
@@ -26,6 +27,7 @@ module DashboardsHelper
     ''
   end
 
+  # gets a string for the unexcused absences warning. if no warning, returns empty string
   def unexcused_absence_string(cenroll)
     near_limit = "You are nearing the unexcused absence limit for #{cenroll.committee.committee_name} Committee.\n"
     reached_limit = "You have reached the unexcused absence limit for #{cenroll.committee.committee_name} Committee.\n"
@@ -37,6 +39,7 @@ module DashboardsHelper
     ''
   end
 
+  # gets a string for the excused absences warning. if no warning, returns empty string
   def excused_absence_string(cenroll)
     near_limit = "You are nearing the excused absence limit for #{cenroll.committee.committee_name} Committee.\n"
     reached_limit = "You have reached the excused absence limit for #{cenroll.committee.committee_name} Committee.\n"
@@ -48,6 +51,7 @@ module DashboardsHelper
     ''
   end
 
+  # returns true if we should show the modal that shows the warnings
   def show_modal?(cenroll)
     !unexcused_absence_string(cenroll).empty? ||
       !excused_absence_string(cenroll).empty? ||

@@ -6,6 +6,7 @@ class CommitteeEnrollment < ApplicationRecord
   belongs_to :committee
   has_many :attendance_records, inverse_of: :committee_enrollment
 
+  # gets the committee enrollment that connects the given user and committee
   def self.get_committee_enrollment(committee, user)
     where(user: user).and(where(committee: committee))
   end

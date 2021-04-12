@@ -15,6 +15,7 @@ module CommitteesHelper
     false
   end
 
+  # returns true if we should show the sign in notice
   def show_sign_in_notice?(user, committee)
     (
       user&.in_committee?(committee) &&
@@ -23,18 +24,22 @@ module CommitteesHelper
     ).present?
   end
 
+  # returns true if we should show the excuses link
   def show_committee_excuses_link?(user, committee)
     user&.heads_committee?(committee)
   end
 
+  # returns true if we should show link to users above max absences
   def show_users_above_max_absences_link?(user, committee)
     user&.heads_committee?(committee)
   end
 
+  # returns true if we should show edit committee link
   def show_edit_committee_link?(user, _committee)
     user&.admin?.present?
   end
 
+  # returns true if we should show delete link
   def show_delete_committee_link?(user)
     user&.admin?.present?
   end

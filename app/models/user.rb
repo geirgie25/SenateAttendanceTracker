@@ -28,10 +28,12 @@ class User < ApplicationRecord
     record.nil? ? false : record.attended
   end
 
+  # gets the committee enrolmment connecting this user and the committee
   def get_committee_enrollment(committee)
     CommitteeEnrollment.where(user: self).and(CommitteeEnrollment.where(committee: committee))
   end
 
+  # returns true if the user is above the max absences in any of the categories
   def above_max_absences?(committee)
     ce = get_committee_enrollment(committee)
     excused_absences = AttendanceRecord.find_total_excused_absences(ce)

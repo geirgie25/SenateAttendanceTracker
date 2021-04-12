@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
   def new; end
 
+  # makes a new session (logging in)
   def create
     @user = User.find_by(username: params[:username])
     post_login_url = '/login'
@@ -17,6 +18,7 @@ class SessionsController < ApplicationController
     redirect_to post_login_url
   end
 
+  # destroys current session (logging out)
   def destroy
     session[:user_id] = nil
     redirect_to '/login'

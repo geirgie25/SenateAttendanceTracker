@@ -6,10 +6,12 @@ class MeetingsController < ApplicationController
   before_action :set_meeting, only: %i[show sign_in]
   before_action :set_record, only: %i[show sign_in]
 
+  # gets a list of meetings for a committee
   def index
     @meetings = filter_meetings
   end
 
+  # creates a meeting. aka start a sign in session
   def create
     committee = Committee.find(params[:committee_id])
     if !committee.current_meeting? && committee_head_permissions?(committee)
@@ -26,11 +28,13 @@ class MeetingsController < ApplicationController
     end
   end
 
+  # show a specific meeting
   def show
     @meeting = Meeting.find(params[:id])
     @records = AttendanceRecord.for_meeting(@meeting.id)
   end
 
+  # end a meeting aka end a sign in
   def end
     meeting = Meeting.find(params[:id])
     if meeting.currently_meeting? && committee_head_permissions?(meeting.committee)
@@ -41,6 +45,7 @@ class MeetingsController < ApplicationController
     end
   end
 
+  # signs the current user in
   def sign_in
     if @meeting.currently_meeting? && current_user&.in_committee?(@meeting.committee)
       @meeting.update(meeting_params)
@@ -53,20 +58,24 @@ class MeetingsController < ApplicationController
 
   private
 
+  # permits the meeting parameters
   def meeting_params
     params.require(:meeting).permit(attendance_records_attributes: %i[id attendance_type])
   end
 
+  # filters the meeting by commtteee id
   def filter_meetings
     return Committee.find(params[:committee_id]).meetings if params[:committee_id].present?
 
     Meeting.all
   end
 
+  # returns true if current user has committee head permissions
   def committee_head_permissions?(committee)
     current_user&.heads_committee?(committee)
   end
 
+  # gets a formatted title for a committee if one isn't set
   def new_meeting_title(curr_title)
     return Time.zone.now.to_formatted_s(:short) if curr_title.blank?
 
