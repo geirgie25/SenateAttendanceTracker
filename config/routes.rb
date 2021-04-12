@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'logout', to: 'sessions#destroy'
   # get 'authorized', to: 'sessions#page_requires_login'
 
+  get 'help', to: 'dashboards#help'
   # dashboard routes
   resources :dashboards, :only => [] do
     collection do
@@ -17,6 +18,7 @@ Rails.application.routes.draw do
       get 'admin'
     end
   end
+
 
   resources :attendance_records, :only => [:index]
 

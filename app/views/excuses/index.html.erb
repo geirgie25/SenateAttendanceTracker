@@ -8,9 +8,11 @@
     <tr>
       <th scope="col">Senator</th>
       <th scope="col">Meeting</th>
-      <th scope="col">Start Time</th>
-      <th scope="col">End Time</th>
+      <th scope="col">Sign-In Start Time</th>
+      <th scope="col">Sign-In End Time</th>
       <th scope="col">Status</th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +23,7 @@
         <td><%= excuse.attendance_record.meeting.start_time.to_formatted_s(:short) %></td>
         <td><%= end_meeting_time_string(excuse.attendance_record.meeting.end_time) %></td>
         <td><%= excuse.status %></td>
-        <td><%= link_to 'Edit', edit_excuse_path(id: excuse.id ) %></td>
+        <td><%= link_to 'Edit Status', edit_excuse_path(id: excuse.id ) %></td>
         <td><%= link_to 'Delete', excuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
