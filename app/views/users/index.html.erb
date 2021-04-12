@@ -37,9 +37,11 @@ function KILLMODAL() {
       <% if current_user&.admin? %>
         <th scope="col">Username</th>
       <% end %>
-      <th scope="col">Number of Absences</th>
-      <th scope="col">Excused Absences</th>
-      <th scope="col">Unexcused Absences</th>
+      <% if @committee %>
+        <th scope="col">Number of Absences</th>
+        <th scope="col">Excused Absences</th>
+        <th scope="col">Unexcused Absences</th>
+      <% end %>
     </tr>
   </thead>
 
@@ -50,13 +52,15 @@ function KILLMODAL() {
         <% if current_user&.admin? %>
           <td><%= user.username %></td>
         <% end %>
-        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) %></td>
-        <td><%= AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
-        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) -  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
+        <% if @committee %>
+          <td><%= AttendanceRecord.find_total_absences(user.get_committee_enrollment(@committee)) %></td>
+          <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
+          <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
+        <% end %>
         <td><%= link_to 'Show', user %></td>
         <% if current_user&.admin? %>
-          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
           <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
     <% end %>
