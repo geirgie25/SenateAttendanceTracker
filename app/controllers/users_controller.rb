@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   skip_before_action :user_authorized, only: %i[index show]
   skip_before_action :admin_authorized, only: %i[index show edit update]
   before_action :user_id_authorized, only: %i[edit update]
+  wrap_parameters :user, include: [:name, :username, :password, role_ids: []]
 
   # shows group of users
   def index
@@ -21,7 +22,14 @@ class UsersController < ApplicationController
   end
 
   # makes changes to existing user
-  def edit; end
+  def edit
+    if current_user.id == @user.id
+      render :user_edit
+    elsif current_user.admin?
+      render :admin_edit
+    end
+
+  end
 
   # assigns parameters and creates relations for new user
   def create
@@ -46,7 +54,11 @@ class UsersController < ApplicationController
         format.html { redirect_to users_path, notice: 'Senator was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
-        format.html { render :edit, status: :unprocessable_entity }
+        if current_user.id == @user.id
+          format.html { render :user_edit, status: :unprocessable_entity }
+        elsif current_user.admin?
+          format.html { render :admin_edit, status: :unprocessable_entity }
+        end
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

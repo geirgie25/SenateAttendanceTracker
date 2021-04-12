@@ -43,5 +43,5 @@ class User < ApplicationRecord
   end
 
   validates :username, uniqueness: true, presence: true
-  validates :password, presence: true
+  validates :password, presence: true, allow_blank: true
 end
