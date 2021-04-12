@@ -1,324 +1,33 @@
 <% Committee.joins(:roles).where(roles: @user.roles).find_each do |committee| %>
-  | <%= link_to "Manage " + committee.committee_name + " Committee", committee_path(committee.id) %>
+  <%= link_to "Manage " + committee.committee_name + " Committee", committee_path(committee.id) %>
 <% end %>
-<h2> Attendance Summary </h2>
-<script>
-function KILLMODAL() {
-  var elem = document.getElementById("MODALID");
-  elem.parentNode.removeChild(elem);
-}
-</script>
-
-<table class="table">
-  <thead>
-    <% if show_yellow_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>
-      <div id="MODALID" >
-        <div class="modal fade show in">
-          <div class="modal-dialog">
-          <div class="v-cell">
-            <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title">ABSENCE WARNING</h4>
-            </div>
-            <div class="modal-body">
-              You are nearing the total absence limit
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <!--<p><span style="background-color: #FFFF00">You are nearing the total absence limit</span></p>-->
-    <% elsif show_red_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>
-      <div id="MODALID" >
-        <div class="modal fade show in">
-          <div class="modal-dialog">
-          <div class="v-cell">
-            <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title">ABSENCE WARNING</h4>
-            </div>
-            <div class="modal-body">
-              You have reached the total absence limit
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <!--<p><span style="background-color: #FF0000">You have reached the total absence limit</span></p>-->
-    <% end %>
-    <% if show_yellow_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
-      <div id="MODALID" >
-        <div class="modal fade show in">
-          <div class="modal-dialog">
-          <div class="v-cell">
-            <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title">ABSENCE WARNING</h4>
-            </div>
-            <div class="modal-body">
-              You are nearing the excused absence limit
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <!--<p><span style="background-color: #FFFF00">You are nearing the excused absence limit</span></p>-->
-    <% elsif show_red_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
-      <div id="MODALID" >
-        <div class="modal fade show in">
-          <div class="modal-dialog">
-          <div class="v-cell">
-            <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title">ABSENCE WARNING</h4>
-            </div>
-            <div class="modal-body">
-              You have reached the excused absence limit
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <!-- <p><span style="background-color: #FF0000">You have reached the excused absence limit</span></p> -->
-    <% end %>
-    <% if show_yellow_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
-      <div id="MODALID" >
-        <div class="modal fade show in">
-          <div class="modal-dialog">
-          <div class="v-cell">
-            <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title">ABSENCE WARNING</h4>
-            </div>
-            <div class="modal-body">
-              You are nearing the unexcused absence limit
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <!-- <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit</span></p> -->
-    <% elsif show_red_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
-      <div id="MODALID" >
-        <div class="modal fade show in">
-          <div class="modal-dialog">
-          <div class="v-cell">
-            <div class="modal-content">
-            <div class="modal-header ">
-              <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-              <h4 class="modal-title">ABSENCE WARNING</h4>
-            </div>
-            <div class="modal-body">
-              You have reached the unexcused absence limit
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-            </div>
-            </div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <!-- <p><span style="background-color: #FF0000">You have reached the unexcused absence limit</span></p> -->
-    <% end %>
-    <tr>
-      <th scope="col">Senator</th>
-      <th scope="col">Number of Absences</th>
-      <th scope="col">Excused Absences</th>
-      <th scope="col">Unexcused Absences</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @user.name %></td>
-      <td><%= @total_absences %></td>
-      <td><%= @excused_absences %></td>
-      <td><%= @unexcused_absences %></td>
-    </tr>
-  </tbody>
-</table>
 
 <h2> Committee Attendance Summary </h2>
 <% @user.committee_enrollments.each do |ce| %>
+  <% if show_modal?(ce) %>
+    <%= render partial: "shared/modal", locals: {title: "Absence Warning", content: [total_absence_string(ce), unexcused_absence_string(ce), excused_absence_string(ce)]} %>
+  <% end %>
   <h3><%= ce.committee.committee_name %> Committee</h3>
-  <% if show_yellow_warning?(ce.committee.max_combined_absences, AttendanceRecord.find_total_absences(ce)) %>
-    <div id="MODALID" >
-      <div class="modal fade show in">
-        <div class="modal-dialog">
-        <div class="v-cell">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">ABSENCE WARNING</h4>
-          </div>
-          <div class="modal-body">
-            You are nearing the total absence limit for the <%= ce.committee.committee_name %> committee
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--<p><span style="background-color: #FFFF00">You are nearing the total absence limit for the <%= ce.committee.committee_name %> committee</span></p>-->
-  <% elsif show_red_warning?(ce.committee.max_combined_absences, AttendanceRecord.find_total_absences(ce)) %>
-    <div id="MODALID" >
-      <div class="modal fade show in">
-        <div class="modal-dialog">
-        <div class="v-cell">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">ABSENCE WARNING</h4>
-          </div>
-          <div class="modal-body">
-            You have reached the total absence limit for the <%= ce.committee.committee_name %> committee
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--<p><span style="background-color: #FF0000">You have reached the total absence limit for the <%= ce.committee.committee_name %> committee</span></p>-->
-  <% end %>
-  <% if show_yellow_warning?(ce.committee.max_excused_absences, AttendanceRecord.find_total_excused_absences(ce)) %>
-    <div id="MODALID" >
-      <div class="modal fade show in">
-        <div class="modal-dialog">
-        <div class="v-cell">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">ABSENCE WARNING</h4>
-          </div>
-          <div class="modal-body">
-            You are nearing the excused absence limit for the <%= ce.committee.committee_name %> committee
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--<p><span style="background-color: #FFFF00">You are nearing the excused absence limit for the <%= ce.committee.committee_name %> committee</span></p>-->
-  <% elsif show_red_warning?(ce.committee.max_excused_absences, AttendanceRecord.find_total_excused_absences(ce)) %>
-    <div id="MODALID" >
-      <div class="modal fade show in">
-        <div class="modal-dialog">
-        <div class="v-cell">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">ABSENCE WARNING</h4>
-          </div>
-          <div class="modal-body">
-            You have reached the excused absence limit for the <%= ce.committee.committee_name %> committee
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--<p><span style="background-color: #FF0000">You have reached the excused absence limit for the <%= ce.committee.committee_name %> committee</span></p>-->
-  <% end %>
-  <% if show_yellow_warning?(ce.committee.max_unexcused_absences, AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)) %>
-    <div id="MODALID" >
-      <div class="modal fade show in">
-        <div class="modal-dialog">
-        <div class="v-cell">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">ABSENCE WARNING</h4>
-          </div>
-          <div class="modal-body">
-            You are nearing the unexcused absence limit for the <%= ce.committee.committee_name %> committee
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--<p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit for the <%= ce.committee.committee_name %> committee</span></p>-->
-  <% elsif show_red_warning?(ce.committee.max_unexcused_absences, AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)) %>
-    <div id="MODALID" >
-      <div class="modal fade show in">
-        <div class="modal-dialog">
-        <div class="v-cell">
-          <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">ABSENCE WARNING</h4>
-          </div>
-          <div class="modal-body">
-            You have reached the unexcused absence limit for the <%= ce.committee.committee_name %> committee
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-          </div>
-          </div>
-        </div>
-        </div>
-      </div>
-    </div>
-    <!--<p><span style="background-color: #FF0000">You have reached the unexcused absence limit for the <%= ce.committee.committee_name %> committee</span></p>-->
-  <% end %>
   <table>
     <thead class="table">
       <tr>
-        <th scope="col">Number of Absences</th>
+        <th scope="col">Attendances</th>
+        <th scope="col">Total Absences</th>
         <th scope="col">Excused Absences</th>
         <th scope="col">Unexcused Absences</th>
       </tr>
     </thead>
     <tbody>
       <tr>
+        <td><%= AttendanceRecord.find_total_attendances(ce) %></td>
         <td><%= AttendanceRecord.find_total_absences(ce) %></td>
         <td><%= AttendanceRecord.find_total_excused_absences(ce) %></td>
-        <td><%= AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce) %></td>
+        <td><%= AttendanceRecord.find_total_unexcused_absences(ce) %></td>
       </tr>
     </tbody>
   </table>
   <br>
 <% end %>
-<%= link_to "My Excuses", "/excuses/my_absences"%>|
-<td> <%= link_to "My Attendance Record", attendance_records_path %> </td>|
+<%= link_to "My Excuses", "/excuses/my_absences"%> |
+<%= link_to "My Attendance Record", attendance_records_path(user_id: current_user.id) %> |
 <%= link_to "Change my username/password", edit_user_path(current_user.id) %>

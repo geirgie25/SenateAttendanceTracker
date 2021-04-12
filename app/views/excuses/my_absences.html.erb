@@ -1,31 +1,6 @@
-<% if !notice.nil? %>
-  <div id="MODALID" >
-    <div class="modal fade show in">
-      <div class="modal-dialog">
-      <div class="v-cell">
-        <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">NOTIFICATION</h4>
-        </div>
-        <div class="modal-body">
-          <%= notice %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-        </div>
-        </div>
-      </div>
-      </div>
-    </div>
-  </div>
+<% if notice %>
+  <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
 <% end %>
-<script>
-function KILLMODAL() {
-  var elem = document.getElementById("MODALID");
-  elem.parentNode.removeChild(elem);
-}
-</script>
 
 <h1>Senator <%= current_user.name %>'s Absences</h1>
 <table class="table">
@@ -43,12 +18,10 @@ function KILLMODAL() {
       <tr>
         <td><%= absence.meeting.title %></td>
         <td><%= absence.meeting.start_time.to_formatted_s(:short) %></td>
-        <td><%= absence.meeting.end_time.to_formatted_s(:short) %></td>
+        <td><%= end_meeting_time_string(absence.meeting.end_time) %></td>
         <td><%= absence.excuse.present? ? absence.excuse.status : "Not Submitted" %></td>
         <td><%= link_to 'Submit Excuse', new_excuse_path(:attendance_record_id => absence.id) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>

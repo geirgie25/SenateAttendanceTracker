@@ -20,4 +20,10 @@ module ApplicationHelper
 
     'Unexcused Absence'
   end
+
+  def end_meeting_time_string(time)
+    return 'Current' if time.nil?
+
+    time.to_formatted_s(:short)
+  end
 end

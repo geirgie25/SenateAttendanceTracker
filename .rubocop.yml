@@ -41,3 +41,6 @@ Naming/MethodName:
   
 Layout/EndOfLine:
    Enabled: False
+   
+Metrics/AbcSize:
+   Max: 20

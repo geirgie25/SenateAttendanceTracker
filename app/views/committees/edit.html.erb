@@ -1,29 +1,26 @@
+<h2>Updating Committee <%= @committee.committee_name %></h2>
+
 <%= form_with model: @committee do |form| %>
+  <div style="padding-left: 5px"><%= form.label(:committee_name, "Committee Name: ") %></div>
+  <div style="padding-left: 5px"><%= form.text_field(:committee_name) %></div>
   <br>
-   <p>Committee Name:</p>
-  <%= form.text_field(:committee_name) %>
-  </br>
+  <div style="padding-left: 5px"><%= form.label(:user_ids, "Users in Committee: ") %></div>
+  <div style="padding-left: 5px">
+    <%= form.collection_check_boxes(:user_ids, User.all, :id, :name) do |b| %>
+      <%= b.label style: "padding-left: 5px" do %>
+        <%= b.check_box(style: "margin-right: 6px") + b.text%>
+      <% end %>
+    <% end %>
+  </div>
   <br>
-  <p>Senators in Committee:</p>
-  <%= form.collection_check_boxes :user_ids, User.all, :id, :name %>
+  <div style="padding-left: 5px"><%= form.label(:max_unexcused_absences, "Maximum Unexcused Absences: ") %></div>
+  <div style="padding-left: 5px"><%= form.text_field( :max_unexcused_absences) %></div>
   <br>
+  <div style="padding-left: 5px"><%= form.label(:max_excused_absences, "Maximum Excused Absences: ") %></div>
+  <div style="padding-left: 5px"><%= form.text_field(:max_excused_absences) %></div>
   <br>
-  <p>Max Unexcused Absences: </p>
-  <%= form.text_field( :max_unexcused_absences) %>
+  <div style="padding-left: 5px"><%= form.label(:max_combined_absences, "Maximum Total Absences: ") %></div>
+  <div style="padding-left: 5px"><%= form.text_field(:max_combined_absences) %></div>
   <br>
-
-  <br>
-  <p>Max Excused Absences: </p>
-  <%= form.text_field(:max_excused_absences) %>
-  <br>
-
-  <br>
-  <p>Max Combined Absences: </p>
-  <%= form.text_field(:max_combined_absences) %>
-  <br>
-
-  <div>
-
-    <%= form.submit("Update Committee") %>
-</div>
+  <div style="padding-left: 5px"><%= form.submit("Update Committee") %></div>
 <% end %>

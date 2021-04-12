@@ -13,11 +13,19 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+      function KILLMODAL() {
+        var elem = document.getElementById("MODALID");
+        elem.parentNode.removeChild(elem);
+      }
+    </script>
   </head>
 
   <body style="">
     <%= render "shared/top_banner" %>
+    
+    <div style="padding: 10px 30px 30px 30px">
     <%= yield %>
-    <%= render "shared/bottom_banner" %>
+    </div>
   </body>
 </html>

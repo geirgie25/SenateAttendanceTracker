@@ -1,3 +1,8 @@
+<% if notice %>
+  <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
+<% end %>
+
+<h2>Attendance Records</h2>
 <table class="table">
   <thead>
     <tr>
@@ -11,16 +16,17 @@
     </tr>
   </thead>
   <tbody>
-     <% @records.each do |record| %>
+    <% @records.each do |record| %>
     <tr>
       <td><%= link_to record.committee_enrollment.user.name, user_path(record.committee_enrollment.user.id) %></td>
       <td><%= record.meeting.committee.committee_name %></td>
       <td><%= record.meeting.title %></td>
       <td><%= record.meeting.start_time.to_formatted_s(:short) %></td>
-      <td><%= record.meeting.end_time.to_formatted_s(:short) %></td>
+      <td><%= end_meeting_time_string(record.meeting.end_time) %></td>
       <td><%= attendance_status_string(record) %></td>
       <td><%= record.attendance_type %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+

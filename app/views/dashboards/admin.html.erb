@@ -1,3 +1,6 @@
-<%= link_to "Create New Committee", new_committee_path %>
-<br>
+<% if notice %>
+  <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
+<% end %>
+<p> Welcome <%= current_user.name %>! You are logged in as an administrator</p>
+<%= link_to "Create New Committee", new_committee_path %> |
 <%= link_to "Change my username/password", edit_user_path(current_user.id) %>

@@ -1,31 +1,3 @@
-<!--
-<div class="AggieScheduleBar">
-	<p>TEXAS A&M STUDENT SENATE</p>
-</div>
-
-<div class="navigationBar">
-	<%= link_to "Home", current_user&.admin? ? admin_dashboards_path : user_dashboards_path %>
-	<%= link_to "Senators", users_path %>
-	<%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %>
-	<div class="dropdown">
-		<button class="dropbtn">Committees</button>
-		<div class="dropdown-content">
-			<% Committee.all.each do |cInst| %>
-				<%if cInst.committee_name != "General" %>
-					<%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %>
-				<% end %>
-			<% end %>
-		</div>
-	</div>
-	<% if logged_in? %>
-    	<%= link_to "Logout", "/logout", method: :post %>
-    <% else %>
-    	<%= link_to "Login", "/login" %>
-  <% end %>
-</div>
--->
-
-
 <nav class="navbar navbar-expand-md">
 	<div class="container-fluid">
 	<div class="navbar-header">

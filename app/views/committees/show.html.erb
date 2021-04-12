@@ -1,39 +1,110 @@
 
-<p> <%= @committee.committee_name %> Committee </p>
+<% if notice %>
+  <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
+<% end %>
+<h2> <%= @committee.committee_name %> Committee </h2>
+
 <% if show_start_button?(current_user, @committee) %>
     <%= form_with url: meeting_new_path, method: :post do |form|%>
         <%= form.text_field :meeting_title, placeholder: "Meeting Title" %>
         <%= hidden_field_tag "committee_id", @committee.id %>
         <%= form.submit "Start Meeting Sign-In" %>
     <% end %>
+    <br>
 <% end %>
 
 <% if show_end_button?(current_user, @committee) %>
     <%= form_with url: end_meeting_path(@committee.current_meeting.id), method: :post do |form|%>
         <%= form.submit "End Meeting Sign-In" %>
     <% end %>
+    <br>
 <% end %>
 
 <% if show_sign_in_notice?(current_user, @committee) %>
     <p>There is currently a meeting signin period:</p>
     <%= link_to "Sign in", meeting_path(@committee.current_meeting.id) %>
+    <br>
 <% end %>
-
-<%= link_to "Committee Users", users_path(committee_id: @committee.id) %> |
-<%= link_to "Committee Meetings", meetings_path(committee_id: @committee.id) %>
-
 <% if show_committee_excuses_link?(current_user, @committee) %>
-    | <%= link_to "Committee Excuses", excuses_path(committee_id: @committee.id) %>
+    <%= link_to "Committee Excuses", excuses_path(committee_id: @committee.id) %>
 <% end %>
-
+<% if show_users_above_max_absences_link?(current_user, @committee) %>
+    | <%= link_to "Users Above Max Absences", users_path(committee_id: @committee.id, max_user_absences: true) %> 
+    <br>
+<% end %>
 <% if show_edit_committee_link?(current_user, @committee) %>
-    | <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
+    <%= link_to "Edit Committee", edit_committee_path(@committee.id) %>
 <% end %>
-
 <% if show_delete_committee_link?(current_user) %>
     | <%= link_to "Delete Committee", @committee, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
+<div style="padding: 10px"></div>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Committee Senators</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Senator</th>
+              <th>Attendances</th>
+              <th>Total Absences</th>
+              <th>Excused Absences</th>
+              <th>Unexcused Absences</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @committee.users.take(5).each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= AttendanceRecord.find_total_attendances(CommitteeEnrollment.get_committee_enrollment(@committee, user))%>
+                <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+                <td><%= AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+                <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) -  AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+                <td><%= link_to 'Show User', user %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <div class="panel-footer">
+        <%= link_to "Show All Senators", users_path(committee_id: @committee.id) %>
+      </div>
+    </div>
+  </div>
+</div>
 
-<% if show_users_above_max_absences_link?(current_user, @committee) %>
-    <%= link_to "Users Above Max Absences", users_path(committee_id: @committee.id, max_user_absences: true) %> 
-<% end %>
+
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">Last 5 Meetings</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Meeting Title</th>
+              <th>Meeting Start Time</th>
+              <th>Meeting End Time</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @committee.meetings.order('created_at DESC').take(5).each do |meeting| %>
+              <tr>
+                <td><%= meeting.title %></td>
+                <td><%= meeting.start_time.to_formatted_s(:short) %></td>
+                <td><%= end_meeting_time_string(meeting.end_time) %></td>
+                <td><%= link_to "Show Meeting", meeting_path(meeting.id) %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <div class="panel-footer">
+        <%= link_to "Show All Meetings", meetings_path(committee_id: @committee.id) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+

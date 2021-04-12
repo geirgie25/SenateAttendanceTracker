@@ -58,6 +58,10 @@ class AttendanceRecord < ApplicationRecord
     excuse_count
   end
 
+  def self.find_total_attendances(committee_enrollment)
+    where(committee_enrollment: committee_enrollment).and(where(attended: true)).count
+  end
+
   def self.find_total_unexcused_absences(committee_enrollment)
     find_total_absences(committee_enrollment) - find_total_excused_absences(committee_enrollment)
   end

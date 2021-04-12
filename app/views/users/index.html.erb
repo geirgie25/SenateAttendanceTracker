@@ -1,73 +1,56 @@
-<% if !notice.nil? %>
-  <div id="MODALID" >
-    <div class="modal fade show in">
-      <div class="modal-dialog">
-      <div class="v-cell">
-        <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" onclick="KILLMODAL()" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <h4 class="modal-title">NOTIFICATION</h4>
-        </div>
-        <div class="modal-body">
-          <%= notice %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal" onclick="KILLMODAL()">Close</button>
-        </div>
-        </div>
-      </div>
+<% if notice %>
+  <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
+<% end %>
+<h2>Senators</h2>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-default">
+      <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Senator</th>
+              <% if current_user&.admin? %>
+                <th scope="col">Username</th>
+              <% end %>
+              <% if @committee %>
+                <th scope="col">Attendances</th>
+                <th scope="col">Total Absences</th>
+                <th scope="col">Excused Absences</th>
+                <th scope="col">Unexcused Absences</th>
+              <% end %>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <% if current_user&.admin? %>
+                  <td><%= user.username %></td>
+                <% end %>
+                <% if @committee %>
+                  <td><%= AttendanceRecord.find_total_attendances(user.get_committee_enrollment(@committee)) %></td>
+                  <td><%= AttendanceRecord.find_total_absences(user.get_committee_enrollment(@committee)) %></td>
+                  <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
+                  <td><%= AttendanceRecord.find_total_unexcused_absences(user.get_committee_enrollment(@committee)) %></td>
+                <% end %>
+                <td><%= link_to 'Show User', user %></td>
+                <% if current_user&.admin? %>
+                  <td><%= link_to 'Edit', edit_user_path(user) %></td>
+                  <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <div class="panel-footer">
+        <% if current_user&.admin? %>
+          <%= link_to 'Create New User', new_user_path %>
+        <% end %>
       </div>
     </div>
   </div>
-<% end %>
-<script>
-function KILLMODAL() {
-  var elem = document.getElementById("MODALID");
-  elem.parentNode.removeChild(elem);
-}
-</script>
-
-
-<h1>Senators</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Senator</th>
-      <% if current_user&.admin? %>
-        <th scope="col">Username</th>
-      <% end %>
-      <% if @committee %>
-        <th scope="col">Number of Absences</th>
-        <th scope="col">Excused Absences</th>
-        <th scope="col">Unexcused Absences</th>
-      <% end %>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <% if current_user&.admin? %>
-          <td><%= user.username %></td>
-        <% end %>
-        <% if @committee %>
-          <td><%= AttendanceRecord.find_total_absences(user.get_committee_enrollment(@committee)) %></td>
-          <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
-          <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
-        <% end %>
-        <td><%= link_to 'Show', user %></td>
-        <% if current_user&.admin? %>
-          <td><%= link_to 'Edit', edit_user_path(user) %></td>
-          <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-<% if current_user&.admin? %>
-  <%= link_to 'New Senator', new_user_path %>
-<% end %>
+</div>
