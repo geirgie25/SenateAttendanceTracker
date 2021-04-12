@@ -42,9 +42,7 @@
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<% Committee.all.each do |cInst| %>
 					<%if cInst.committee_name != "General" %>
-						<!-- <a class="dropdown-item"><%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %></a> -->
-						<li><%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %></li>
-
+						<a class="dropdown-item"><%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %></a>
 					<% end %>
 				<% end %>
 			</div>
