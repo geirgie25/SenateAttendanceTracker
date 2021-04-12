@@ -11,7 +11,7 @@
   <%= @user.username %>
 </p>
 <% end %>
-
+<p>Last 5 Attendance Records</p>
 <table>
   <thead>
     <tr>
@@ -24,7 +24,7 @@
     </tr>
   </thead>
   <tbody>
-     <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).each do |record| %>
+     <% AttendanceRecord.where(committee_enrollment: @user.committee_enrollments).take(5).each do |record| %>
     <tr>
       <td><%= record.committee_enrollment.user.name %></td>
       <td><%= record.meeting.committee.committee_name %></td>
@@ -36,3 +36,5 @@
     <% end %>
   </tbody>
 </table>
+
+<td> <%= link_to "View All Attendance Records", attendance_records_path(user_id: @user.id) %> </td>

@@ -24,7 +24,8 @@ Committee Senators
   <thead>
     <tr>
       <th>Senator</th>
-      <th>Number of Absences</th>
+      <th>Attendances</th>
+      <th>Total Absences</th>
       <th>Excused Absences</th>
       <th>Unexcused Absences</th>
     </tr>
@@ -34,9 +35,10 @@ Committee Senators
     <% @committee.users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
-        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) %></td>
-        <td><%= AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
-        <td><%= AttendanceRecord.find_total_absences(user.committee_enrollments) -  AttendanceRecord.find_total_excused_absences(user.committee_enrollments) %></td>
+        <td><%= AttendanceRecord.find_total_attendances(CommitteeEnrollment.get_committee_enrollment(@committee, user))%>
+        <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+        <td><%= AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+        <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) -  AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
         <td><%= link_to 'Show User', user %></td>
       </tr>
     <% end %>
@@ -44,7 +46,7 @@ Committee Senators
 </table>
 <%= link_to "Show All Senators", users_path(committee_id: @committee.id) %>
 <br>
-Committee Meetings
+Last 5 Meetings
 <table>
   <thead>
     <tr>

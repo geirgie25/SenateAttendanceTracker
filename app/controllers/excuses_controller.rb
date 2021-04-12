@@ -36,18 +36,14 @@ class ExcusesController < ApplicationController
 
   def update
     @excuse.update(excuse_params)
-    redirect_to committee_path(@excuse.attendance_record.meeting.committee.id),
+    redirect_to excuses_path(committee_id: @excuse.attendance_record.meeting.committee.id),
                 notice: 'Excuse was successfully updated.'
   end
 
   def destroy
     @excuse.destroy
-    respond_to do |format|
-      format.html do
-        redirect_to "/committees/#{@excuse.id}/excuses/", notice: 'Excuse was successfully deleted.'
-      end
-      format.json { head :no_content }
-    end
+    redirect_to excuses_path(committee_id: @excuse.attendance_record.meeting.committee.id),
+                notice: 'Excuse was successfully deleted.'
   end
 
   private
@@ -83,7 +79,7 @@ class ExcusesController < ApplicationController
   end
 
   def set_excuses
-    committee = Committee.find(params[:committee_id])
+    committee = Committee.find(params[:committee_id]) if params[:committee_id]
     if committee && current_user&.heads_committee?(committee)
       @meetings = committee.meetings
       @records = AttendanceRecord.where(meeting: @meetings)

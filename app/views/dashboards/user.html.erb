@@ -1,37 +1,3 @@
-<h2> Attendance Summary </h2>
-<table>
-  <thead>
-    <% if show_yellow_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>
-      <p><span style="background-color: #FFFF00">You are nearing the total absence limit</span></p>
-    <% elsif show_red_warning?(Committee.get_max_combined_absences_for_all_user_committees(@user), @total_absences) %>
-      <p><span style="background-color: #FF0000">You have reached the total absence limit</span></p>
-    <% end %>
-    <% if show_yellow_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
-      <p><span style="background-color: #FFFF00">You are nearing the excused absence limit</span></p>
-    <% elsif show_red_warning?(Committee.get_max_excused_absences_for_all_user_committees(@user), @excused_absences) %>
-      <p><span style="background-color: #FF0000">You have reached the excused absence limit</span></p>
-    <% end %>
-    <% if show_yellow_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
-      <p><span style="background-color: #FFFF00">You are nearing the unexcused absence limit</span></p>
-    <% elsif show_red_warning?(Committee.get_max_unexcused_absences_for_all_user_committees(@user), @unexcused_absences) %>
-      <p><span style="background-color: #FF0000">You have reached the unexcused absence limit</span></p>
-    <% end %>
-    <tr>
-      <th>Senator</th>
-      <th>Number of Absences</th>
-      <th>Excused Absences</th>
-      <th>Unexcused Absences</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><%= @user.name %></td>
-      <td><%= @total_absences %></td>
-      <td><%= @excused_absences %></td>
-      <td><%= @unexcused_absences %></td>
-    </tr>
-  </tbody>
-</table>
 
 <h2> Committee Attendance Summary </h2>
 <% @user.committee_enrollments.each do |ce| %>
