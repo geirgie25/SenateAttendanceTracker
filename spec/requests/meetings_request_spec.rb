@@ -88,7 +88,7 @@ RSpec.describe 'Meetings', type: :request do
 
     it 'sign in if part of committee' do
       sign_user_in(u2)
-      post sign_in_meeting_path(c.current_meeting.id), params: {meeting: c.current_meeting}
+      post sign_in_meeting_path(c.current_meeting.id)
       expect(AttendanceRecord.find_record(c.current_meeting, u2).attended).to eq true
     end
 
@@ -102,7 +102,7 @@ RSpec.describe 'Meetings', type: :request do
       m = c.current_meeting
       post end_meeting_path(m.id)
       sign_user_in(u2)
-      post sign_in_meeting_path(m.id), params: {meeting: m}
+      post sign_in_meeting_path(m.id)
       expect(AttendanceRecord.find_record(m, u2).attended).to eq false
     end
   end
