@@ -3,7 +3,7 @@
 <% end %>
 <h2>Senators</h2>
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-xs-8">
     <div class="panel panel-default">
       <table class="table">
           <thead>
@@ -37,7 +37,7 @@
                   <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
                   <td><%= AttendanceRecord.find_total_unexcused_absences(user.get_committee_enrollment(@committee)) %></td>
                 <% end %>
-                <td><%= link_to 'Show User', user %></td>
+                <td><%= link_to 'Show Senator', user %></td>
                 <% if current_user&.admin? %>
                   <td><%= link_to 'Edit', edit_user_path(user) %></td>
                   <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

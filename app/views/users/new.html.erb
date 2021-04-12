@@ -1,5 +1,6 @@
 <h1>New Senator</h1>
 
+<<<<<<< HEAD
 <%= form_with(model: @user) do |form| %>
   <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -37,3 +38,6 @@
     <%= form.submit %>
   </div>
 <% end %>
+=======
+<%= render 'form', user: @user %>
+>>>>>>> main

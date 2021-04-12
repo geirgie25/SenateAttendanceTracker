@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class DashboardsController < ApplicationController
-  skip_before_action :admin_authorized, only: %i[user]
+  skip_before_action :user_authorized, only: %i[help]
+  skip_before_action :admin_authorized, only: %i[user help]
 
   def user
     @user = current_user
@@ -12,4 +13,6 @@ class DashboardsController < ApplicationController
   def admin
     @meetings = Meeting.all
   end
+
+  def help; end
 end
