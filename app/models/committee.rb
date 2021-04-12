@@ -11,14 +11,17 @@ class Committee < ApplicationRecord
   has_many :users, through: :committee_enrollments
   has_many :meetings, inverse_of: :committee
 
+  # gets committee given committee name
   def self.get_committee_by_name(name)
     find_by(committee_name: name)
   end
 
+  # checks to see if committee currently has a meeting happening
   def current_meeting?
     Meeting.where(committee: self).and(Meeting.where(end_time: nil)).exists?
   end
 
+  # returns current meeting
   def current_meeting
     Meeting.where(committee: self).and(Meeting.where(end_time: nil)).take
   end

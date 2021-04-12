@@ -1,3 +1,6 @@
+<% Committee.joins(:roles).where(roles: @user.roles).find_each do |committee| %>
+  | <%= link_to "Manage " + committee.committee_name + " Committee", committee_path(committee.id) %>
+<% end %>
 <h2> Attendance Summary </h2>
 <script>
 function KILLMODAL() {

@@ -32,7 +32,7 @@ gem 'rexml'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
-#BOOTSTRAP STYLING
+# BOOTSTRAP STYLING
 gem 'bootstrap', '~> 4.0.0.alpha3'
 
 group :development, :test do

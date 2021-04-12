@@ -5,7 +5,15 @@
 <% if show_sign_in?(current_user, @meeting) %>
     <p>By signing into this meeting, I agree to the Aggie Honor Code:</p>
     <p>An Aggie does not lie, cheat, or steal, nor tolerates those who do.</p>
-    <%= form_with url: sign_in_meeting_path(@meeting.id), method: :post do |form|%>
-        <%= form.submit "Sign-In" %>
+    <%= form_with url: sign_in_meeting_path(@meeting.id), method: :post, model: @meeting do |form|%>
+    <ul>
+      <%= form.fields_for :attendance_records, @record do |ar_f| %>
+        <div class="field">
+          <%= ar_f.label :attendance_type %>
+          <%= ar_f.select :attendance_type, AttendanceRecord.attendance_types.keys.map {|key| [key.humanize, key]} %>
+        </div>
+      <% end %>
+    </ul>
+    <%= form.submit "Sign-In" %>
     <% end %>
 <% end %>
