@@ -73,5 +73,5 @@
 <td> <%= link_to "My Attendance Record", attendance_records_path %> </td>|
 <%= link_to "Change my username/password", edit_user_path(current_user.id) %>
 <% Committee.joins(:roles).where(roles: @user.roles).find_each do |committee| %>
-  <%= link_to "Manage " + committee.committee_name + " Committee", committee_path(committee.id) %>|
+  | <%= link_to "Manage " + committee.committee_name + " Committee", committee_path(committee.id) %>
 <% end %>

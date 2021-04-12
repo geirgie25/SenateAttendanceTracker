@@ -28,10 +28,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        add_to_committee_if_head(@user)
         @committee = Committee.get_committee_by_name('General')
         @committee_enrollment = CommitteeEnrollment.new(user: @user, committee: @committee).save
-        format.html { redirect_to @user, notice: 'Senator was successfully created.' }
+        add_to_committee_if_head(@user)
+        format.html { redirect_to users_path, notice: 'Senator was successfully created.' }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         add_to_committee_if_head(@user)
-        format.html { redirect_to @user, notice: 'Senator was successfully updated.' }
+        format.html { redirect_to users_path, notice: 'Senator was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }

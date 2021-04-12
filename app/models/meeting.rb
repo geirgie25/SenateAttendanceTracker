@@ -4,6 +4,7 @@
 class Meeting < ApplicationRecord
   belongs_to :committee, inverse_of: :meetings
   has_many :attendance_records, inverse_of: :meeting
+  accepts_nested_attributes_for :attendance_records
 
   def meeting_started?
     !self[:start_time].nil?
