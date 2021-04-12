@@ -19,7 +19,7 @@ module DashboardsHelper
     near_limit = "You are nearing the total absence limit for #{cenroll.committee.committee_name} Committee.\n"
     reached_limit = "You have reached the total absence limit for #{cenroll.committee.committee_name} Committee.\n"
     return near_limit if show_yellow_warning?(cenroll.committee.max_combined_absences,
-                                              AttendanceRecord.find_total_absences(ce))
+                                              AttendanceRecord.find_total_absences(cenroll))
     return reached_limit if show_red_warning?(cenroll.committee.max_combined_absences,
                                               AttendanceRecord.find_total_absences(cenroll))
 

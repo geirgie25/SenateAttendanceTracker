@@ -3,6 +3,8 @@
 class MeetingsController < ApplicationController
   skip_before_action :user_authorized, only: %i[index show]
   skip_before_action :admin_authorized, only: %i[index create end show sign_in]
+  before_action :set_meeting, only: %i[show sign_in]
+  before_action :set_record, only: %i[show sign_in]
 
   def index
     @meetings = filter_meetings
@@ -40,18 +42,20 @@ class MeetingsController < ApplicationController
   end
 
   def sign_in
-    meeting = Meeting.find(params[:id])
-
-    if meeting.currently_meeting? && current_user&.in_committee?(meeting.committee)
-      record = AttendanceRecord.find_record(meeting, current_user)
-      record&.update(attended: true)
-      redirect_to committee_path(meeting.committee.id), notice: "Signed in to Meeting #{meeting.title}"
+    if @meeting.currently_meeting? && current_user&.in_committee?(@meeting.committee)
+      @meeting.update(meeting_params)
+      @record&.update(attended: true)
+      redirect_to committee_path(@meeting.committee.id), notice: "Signed in to Meeting #{@meeting.title}"
     else
-      redirect_to committee_path(meeting.committee.id), notice: 'Error Signing in to Meeting'
+      redirect_to committee_path(@meeting.committee.id), notice: 'Error Signing in to Meeting'
     end
   end
 
   private
+
+  def meeting_params
+    params.require(:meeting).permit(attendance_records_attributes: %i[id attendance_type])
+  end
 
   def filter_meetings
     return Committee.find(params[:committee_id]).meetings if params[:committee_id].present?
@@ -67,5 +71,13 @@ class MeetingsController < ApplicationController
     return Time.zone.now.to_formatted_s(:short) if curr_title.blank?
 
     curr_title
+  end
+
+  def set_meeting
+    @meeting = Meeting.find(params[:id])
+  end
+
+  def set_record
+    @record = AttendanceRecord.find_record(@meeting, current_user)
   end
 end

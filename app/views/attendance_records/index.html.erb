@@ -6,12 +6,13 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Senator</th>
-      <th>Committee</th>
-      <th>Meeting</th>
-      <th>Sign-in Start</th>
-      <th>Sign-in End</th>
-      <th>Attendance Status</th>
+      <th scope="col">Senator</th>
+      <th scope="col">Committee</th>
+      <th scope="col">Meeting</th>
+      <th scope="col">Sign-in Start</th>
+      <th scope="col">Sign-in End</th>
+      <th scope="col">Attendance Status</th>
+      <th scope="col">Attendance Type</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@
       <td><%= record.meeting.start_time.to_formatted_s(:short) %></td>
       <td><%= end_meeting_time_string(record.meeting.end_time) %></td>
       <td><%= attendance_status_string(record) %></td>
+      <td><%= record.attendance_type %></td>
     </tr>
     <% end %>
   </tbody>

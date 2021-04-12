@@ -1,3 +1,8 @@
+<% Committee.joins(:roles).where(roles: @user.roles).find_each do |committee| %>
+  <%= link_to "Manage " + committee.committee_name + " Committee", committee_path(committee.id) %>
+<% end %>
+
+<h2> Committee Attendance Summary </h2>
 <% @user.committee_enrollments.each do |ce| %>
   <% if show_modal?(ce) %>
     <%= render partial: "shared/modal", locals: {title: "Absence Warning", content: [total_absence_string(ce), unexcused_absence_string(ce), excused_absence_string(ce)]} %>
@@ -23,6 +28,6 @@
   </table>
   <br>
 <% end %>
-<%= link_to "My Excuses", "/excuses/my_absences"%>|
-<%= link_to "My Attendance Record", attendance_records_path(user_id: current_user.id) %>|
+<%= link_to "My Excuses", "/excuses/my_absences"%> |
+<%= link_to "My Attendance Record", attendance_records_path(user_id: current_user.id) %> |
 <%= link_to "Change my username/password", edit_user_path(current_user.id) %>
