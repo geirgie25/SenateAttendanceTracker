@@ -78,6 +78,13 @@ class UsersController < ApplicationController
     @users = User.all
     @committee = Committee.find(params[:committee_id]) if params[:committee_id]
     @users = @users.for_committee(@committee.id) if @committee
+    return unless params[:max_user_absences] && @committee
+
+    @list = []
+    @users.each do |user|
+      @list.push(user) if user.above_max_absences?(@committee)
+    end
+    @users = @list
   end
 
   # checks to see if user id matches before giving user permission

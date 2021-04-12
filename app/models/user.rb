@@ -28,6 +28,20 @@ class User < ApplicationRecord
     record.nil? ? false : record.attended
   end
 
+  def get_committee_enrollment(committee)
+    CommitteeEnrollment.where(user: self).and(CommitteeEnrollment.where(committee: committee))
+  end
+
+  def above_max_absences?(committee)
+    ce = get_committee_enrollment(committee)
+    excused_absences = AttendanceRecord.find_total_excused_absences(ce)
+    total_absences = AttendanceRecord.find_total_absences(ce)
+    unexcused_absences = AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)
+    committee.max_excused_absences <= excused_absences ||
+      committee.max_combined_absences <= total_absences ||
+      committee.max_unexcused_absences <= unexcused_absences
+  end
+
   validates :username, uniqueness: true, presence: true
   validates :password, presence: true
 end
