@@ -45,7 +45,7 @@ class MeetingsController < ApplicationController
   private
 
   def meeting_params
-    params.require(:meeting).permit(attendance_records_attributes: [:id, :attendance_type])
+    params.require(:meeting).permit(attendance_records_attributes: %i[id attendance_type])
   end
 
   def filter_meetings
