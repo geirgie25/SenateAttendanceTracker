@@ -68,23 +68,13 @@ class UsersController < ApplicationController
     @users = User.all
     @committee = Committee.find(params[:committee_id]) if params[:committee_id]
     @users = @users.for_committee(@committee.id) if @committee
-    if params[:max_user_absences]
-      @list = []
-      @users.each do |user|
-        ce = CommitteeEnrollment.where(user: user).and(CommitteeEnrollment.where(committee: @committee))
-        emax_excused_absences = AttendanceRecord.find_total_excused_absences(ce)
-        cmax_total_absences = AttendanceRecord.find_total_absences(ce)
-        umax_unexcused_absences = AttendanceRecord.find_total_absences(ce) - AttendanceRecord.find_total_excused_absences(ce)
-        if @committee.max_excused_absences > emax_excused_absences
-          @list.push(user)
-        elsif @committee.max_total_absences > cmax_total_absences
-          @list.push(user)
-        elsif @committee.max_unexcused_absences > umax_unexcused_absences
-          @list.push(user)
-        end
-      end
-      @users = @list
+    return unless params[:max_user_absences] && @committee
+
+    @list = []
+    @users.each do |user|
+      @list.push(user) if user.above_max_absences?(@committee)
     end
+    @users = @list
   end
 
   def user_id_authorized

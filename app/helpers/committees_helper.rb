@@ -27,6 +27,10 @@ module CommitteesHelper
     user&.heads_committee?(committee)
   end
 
+  def show_users_above_max_absences_link?(user, committee)
+    user&.heads_committee?(committee)
+  end
+
   def show_edit_committee_link?(user, _committee)
     user&.admin?.present?
   end

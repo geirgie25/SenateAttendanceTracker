@@ -34,4 +34,6 @@
     | <%= link_to "Delete Committee", @committee, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 
-<%= link_to "Committee Users", users_path(committee_id: @committee.id, max_user_absences: true) %> 
+<% if show_users_above_max_absences_link?(current_user, @committee) %>
+    <%= link_to "Users Above Max Absences", users_path(committee_id: @committee.id, max_user_absences: true) %> 
+<% end %>
