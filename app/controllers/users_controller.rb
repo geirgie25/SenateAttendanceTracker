@@ -21,7 +21,13 @@ class UsersController < ApplicationController
   end
 
   # makes changes to existing user
-  def edit; end
+  def edit
+    if current_user.id == @user.id
+      render :user_edit
+    elsif current_user.admin?
+      render :admin_edit
+    end
+  end
 
   # assigns parameters and creates relations for new user
   def create
@@ -45,9 +51,10 @@ class UsersController < ApplicationController
         add_to_committee_if_head(@user)
         format.html { redirect_to users_path, notice: 'Senator was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+      elsif current_user.id == @user.id
+        format.html { render :user_edit, status: :unprocessable_entity }
+      elsif current_user.admin?
+        format.html { render :admin_edit, status: :unprocessable_entity }
       end
     end
   end
