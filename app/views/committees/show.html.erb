@@ -39,41 +39,6 @@
     | <%= link_to "Delete Committee", @committee, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
 <div style="padding: 10px"></div>
-<div class="row">
-  <div class="col-xs-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">Committee Senators</div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Senator</th>
-              <th>Attendances</th>
-              <th>Total Absences</th>
-              <th>Excused Absences</th>
-              <th>Unexcused Absences</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @committee.users.take(5).each do |user| %>
-              <tr>
-                <td><%= user.name %></td>
-                <td><%= AttendanceRecord.find_total_attendances(CommitteeEnrollment.get_committee_enrollment(@committee, user))%>
-                <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
-                <td><%= AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
-                <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) -  AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
-                <td><%= link_to 'Show User', user %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <div class="panel-footer">
-        <%= link_to "Show All Senators", users_path(committee_id: @committee.id) %>
-      </div>
-    </div>
-  </div>
-</div>
-
 
 <div class="row">
   <div class="col-xs-6">
@@ -106,5 +71,43 @@
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">Committee Senators</div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Senator</th>
+              <th>Attendances</th>
+              <th>Total Absences</th>
+              <th>Excused Absences</th>
+              <th>Unexcused Absences</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @committee.users.take(5).each do |user| %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= AttendanceRecord.find_total_attendances(CommitteeEnrollment.get_committee_enrollment(@committee, user))%>
+                <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+                <td><%= AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+                <td><%= AttendanceRecord.find_total_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) -  AttendanceRecord.find_total_excused_absences(CommitteeEnrollment.get_committee_enrollment(@committee, user)) %></td>
+                <td><%= link_to 'Show Senator', user %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <div class="panel-footer">
+        <%= link_to "Show All Senators", users_path(committee_id: @committee.id) %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 
