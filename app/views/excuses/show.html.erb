@@ -1,4 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% if notice %>
+  <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
+<% end %>
 
 <p>
   <strong>Excuse for <%= @excuse.attendance_record.meeting.title %> Meeting</strong>
@@ -13,5 +15,3 @@
   <strong>Reason:</strong>
   <%= @excuse.reason %>
 </p>
-
-<%= link_to "Back", "/excuses/my_absences"%>

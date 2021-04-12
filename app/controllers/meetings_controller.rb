@@ -18,20 +18,25 @@ class MeetingsController < ApplicationController
           start_time: Time.zone.now
         )
       )
+      redirect_to committee_path(committee.id), notice: 'Started Meeting Sign In'
+    else
+      redirect_to committee_path(committee.id), notice: 'Error Starting Meeting Sign In'
     end
-    redirect_to committee_path(committee.id)
   end
 
   def show
     @meeting = Meeting.find(params[:id])
+    @records = AttendanceRecord.for_meeting(@meeting.id)
   end
 
   def end
     meeting = Meeting.find(params[:id])
     if meeting.currently_meeting? && committee_head_permissions?(meeting.committee)
       meeting.update(end_time: Time.zone.now)
+      redirect_to committee_path(meeting.committee.id), notice: 'Ended Meeting Sign In'
+    else
+      redirect_to committee_path(meeting.committee.id), notice: 'Error Ending Meeting Sign In'
     end
-    redirect_to committee_path(meeting.committee.id)
   end
 
   def sign_in
@@ -40,8 +45,10 @@ class MeetingsController < ApplicationController
     if meeting.currently_meeting? && current_user&.in_committee?(meeting.committee)
       record = AttendanceRecord.find_record(meeting, current_user)
       record&.update(attended: true)
+      redirect_to committee_path(meeting.committee.id), notice: "Signed in to Meeting #{meeting.title}"
+    else
+      redirect_to committee_path(meeting.committee.id), notice: 'Error Signing in to Meeting'
     end
-    redirect_to committee_path(meeting.committee.id)
   end
 
   private

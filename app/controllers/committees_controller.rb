@@ -24,7 +24,8 @@ class CommitteesController < ApplicationController
 
   def update
     committee = Committee.find(params[:id])
-    committee.update(params[:committee].permit(:committee_name, user_ids: []))
+    committee.update(params[:committee].permit(:committee_name, :max_unexcused_absences,
+                                               :max_excused_absences, :max_combined_absences, user_ids: []))
     redirect_to(committee_path(committee.id))
   end
 end

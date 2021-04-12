@@ -1,24 +1,35 @@
-<div class="AggieScheduleBar">
-	<p>TEXAS A&M STUDENT SENATE</p>
-</div>
-
-<div class="navigationBar">
-	<%= link_to "Home", current_user&.admin? ? admin_dashboards_path : user_dashboards_path %>
-	<%= link_to "Senators", users_path %>
-	<%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %>
-	<div class="dropdown">
-		<button class="dropbtn">Committees</button>
-		<div class="dropdown-content">
-			<% Committee.all.each do |cInst| %>
-				<%if cInst.committee_name != "General" %>
-					<%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %>
-				<% end %>
-			<% end %>
-		</div>
+<nav class="navbar navbar-expand-md">
+	<div class="container-fluid">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="#">TEXAS A&M STUDENT SENATE</a>
 	</div>
-	<% if logged_in? %>
-    	<%= link_to "Logout", "/logout", method: :post %>
-    <% else %>
-    	<%= link_to "Login", "/login" %>
-    <% end %>
-</div>
+	<ul class="nav navbar-nav">
+		<li class="active"><%= link_to "Home", current_user&.admin? ? admin_dashboards_path : user_dashboards_path %></li>
+		<li><%= link_to "Senators", users_path %></li>
+		<li><%= link_to "General Committee", committee_path(Committee.find_by(committee_name: "General").id) %></li>
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Committees
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<% Committee.all.each do |cInst| %>
+					<%if cInst.committee_name != "General" %>
+						<a class="dropdown-item"><%= link_to(cInst.committee_name, committee_path(cInst), :class => 'action show') %></a>
+					<% end %>
+				<% end %>
+			</div>
+		</li>
+	</ul>
+	</div>
+	<nav class="navbar-custom navbar-expand-md">
+		<div class="container-fluid">
+		<ul class="nav navbar-nav ml-auto">
+			<% if logged_in? %>
+		    	<li><%= link_to "Log Out", "/logout", method: :post %></li>
+		    <% else %>
+		    	<li><%= link_to "Log In", "/login" %></li>
+		  <% end %>
+		</ul>
+		</div>
+	</nav>
+</nav>

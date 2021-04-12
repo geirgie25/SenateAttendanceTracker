@@ -60,6 +60,10 @@ class AttendanceRecord < ApplicationRecord
     where(committee_enrollment: committee_enrollment).and(where(attended: true)).count
   end
 
+  def self.find_total_unexcused_absences(committee_enrollment)
+    find_total_absences(committee_enrollment) - find_total_excused_absences(committee_enrollment)
+  end
+
   # returns all attendance records for missed meetings for a user
   def self.get_absences(user)
     where(committee_enrollment: user.committee_enrollments).and(where(attended: false))

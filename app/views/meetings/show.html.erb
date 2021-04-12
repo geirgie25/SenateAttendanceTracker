@@ -1,5 +1,5 @@
 <p><%= @meeting.committee.committee_name %></p>
-<p>Meeting <%= @meeting.title %></p>
+<p>Sign In for Meeting <%= @meeting.title %></p>
 
 
 <% if show_sign_in?(current_user, @meeting) %>
@@ -8,4 +8,8 @@
     <%= form_with url: sign_in_meeting_path(@meeting.id), method: :post do |form|%>
         <%= form.submit "Sign-In" %>
     <% end %>
+<% else %>
+  <p>The sign in period for this meeting has ended</p>
 <% end %>
+
+<%= link_to attendance_records_path(meeting_id: @meeting.id) %>
