@@ -1,0 +1,23 @@
+<h2> Meeting Details</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Meeting ID: </th>
+      <th scope="col">Start Time: </th>
+      <th scope="col">End Time: </th>
+      <th scope="col">Meeting Link: </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @meetings.each do |meeting| %>
+    <tr>
+        <td> <%= meeting.id %></td>
+        <td> <%= meeting.start_time %></td>
+        <td> <%= meeting.end_time %></td>
+        <td> <%= link_to "Show Meeting", "/dashboard/admin/" + meeting.id.to_s %> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Create New Committe", new_committee_path %>
