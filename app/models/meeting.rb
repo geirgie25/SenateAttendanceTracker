@@ -3,8 +3,8 @@
 # meeting model. each meeting has a committee and many attendance_records
 class Meeting < ApplicationRecord
   belongs_to :committee, inverse_of: :meetings
-  has_many :attendance_records, inverse_of: :meeting
-  accepts_nested_attributes_for :attendance_records
+  has_many :attendance_records, inverse_of: :meeting, dependent: :destroy
+  accepts_nested_attributes_for :attendance_records, allow_destroy: true
 
   def meeting_started?
     !self[:start_time].nil?

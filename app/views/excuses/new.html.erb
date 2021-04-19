@@ -1,8 +1,12 @@
-<p>Excuse for <%= @absence.meeting.title %></p>
-
+<h1>Create Excuse</h1>
+<br>
+<p>Committee: <%= @absence.meeting.committee.committee_name %></p> 
+<p style="padding-bottom: 10px">Meeting: <%= @absence.meeting.title %></p>
 <%= form_with(model: @excuse) do |form| %>
   <%= form.hidden_field :attendance_record_id, :value => @absence.id %>
   <%= form.label :reason %>
-  <%= form.text_area :reason %>
+  <br>
+  <%= form.text_area :reason, style: 'width: 300px; height: 200px' %>
+  <br>
   <%= form.submit %>
 <% end %>

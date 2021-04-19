@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get "dashboards/admin/download_records", to: 'dashboards#download_session'
+  get "/dashboards/admin/delete_records", to: 'dashboards#delete_records'
+  
 
   resources :attendance_records, :only => [:index]
 

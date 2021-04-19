@@ -1,5 +1,8 @@
+<h1>Create Committee</h1>
+<br>
 <%= form_for(@committee) do |f|%>
-    <%= f.label( 'Name' ) %>
+    <p><%= f.label( 'Committee Name:' ) %>
     <%= f.text_field(:committee_name) %>
+    </p>
     <%= f.submit("Create New Committee") %>
 <% end %>

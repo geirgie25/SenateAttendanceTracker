@@ -16,7 +16,7 @@ module ApplicationHelper
 
   def attendance_status_string(record)
     return 'Attended' if record.attended
-    return 'Excused Absence' if record.excuse && record.excuse.status == 'Accepted'
+    return 'Excused Absence' if record.excuse && record.excuse.status == 'Approved'
 
     'Unexcused Absence'
   end

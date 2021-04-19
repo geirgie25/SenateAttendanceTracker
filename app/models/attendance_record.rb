@@ -4,7 +4,7 @@
 class AttendanceRecord < ApplicationRecord
   belongs_to :meeting, inverse_of: :attendance_records
   belongs_to :committee_enrollment, inverse_of: :attendance_records
-  has_one :excuse, inverse_of: :attendance_record
+  has_one :excuse, inverse_of: :attendance_record, dependent: :destroy
 
   enum attendance_type: { In_Person: 0, Online: 1 }
 

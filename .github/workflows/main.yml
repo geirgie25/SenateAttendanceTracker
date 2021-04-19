@@ -2,7 +2,7 @@ name: Deploy
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,4 +13,3 @@ jobs:
           heroku_api_key: 2ff10b4c-21e0-4f10-8eca-1f5cb73153c5
           heroku_app_name: senate-attendance-tracker
           heroku_email: jrs7943@tamu.edu
-          usedocker: true
