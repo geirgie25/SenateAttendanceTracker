@@ -1,8 +1,8 @@
-<p>Reviewing excuse for <%= @excuse.attendance_record.meeting.title %> Meeting for <%= @excuse.attendance_record.committee_enrollment.user.name %></p>
+<p>Reviewing excuse for Meeting <%= @excuse.attendance_record.meeting.title %> for Senator <%= @excuse.attendance_record.committee_enrollment.user.name %></p>
 <p>Reason: "<%= @excuse.reason %>"</p>
 <%= form_with(model: @excuse) do |form| %>
-  <%= form.label :status %>
-  <%= form.select :status, Excuse.statuses.keys.map {|key| [key.humanize, key]} %>
+  <p><%= form.label :status %>
+  <%= form.select :status, Excuse.statuses.keys.map {|key| [key.humanize, key]} %></p>
   <%= form.submit %>
 
 <% end %>

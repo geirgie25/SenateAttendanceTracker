@@ -6,6 +6,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">Committee</th>
       <th scope="col">Meeting</th>
       <th scope="col">Sign-In Start Time</th>
       <th scope="col">Sign-In End Time</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @absences.each do |absence| %>
       <tr>
+        <td><%= absence.meeting.committee.committee_name %></td>
         <td><%= absence.meeting.title %></td>
         <td><%= absence.meeting.start_time.to_formatted_s(:short) %></td>
         <td><%= end_meeting_time_string(absence.meeting.end_time) %></td>
