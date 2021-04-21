@@ -1,55 +1,68 @@
 <% if notice %>
   <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
 <% end %>
-<h2>Senators</h2>
+<!-- <h2>Senators</h2> -->
 <div class="row">
-  <div class="col-xs-8">
-    <div class="panel panel-default">
-      <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Senator</th>
-              <% if current_user&.admin? %>
-                <th scope="col">Username</th>
-              <% end %>
-              <% if @committee %>
-                <th scope="col">Attendances</th>
-                <th scope="col">Total Absences</th>
-                <th scope="col">Excused Absences</th>
-                <th scope="col">Unexcused Absences</th>
-              <% end %>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
+  <!-- Centered -->
+  <div class="col-sm-3">
+  </div>
+  <div class="col-xs-6">
+    <div class="panel-custom panel-default">
+      <div class="panel-heading">Senators</div>
+        <div class="panel panel-default">
+          <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Senator</th>
+                  <% if current_user&.admin? %>
+                    <th scope="col">Username</th>
+                  <% end %>
+                  <% if @committee %>
+                    <th scope="col">Attendances</th>
+                    <th scope="col">Total Absences</th>
+                    <th scope="col">Excused Absences</th>
+                    <th scope="col">Unexcused Absences</th>
+                  <% end %>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
 
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
-                <td><%= user.name %></td>
-                <% if current_user&.admin? %>
-                  <td><%= user.username %></td>
+              <tbody>
+                <% @users.each do |user| %>
+                  <tr>
+                    <td><%= user.name %></td>
+                    <% if current_user&.admin? %>
+                      <td><%= user.username %></td>
+                    <% end %>
+                    <% if @committee %>
+                      <td><%= AttendanceRecord.find_total_attendances(user.get_committee_enrollment(@committee)) %></td>
+                      <td><%= AttendanceRecord.find_total_absences(user.get_committee_enrollment(@committee)) %></td>
+                      <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
+                      <td><%= AttendanceRecord.find_total_unexcused_absences(user.get_committee_enrollment(@committee)) %></td>
+                    <% end %>
+                    <td><%= link_to 'Show Senator', user %></td>
+                    <% if current_user&.admin? %>
+                      <td><%= link_to 'Edit', edit_user_path(user) %></td>
+                      <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% end %>
+                  </tr>
                 <% end %>
-                <% if @committee %>
-                  <td><%= AttendanceRecord.find_total_attendances(user.get_committee_enrollment(@committee)) %></td>
-                  <td><%= AttendanceRecord.find_total_absences(user.get_committee_enrollment(@committee)) %></td>
-                  <td><%= AttendanceRecord.find_total_excused_absences(user.get_committee_enrollment(@committee)) %></td>
-                  <td><%= AttendanceRecord.find_total_unexcused_absences(user.get_committee_enrollment(@committee)) %></td>
-                <% end %>
-                <td><%= link_to 'Show Senator', user %></td>
-                <% if current_user&.admin? %>
-                  <td><%= link_to 'Edit', edit_user_path(user) %></td>
-                  <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-                <% end %>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <div class="panel-footer">
-        <% if current_user&.admin? %>
-          <%= link_to 'Create New User', new_user_path %>
-        <% end %>
+              </tbody>
+            </table>
+          <% if @users.each.size == 0 %>
+            <div style="text-align:center; padding-top: 5px">
+              <p>No Senators Found</p>
+            </div>
+          <% end %>
+          <% if current_user&.admin? %>
+            <div class="panel-footer">
+              <%= link_to 'Create New User', new_user_path %>
+            </div>
+          <% end %>
+          
+        </div>
       </div>
     </div>
   </div>
