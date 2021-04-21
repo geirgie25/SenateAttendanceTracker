@@ -2,7 +2,11 @@
 <% if notice %>
   <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
 <% end %>
-<h2> <%= @committee.committee_name %> Committee </h2>
+
+
+<div class="text-align: center">
+  <h2> <%= @committee.committee_name %> Committee </h2>
+</div>
 
 <% if show_start_button?(current_user, @committee) %>
     <%= form_with url: meeting_new_path, method: :post do |form|%>
@@ -29,7 +33,7 @@
     <%= link_to "Committee Excuses", excuses_path(committee_id: @committee.id) %>
 <% end %>
 <% if show_users_above_max_absences_link?(current_user, @committee) %>
-    | <%= link_to "Users Above Max Absences", users_path(committee_id: @committee.id, max_user_absences: true) %> 
+    | <%= link_to "Users Above Max Absences", users_path(committee_id: @committee.id, max_user_absences: true) %>
     <br>
 <% end %>
 <% if show_edit_committee_link?(current_user, @committee) %>
@@ -41,8 +45,10 @@
 <div style="padding: 10px"></div>
 
 <div class="row">
+  <div class="col-sm-3">
+  </div>
   <div class="col-xs-6">
-    <div class="panel panel-default">
+    <div class="panel-custom panel-default">
       <div class="panel-heading">Last 5 Meetings</div>
         <table class="table">
           <thead>
@@ -65,6 +71,11 @@
             <% end %>
           </tbody>
         </table>
+        <% if @committee.meetings.order('created_at DESC').take(5).each.size == 0 %>
+          <div style="text-align:center">
+            <p>No Committee Found</p>
+          </div>
+        <% end %>
       <div class="panel-footer">
         <%= link_to "Show All Meetings", meetings_path(committee_id: @committee.id) %>
       </div>
@@ -72,9 +83,15 @@
   </div>
 </div>
 
+<!-- added these to make sure theres a space -->
+<br>
+<br>
+
 <div class="row">
+  <div class="col-sm-2">
+  </div>
   <div class="col-xs-8">
-    <div class="panel panel-default">
+    <div class="panel-custom panel-default">
       <div class="panel-heading">Committee Senators</div>
         <table class="table">
           <thead>
@@ -100,14 +117,14 @@
             <% end %>
           </tbody>
         </table>
+        <% if @committee.users.take(5).each.size == 0 %>
+          <div style="text-align:center">
+            <p>No Committee Found</p>
+          </div>
+        <% end %>
       <div class="panel-footer">
         <%= link_to "Show All Senators", users_path(committee_id: @committee.id) %>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-

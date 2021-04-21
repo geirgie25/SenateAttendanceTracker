@@ -1,80 +1,128 @@
-<h1><u>Website Help</u></h1>
-<h3><u>Navigating around the Site</u></h3>
-<p>At the top of the page is a the Navbar which has links to all the important pages. It has the following links:
-<ul>
-    <li>Home</li>
-    <li>Senators</li>
-    <li>General Committee and Committees</li>
-    <li>Help</li>
-</ul>
-<br>
-<h4><u>Home</u></h4>
-<p>
-The Home page takes you to the home of the site. If you are a guest, it simply takes you to the login page. 
-Regular users and administrators also have their respective pages.
-</p>
-<br>
-<h4><u>Senators</u></h4>
-<p>
-The Senators page shows all the senators currently stored in the system, 
-as well as a link to view more details about that senator's attendance.
-</p>
-<br>
-<h4><u>General Committee and Committees</u></h4>
-<p>Both of these links take you to a committee's page. From that committee's page, you can view attendance information for that committee, 
-such as attendances for specific meetings or a user's total attendances for that committee</p>
+<div class="row">
+  <div class="col-xs-6 col-sm-3">
+  </div>
+  <div class="col-xs-6">
+    <div class="panel-custom panel-default">
+      <div class="panel-heading"><h1>Website Help</h1></div>
+      <div class="panel-body">
+        <h3><u>Navigating around the Site</u></h3>
+        <p>At the top of the page is a the Navbar which has links to all the important pages. It has the following links:
+        <ul>
+            <li>Home</li>
+            <li>Senators</li>
+            <li>General Committee and Committees</li>
+            <li>Help</li>
+        </ul>
+        <br>
+        <h4><u>Home</u></h4>
+        <p>
+        The Home page takes you to the home of the site. If you are a guest, it simply takes you to the login page.
+        Regular users and administrators also have their respective pages.
+        </p>
+        <br>
+        <h4><u>Senators</u></h4>
+        <p>
+        The Senators page shows all the senators currently stored in the system,
+        as well as a link to view more details about that senator's attendance.
+        </p>
+        <br>
+        <h4><u>General Committee and Committees</u></h4>
+        <p>Both of these links take you to a committee's page. From that committee's page, you can view attendance information for that committee,
+        such as attendances for specific meetings or a user's total attendances for that committee</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% if current_user %>
-<h2><u>User Actions</u></h2>
-<p>As a user, you can, you can see a summary of your attendance records for each committee on the home page. You also have permission to do several other actions.</p>
 <br>
-<h4><u>Signing in to a Committee Meeting</u></h4>
-<p>To sign in to a meeting, a committee head will first start a meeting sign in. Once that has been done, 
-there will be a link to sign in on that committee's page.</p>
 <br>
-<h4><u>Submitting an Excuse for an Absence</u></h4>
-<p>If you missed a meeting sign in, you can submit an excuse form. To do this, go to your home page. 
-From there, click the "My Absences" link. This will take you to a list of all your absences. To submit an excuse, 
-find the absence you wish to excuse, and click the "Submit Excuse" link next to the absence.
-</p>
-<h4><u>Changing your Username/Password</u></h4>
-<p>To change your username or password, click the "Change Username/Password" link on the home page.</p>
+<div class="row">
+  <div class="col-xs-6 col-sm-3">
+  </div>
+  <div class="col-xs-6">
+    <div class="panel-custom panel-default">
+      <div class="panel-heading"><h2>User Actions</h2></div>
+      <div class="panel-body">
+        <p>As a user, you can, you can see a summary of your attendance records for each committee on the home page. You also have permission to do several other actions.</p>
+        <br>
+        <h4><u>Signing in to a Committee Meeting</u></h4>
+        <p>To sign in to a meeting, a committee head will first start a meeting sign in. Once that has been done,
+        there will be a link to sign in on that committee's page.</p>
+        <br>
+        <h4><u>Submitting an Excuse for an Absence</u></h4>
+        <p>If you missed a meeting sign in, you can submit an excuse form. To do this, go to your home page.
+        From there, click the "My Absences" link. This will take you to a list of all your absences. To submit an excuse,
+        find the absence you wish to excuse, and click the "Submit Excuse" link next to the absence.
+        </p>
+        <h4><u>Changing your Username/Password</u></h4>
+        <p>To change your username or password, click the "Change Username/Password" link on the home page.</p>
+        <br>
+      </div>
+    </div>
+  </div>
+</div>
+
 <br>
-<h2><u>Committee Head Actions</u></h2>
-<p>If you are given the role of Committee Head over a committee, you have the power to start/end committee sign ins for that committee,
- as well as approve absence excuses for that committee.</p>
 <br>
-<h4><u>Sign-In</u></h4>
- <p>
- To start a sign in, navigate to your committee's page and click "Start Meeting Sign-in". 
- If no title is given, a title will be generated for you. Ending sign-in follows the same steps
- </p>
-<br>
-<h4><u>Excuses</u></h4>
- <p>
- To approve/reject excuses, click the "Committee Excuses" link, then "Edit Status" next to the excuse.
- <b>Pending and rejected excuses will count the absence as unexcused, while approved excuses will count the absence as excused.</b>
- </p>
- <p> To view users above the maximum allowed absences for the committee, click the "Users Above Max Absences" link. </p>
+
+<div class="row">
+  <div class="col-xs-6 col-sm-3">
+  </div>
+  <div class="col-xs-6">
+    <div class="panel-custom panel-default">
+      <div class="panel-heading"><h2>Committee Head Actions</h2></div>
+      <div class="panel-body">
+        <p>If you are given the role of Committee Head over a committee, you have the power to start/end committee sign ins for that committee,
+         as well as approve absence excuses for that committee.</p>
+        <br>
+        <h4><u>Sign-In</u></h4>
+         <p>
+         To start a sign in, navigate to your committee's page and click "Start Meeting Sign-in".
+         If no title is given, a title will be generated for you. Ending sign-in follows the same steps
+         </p>
+        <br>
+        <h4><u>Excuses</u></h4>
+         <p>
+         To approve/reject excuses, click the "Committee Excuses" link, then "Edit Status" next to the excuse.
+         <b>Pending and rejected excuses will count the absence as unexcused, while approved excuses will count the absence as excused.</b>
+         </p>
+         <p> To view users above the maximum allowed absences for the committee, click the "Users Above Max Absences" link. </p>
+    </div>
+  </div>
+</div>
 <% end %>
 
 <% if current_user&.admin? %>
-<h2><u>Admin Actions</u></h2>
-<p>As an administrator, you have many powers: assigning roles to users, creating/delete users, creating/deleting committees, and adding users to
-committees.</p>
-<br>
-<h4><u>Assigning User Roles</u></h4>
-<p>To assign a user roles, click on the "Edit" link next to a user in the Senators tab. You can then edit the user's roles.</p>
-<br>
-<h4><u>Creating/Deleting Users</u></h4>
-<p>On the senators page, there are links to delete users, as well as a link at the bottom of the page to create a new user.</p>
-<br>
-<h4><u>Creating/Delete Committees</u></h4>
-<p>You can create a committee by clicking the "Create Committee" button on the user dashboard.
- You can delete a committee by going to the committee's page and clicking "Delete Committee"</p>
-<br>
-<h4><u>Adding User to a Committee</u></h4>
-<p>To add a user to a committee, navigate to the committee's page and click "Edit Committee". From here, you can add/remove users, as well as 
-change the committee's name and max allowed absences of each type.</p>
+<div class="row">
+  <div class="col-xs-6 col-sm-3">
+  </div>
+  <div class="col-xs-6">
+    <div class="panel-custom panel-default">
+      <div class="panel-heading"><h2>Admin Actions</h2></div>
+      <div class="panel-body">
+        <p>As an administrator, you have many powers: assigning roles to users, creating/delete users, creating/deleting committees, and adding users to
+        committees.</p>
+        <br>
+        <h4><u>Assigning User Roles</u></h4>
+        <p>To assign a user roles, click on the "Edit" link next to a user in the Senators tab. You can then edit the user's roles.</p>
+        <br>
+        <h4><u>Creating/Deleting Users</u></h4>
+        <p>On the senators page, there are links to delete users, as well as a link at the bottom of the page to create a new user.</p>
+        <br>
+        <h4><u>Creating/Delete Committees</u></h4>
+        <p>You can create a committee by clicking the "Create Committee" button on the user dashboard.
+         You can delete a committee by going to the committee's page and clicking "Delete Committee"</p>
+        <br>
+        <h4><u>Adding User to a Committee</u></h4>
+        <p>To add a user to a committee, navigate to the committee's page and click "Edit Committee". From here, you can add/remove users, as well as
+        change the committee's name and max allowed absences of each type.</p>
+        <br>
+        <h4><u>Contact the Developers</u></h4>
+        <p>Jesse Sprinkle (361) 205 3539</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% end %>

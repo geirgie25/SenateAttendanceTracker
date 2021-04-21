@@ -87,6 +87,7 @@
  }
  .table {
    background-color: #f6f6f6;
+   text-align: center;
  }
  .table-thead {
    background-color: #3C0000;
@@ -94,6 +95,7 @@
  th {
    background-color: #3C0000;
    color: white;
+   text-align: center;
  }
 
  .panel > .panel-heading {
@@ -113,5 +115,13 @@
    text-align:center;
  }
  .dropdown-menu {
+   text-align: center;
+ }
+
+ // PANEL CUSTOM
+ .panel-custom > .panel-heading {
+   background-color: #3C0000;
+   color: #f6f6f6;
+   font-size: 25px;
    text-align: center;
  }
