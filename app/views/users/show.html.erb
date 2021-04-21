@@ -25,7 +25,7 @@
               <td><%= record.meeting.committee.committee_name %></td>
               <td><%= record.meeting.title %></td>
               <td><%= record.meeting.start_time.to_formatted_s(:short) %></td>
-              <td><%= record.meeting.end_time.to_formatted_s(:short) %></td>
+              <td><%= end_meeting_time_string(record.meeting.end_time) %></td>
               <td><%= attendance_status_string(record) %></td>
             </tr>
             <% end %>

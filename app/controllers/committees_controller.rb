@@ -24,8 +24,17 @@ class CommitteesController < ApplicationController
 
   def update
     committee = Committee.find(params[:id])
+    del_records(committee, params[:committee][:user_ids].map(&:to_i)) unless params[:committee][:user_ids].nil?
     committee.update(params[:committee].permit(:committee_name, :max_unexcused_absences,
                                                :max_excused_absences, :max_combined_absences, user_ids: []))
     redirect_to(committee_path(committee.id))
+  end
+
+  private
+
+  def del_records(committee, u_ids)
+    committee.users.each do |user|
+      user.get_committee_enrollment(committee).attendance_records.destroy_all unless user.id.in?(u_ids)
+    end
   end
 end
