@@ -43,10 +43,6 @@ RSpec.describe AttendanceRecord, type: :model do
     expect(described_class.find_total_unexcused_absences(u.committee_enrollments)).to eq 1
   end
 
-  it 'find find_total_absences' do
-    expect(described_class.find_total_absences(u.committee_enrollments)).to eq 1
-  end
-
   it 'get_absences works' do
     expect(described_class.get_absences(u).first).to be_truthy
   end

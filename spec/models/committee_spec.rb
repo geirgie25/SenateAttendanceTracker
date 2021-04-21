@@ -47,7 +47,7 @@ RSpec.describe Committee, type: :model do
   end
 
   describe 'Committee Enrollment:' do
-    it  'get_committee_enrollment' do
+    it 'get_committee_enrollment' do
       u.committees << c
       u.save
       expect(CommitteeEnrollment.get_committee_enrollment(c, u)).to be_truthy

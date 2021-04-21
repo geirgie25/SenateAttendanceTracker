@@ -32,5 +32,4 @@ RSpec.describe 'Dashboards', type: :request do
       expect(response).to render_template(:help)
     end
   end
-  
 end
