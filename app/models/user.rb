@@ -29,7 +29,7 @@ class User < ApplicationRecord
   end
 
   def get_committee_enrollment(committee)
-    CommitteeEnrollment.where(user: self).and(CommitteeEnrollment.where(committee: committee))
+    CommitteeEnrollment.where(user: self).and(CommitteeEnrollment.where(committee: committee)).take
   end
 
   def above_max_absences?(committee)

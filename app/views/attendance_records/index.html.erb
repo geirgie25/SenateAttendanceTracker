@@ -24,7 +24,7 @@
       <td><%= record.meeting.start_time.to_formatted_s(:short) %></td>
       <td><%= end_meeting_time_string(record.meeting.end_time) %></td>
       <td><%= attendance_status_string(record) %></td>
-      <td><%= record.attendance_type %></td>
+      <td><%= attendance_type_string(record.attendance_type) %></td>
     </tr>
     <% end %>
   </tbody>

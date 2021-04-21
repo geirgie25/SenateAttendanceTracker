@@ -25,4 +25,12 @@ RSpec.describe 'Dashboards', type: :request do
       expect(response).to redirect_to(controller: 'dashboards', action: 'admin')
     end
   end
+
+  describe 'Help Page:' do
+    it 'help page works' do
+      get '/help'
+      expect(response).to render_template(:help)
+    end
+  end
+  
 end

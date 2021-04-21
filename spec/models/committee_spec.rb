@@ -45,4 +45,12 @@ RSpec.describe Committee, type: :model do
       expect(described_class.get_max_unexcused_absences_for_all_user_committees(u)).to eq 30
     end
   end
+
+  describe 'Committee Enrollment:' do
+    it  'get_committee_enrollment' do
+      u.committees << c
+      u.save
+      expect(CommitteeEnrollment.get_committee_enrollment(c, u)).to be_truthy
+    end
+  end
 end
