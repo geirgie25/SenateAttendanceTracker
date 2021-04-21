@@ -1,29 +1,3 @@
-<!--
-<div class="row">
-  <div class="col-sm-4">
-  </div>
-  <div class="col-xs-4">
-    <div class="panel-custom panel-default">
-      <div class="panel-heading">Login</div>
-      <%= form_for(@committee) do |f|%>
-      <div class="panel-body">
-        <div style="text-align:center">
-          <p><%= f.label( 'Committee Name:' ) %>
-          <%= f.text_field(:committee_name) %>
-          </p>
-        </div>
-      </div>
-      <div class="panel-footer">
-        <div style="text-align:center">
-          <%= f.submit("Create New Committee") %>
-        </div>
-      </div>
-      <%end%>
-    </div>
-  </div>
-</div>
--->
-
 <h1>Create Committee</h1>
 <br>
 <%= form_for(@committee) do |f|%>
