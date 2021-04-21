@@ -29,4 +29,8 @@
     <% end %>
   </tbody>
 </table>
-
+<% if @records.each.size == 0 %>
+  <div style="text-align:center">
+    <p>No Users Found</p>
+  </div>
+<% end %>

@@ -1,24 +1,31 @@
 
-<p>Meetings</p>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Meeting Title</th>
-      <th scope="col">Meeting Start Time</th>
-      <th scope="col">Meeting End Time</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @meetings.each do |meeting| %>
-      <tr>
-        <td><%= meeting.title %></td>
-        <td><%= meeting.start_time.to_formatted_s(:short) %></td>
-        <td><%= end_meeting_time_string(meeting.end_time) %></td>
-        <td><%= link_to "Show Records", attendance_records_path(meeting_id: meeting.id) %></td>
-      </tr>
+<div class="panel-custom panel-default">
+  <div class="panel-heading">Meetings</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Meeting Title</th>
+          <th scope="col">Meeting Start Time</th>
+          <th scope="col">Meeting End Time</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @meetings.each do |meeting| %>
+          <tr>
+            <td><%= meeting.title %></td>
+            <td><%= meeting.start_time.to_formatted_s(:short) %></td>
+            <td><%= end_meeting_time_string(meeting.end_time) %></td>
+            <td><%= link_to "Show Records", attendance_records_path(meeting_id: meeting.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @meetings.each.size == 0 %>
+      <div style="text-align:center">
+        <p>No Meetings Found</p>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
+</div>
