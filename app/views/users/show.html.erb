@@ -1,12 +1,6 @@
 <% if !notice.nil? %>
   <%= render partial: "shared/modal", locals: {title: "Notice", content: [notice]} %>
 <% end %>
-
-<!-- <h2>Senator <%= @user.name %></h2> -->
-<% if current_user&.admin? %>
-  <p>Username: <%= @user.username %></p>
-<% end %>
-
 <div class="row">
   <div class="col-sm-3">
   </div>

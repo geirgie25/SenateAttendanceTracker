@@ -1,19 +1,17 @@
-<div style="text-align:center">
-  <p>Reviewing excuse for Meeting <%= @excuse.attendance_record.meeting.title %> for Senator <%= @excuse.attendance_record.committee_enrollment.user.name %></p>
-  <p>Reason: "<%= @excuse.reason %>"</p>
-</div>
-
 <div class="row">
-  <div class="col-sm-5">
+  <div class="col-sm-4">
   </div>
-  <div class="col-xs-2">
+  <div class="col-xs-4">
     <div class="panel-custom panel-default">
-      <div class="panel-heading"><h1>Create Excuse</h1></div>
+      <div class="panel-heading">
+      <h5>Reviewing Senator <%= @excuse.attendance_record.committee_enrollment.user.name %>'s excuse for Meeting <%= @excuse.attendance_record.meeting.title %> </h5>
+      <h6>Reason: "<%= @excuse.reason %>"</h6>
+      </div>
       <%= form_with(model: @excuse) do |form| %>
       <div class="panel-body">
         <div style="text-align:center">
-          <p><%= form.label :status %>
-          <%= form.select :status, Excuse.statuses.keys.map {|key| [key.humanize, key]} %></p>
+          <%= form.label :status %>
+          <%= form.select :status, Excuse.statuses.keys.map {|key| [key.humanize, key]} %>
         </div>
       </div>
       <div class="panel-footer">

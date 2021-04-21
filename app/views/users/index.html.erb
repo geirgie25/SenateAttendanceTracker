@@ -49,22 +49,21 @@
                     <% end %>
                   </tr>
                 <% end %>
-                <% if @users.each.size == 0 %>
-                  <div style="text-align:center">
-                    <p>No Senators Found</p>
-                  </div>
-                <% end %>
               </tbody>
             </table>
+          <% if @users.each.size == 0 %>
+            <div style="text-align:center; padding-top: 5px">
+              <p>No Senators Found</p>
+            </div>
+          <% end %>
           <% if current_user&.admin? %>
             <div class="panel-footer">
               <%= link_to 'Create New User', new_user_path %>
             </div>
           <% end %>
+          
         </div>
-
-        </div>
+      </div>
     </div>
-
   </div>
 </div>
