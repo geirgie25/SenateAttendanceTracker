@@ -30,6 +30,15 @@ class CommitteesController < ApplicationController
     redirect_to(committee_path(committee.id))
   end
 
+  def destroy
+    committee = Committee.find(params[:id])
+    committee.committee_enrollments.destroy_all
+    committee.roles.destroy_all
+    committee.meetings.destroy_all
+    committee.destroy
+    redirect_to admin_dashboards_path
+  end
+
   private
 
   def del_records(committee, u_ids)

@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   resources :attendance_records, :only => [:index]
 
   # committees route
-  resources :committees, :only => [:new, :create, :show, :edit, :update]
+  resources :committees, :only => [:new, :create, :show, :edit, :update, :destroy]
 
   # meetings route
   resources :meetings, :only => [:index, :create, :show] do
